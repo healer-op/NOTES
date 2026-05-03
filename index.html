@@ -3,100 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Repository Viewer</title>
+    <title>Modern Repo Browser</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: system-ui, -apple-system, sans-serif; 
-            padding: 30px; 
-            background: #f6f8fa;
-            color: #24292f;
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --item-hover: rgba(255, 255, 255, 0.06);
         }
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 6px;
-            border: 1px solid #d0d7de;
-            box-shadow: 0 3px 6px rgba(140,149,159,0.15);
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
-        h2 { margin-top: 0; border-bottom: 1px solid #d0d7de; padding-bottom: 10px; }
-        ul { list-style-type: none; padding: 0; margin: 0; }
-        li { 
-            border-bottom: 1px solid #d0d7de;
+
+        .browser-container {
+            width: 100%;
+            max-width: 700px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
         }
-        li:last-child { border-bottom: none; }
-        a { 
-            text-decoration: none; 
-            color: #0969da; 
-            display: flex; 
-            align-items: center; 
-            padding: 12px 8px;
+
+        .header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
         }
-        a:hover { background: #f3f4f6; color: #0969da; text-decoration: underline; border-radius: 6px;}
-        .icon { margin-right: 12px; font-size: 1.2rem; }
-        .folder { color: #54aeff; }
-        .error { color: #cf222e; padding: 10px; background: #ffebe9; border-radius: 6px; }
+
+        .back-btn:hover {
+            background: var(--item-hover);
+            border-color: var(--text-muted);
+        }
+
+        .back-btn.hidden {
+            display: none;
+        }
+
+        .current-path {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--accent);
+            word-break: break-all;
+        }
+
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        /* Custom Scrollbar */
+        .file-list::-webkit-scrollbar { width: 8px; }
+        .file-list::-webkit-scrollbar-track { background: transparent; }
+        .file-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        .file-list::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        .list-item {
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-link {
+            display: flex;
+            align-items: center;
+            padding: 16px 24px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .item-link:hover {
+            background: var(--item-hover);
+            padding-left: 32px; /* Smooth indent effect on hover */
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .folder-icon { fill: #facc15; }
+        .file-icon { fill: #94a3b8; }
+
+        .loading, .error {
+            padding: 30px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .error { color: #ef4444; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>📂 Repository Files</h2>
-        <ul id="file-list">Loading files from GitHub...</ul>
+
+    <div class="browser-container">
+        <div class="header">
+            <button id="back-btn" class="back-btn hidden">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back
+            </button>
+            <div class="current-path" id="path-display">/root</div>
+        </div>
+        <ul class="file-list" id="file-list">
+            <li class="loading">Loading repository data...</li>
+        </ul>
     </div>
 
     <script>
-        // 🛑 CHANGE THESE TWO VARIABLES TO YOUR GITHUB DETAILS 🛑
+        // 🛑 CONFIGURATION: UPDATE THESE TWO VARIABLES 🛑
         const GITHUB_USERNAME = 'healer-op'; 
         const REPO_NAME = 'NOTES';
-        // Optional: change this if your files are in a specific subfolder, otherwise leave as ''
-        const FOLDER_PATH = ''; 
 
-        async function fetchGitHubFiles() {
-            const list = document.getElementById('file-list');
-            const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER_PATH}`;
+        // State management
+        let pathHistory = [];
+        let currentPath = '';
+
+        // SVG Icons
+        const icons = {
+            folder: `<svg class="folder-icon" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>`,
+            file: `<svg class="file-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>`
+        };
+
+        const listElement = document.getElementById('file-list');
+        const pathDisplay = document.getElementById('path-display');
+        const backBtn = document.getElementById('back-btn');
+
+        async function fetchPath(path) {
+            listElement.innerHTML = '<li class="loading">Fetching files...</li>';
+            
+            // Update UI Header
+            pathDisplay.textContent = path === '' ? '/root' : `/root/${path}`;
+            if (pathHistory.length > 0) {
+                backBtn.classList.remove('hidden');
+            } else {
+                backBtn.classList.add('hidden');
+            }
+
+            const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${path}`;
 
             try {
                 const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`Error: ${response.status} - ${response.statusText}`);
                 
-                if (!response.ok) {
-                    throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
-                }
-
-                const files = await response.json();
-                list.innerHTML = ''; // Clear loading text
-
-                // Sort files so folders appear at the top
+                let files = await response.json();
+                
+                // Sort: Folders first, then files alphabetically
                 files.sort((a, b) => {
                     if (a.type === b.type) return a.name.localeCompare(b.name);
                     return a.type === 'dir' ? -1 : 1;
                 });
 
+                listElement.innerHTML = '';
+
                 files.forEach(file => {
-                    // Skip the index.html file itself so it doesn't clutter the list
-                    if (file.name === 'index.html') return;
+                    // Hide the index.html from the root so it doesn't loop
+                    if (path === '' && file.name === 'index.html') return;
 
                     const li = document.createElement('li');
+                    li.className = 'list-item';
                     const isFolder = file.type === 'dir';
-                    const icon = isFolder ? '📁' : '📄';
-                    
-                    // Creates a relative link (e.g., "./style.css") so it opens directly on GitHub Pages
-                    li.innerHTML = `
-                        <a href="./${file.path}" target="_blank">
-                            <span class="icon ${isFolder ? 'folder' : ''}">${icon}</span> ${file.name}
-                        </a>
-                    `;
-                    list.appendChild(li);
+
+                    if (isFolder) {
+                        // Folders trigger JavaScript to dive deeper
+                        li.innerHTML = `
+                            <div class="item-link" onclick="navigateInto('${file.path}')">
+                                <div class="icon">${icons.folder}</div>
+                                <span>${file.name}</span>
+                            </div>
+                        `;
+                    } else {
+                        // Files are standard links that open in a new tab
+                        li.innerHTML = `
+                            <a class="item-link" href="./${file.path}" target="_blank">
+                                <div class="icon">${icons.file}</div>
+                                <span>${file.name}</span>
+                            </a>
+                        `;
+                    }
+                    listElement.appendChild(li);
                 });
 
+                if (files.length === 0) {
+                    listElement.innerHTML = '<li class="loading">This folder is empty.</li>';
+                }
+
             } catch (error) {
-                list.innerHTML = `<li class="error"><strong>Error fetching files:</strong> ${error.message}<br><br>Make sure your username and repo name are correct in the code!</li>`;
-                console.error(error);
+                listElement.innerHTML = `<li class="error">${error.message}<br><small>Did you update the username and repo name in the code?</small></li>`;
             }
         }
 
-        fetchGitHubFiles();
+        // Navigation Handlers
+        window.navigateInto = function(newPath) {
+            pathHistory.push(currentPath);
+            currentPath = newPath;
+            fetchPath(currentPath);
+        };
+
+        backBtn.addEventListener('click', () => {
+            if (pathHistory.length > 0) {
+                currentPath = pathHistory.pop();
+                fetchPath(currentPath);
+            }
+        });
+
+        // Initialize
+        fetchPath(currentPath);
     </script>
 </body>
 </html>
