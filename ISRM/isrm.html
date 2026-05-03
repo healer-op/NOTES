@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPISE14 — Complete Syllabus Notes | Information Security & Risk Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE6;
+    --border: #E2DDD4;
+    --border2: #CCC6BA;
+    --text: #1C1917;
+    --text2: #57534E;
+    --text3: #A8A29E;
+    --accent: #2D6A4F;
+    --accent-light: #D8F3DC;
+    --accent-text: #1B4332;
+    --amber: #92400E;
+    --amber-bg: #FEF3C7;
+    --blue: #1E3A5F;
+    --blue-bg: #DBEAFE;
+    --purple: #4C1D95;
+    --purple-bg: #EDE9FE;
+    --red: #7F1D1D;
+    --red-bg: #FEE2E2;
+    --teal: #134E4A;
+    --teal-bg: #CCFBF1;
+    --pink: #831843;
+    --pink-bg: #FCE7F3;
+    --mono: 'JetBrains Mono', monospace;
+    --body: 'DM Sans', sans-serif;
+    --serif: 'Lora', serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--body); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
+
+  .header { background: var(--text); color: #F7F4EF; padding: 3rem 2rem 2.5rem; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; border: 40px solid rgba(255,255,255,0.04); }
+  .header::after { content: ''; position: absolute; bottom: -40px; left: 10%; width: 140px; height: 140px; border-radius: 50%; border: 28px solid rgba(255,255,255,0.03); }
+  .header-inner { max-width: 980px; margin: 0 auto; position: relative; }
+  .header-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #86EFAC; margin-bottom: 0.75rem; }
+  .header h1 { font-family: var(--serif); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 600; line-height: 1.25; margin-bottom: 0.75rem; color: #FAF9F6; }
+  .header-meta { font-size: 14px; color: #A8A29E; display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; }
+  .header-meta span { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; background: #86EFAC; display: inline-block; }
+
+  .layout { max-width: 980px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 2.5rem; position: sticky; top: 0; background: var(--bg); padding: 0.75rem 0; z-index: 100; border-bottom: 1px solid var(--border); }
+  .nb { padding: 8px 16px; font-size: 12px; font-weight: 500; font-family: var(--body); border: 1.5px solid var(--border2); border-radius: 100px; background: var(--surface); color: var(--text2); cursor: pointer; transition: all 0.2s ease; }
+  .nb:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .nb.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .pg { display: none; }
+  .pg.on { display: block; }
+
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
+  .sec-head h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--text); }
+  .sec-head .co-pill { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: var(--accent-light); color: var(--accent-text); }
+  .sec-head .src-pill { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 100px; background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
+
+  .qcard { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; margin-bottom: 1.75rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: box-shadow 0.2s; }
+  .qcard:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .qcard-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .qnum { flex-shrink: 0; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px; background: var(--text); color: #FAF9F6; letter-spacing: 0.3px; }
+  .topic-pill { flex-shrink: 0; font-size: 11px; padding: 4px 10px; border-radius: 100px; background: var(--blue-bg); color: var(--blue); border: 1px solid #BFDBFE; font-weight: 500; }
+  .qtitle { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--text); line-height: 1.4; flex: 1; min-width: 200px; }
+
+  .block { margin-bottom: 1.25rem; }
+  .block-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px; }
+  .block-label::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.2; }
+
+  .mblock { background: var(--amber-bg); border: 1px solid #FCD34D; border-radius: 12px; padding: 1rem 1.25rem; }
+  .mblock .block-label { color: var(--amber); }
+  .mblock .mtext { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--amber); margin-bottom: 0.4rem; font-style: italic; }
+  .mblock .mexp { font-size: 13px; color: #78350F; line-height: 1.6; }
+
+  .dblock { background: var(--blue-bg); border: 1px solid #BFDBFE; border-radius: 12px; padding: 1rem 1.25rem; }
+  .dblock .block-label { color: var(--blue); }
+  .dblock p, .dblock li { font-size: 14px; color: #1E3A5F; line-height: 1.75; }
+
+  .eblock { background: var(--accent-light); border: 1px solid #95D5B2; border-radius: 12px; padding: 1rem 1.25rem; }
+  .eblock .block-label { color: var(--accent-text); }
+  .eblock p, .eblock li { font-size: 14px; color: var(--accent-text); line-height: 1.75; }
+
+  .nblock { background: var(--purple-bg); border: 1px solid #C4B5FD; border-radius: 12px; padding: 1rem 1.25rem; }
+  .nblock .block-label { color: var(--purple); }
+  .nblock p, .nblock li { font-size: 14px; color: #3B0764; line-height: 1.75; }
+
+  .wblock { background: var(--red-bg); border: 1px solid #FECACA; border-radius: 12px; padding: 1rem 1.25rem; }
+  .wblock .block-label { color: var(--red); }
+  .wblock p { font-size: 14px; color: #7F1D1D; line-height: 1.75; }
+
+  .tblock { background: var(--teal-bg); border: 1px solid #5EEAD4; border-radius: 12px; padding: 1rem 1.25rem; }
+  .tblock .block-label { color: var(--teal); }
+  .tblock p, .tblock li { font-size: 14px; color: #042F2E; line-height: 1.75; }
+
+  .pblock { background: var(--pink-bg); border: 1px solid #FBCFE8; border-radius: 12px; padding: 1rem 1.25rem; }
+  .pblock .block-label { color: var(--pink); }
+  .pblock p, .pblock li { font-size: 14px; color: var(--pink); line-height: 1.75; }
+
+  .fblock { background: #1C1917; border-radius: 12px; padding: 1.25rem 1.5rem; overflow-x: auto; }
+  .fblock .block-label { color: #86EFAC; }
+  .fblock pre { font-family: var(--mono); font-size: 13px; color: #E7E5E4; line-height: 2; white-space: pre-wrap; }
+  .fblock pre .hl { color: #86EFAC; font-weight: 500; }
+  .fblock pre .hl2 { color: #FCD34D; }
+  .fblock pre .hl3 { color: #93C5FD; }
+
+  .pts { list-style: none; padding: 0; }
+  .pts li { font-size: 14px; color: var(--text); padding: 0.65rem 0 0.65rem 1.5rem; position: relative; line-height: 1.6; border-bottom: 1px solid var(--border); }
+  .pts li:last-child { border-bottom: none; }
+  .pts li::before { content: ''; position: absolute; left: 0; top: 1.1rem; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .pts li b { color: var(--text); font-weight: 600; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media(max-width:600px) { .grid2 { grid-template-columns: 1fr; } }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media(max-width:700px) { .grid3 { grid-template-columns: 1fr; } }
+
+  .cmp { border: 1px solid var(--border); border-radius: 12px; padding: 1rem; background: var(--surface2); }
+  .cmp-title { font-size: 13px; font-weight: 600; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .cmp .pts li { font-size: 13px; }
+
+  .refbar { font-size: 12px; color: var(--text3); margin-top: 1.25rem; padding-top: 0.75rem; border-top: 1px dashed var(--border); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .refbar strong { color: var(--text2); font-weight: 600; }
+  .refpill { background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 2px 10px; font-size: 11px; color: var(--text2); }
+
+  .diff-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+  .diff-table th { background: var(--text); color: #FAF9F6; padding: 8px 12px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.3px; }
+  .diff-table th:first-child { border-radius: 8px 0 0 0; }
+  .diff-table th:last-child { border-radius: 0 8px 0 0; }
+  .diff-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; line-height: 1.5; }
+  .diff-table tr:last-child td { border-bottom: none; }
+  .diff-table tr:nth-child(even) td { background: var(--surface2); }
+  .diff-table td:first-child { color: var(--text); font-weight: 500; }
+
+  .footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); margin-top: 3rem; }
+  html { scroll-behavior: smooth; }
+  @media print { .nav { display: none; } .pg { display: block !important; } .qcard { break-inside: avoid; } }
+
+  .unit-intro { background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%); color: #FAF9F6; padding: 1.5rem 1.75rem; border-radius: 16px; margin-bottom: 2rem; }
+  .unit-intro h3 { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.5rem; color: #FAF9F6; }
+  .unit-intro p { font-size: 14px; color: #D8F3DC; line-height: 1.7; }
+
+  .topics-strip { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+  .topic-tag { font-size: 11px; padding: 3px 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; color: #D8F3DC; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-tag">M.Tech (IS) · 2nd Sem · CPISE14 · Complete Syllabus Notes</div>
+    <h1>Information Security &amp;<br>Risk Management — Full Syllabus</h1>
+    <div style="font-size:14px;color:#D6D3D1;margin-top:0.5rem;font-family:var(--body)">5 Units · Bonus Topics (Cookies · GDPR · UPI) · Based on William Stallings &amp; NIST Framework</div>
+    <div class="header-meta">
+      <span><span class="dot"></span> Stallings: Computer Security — Principles &amp; Practice</span>
+      <span><span class="dot"></span> NIST 800-30, 800-37, 800-39, 800-53, 800-61, 800-171, CSF 2.0</span>
+      <span><span class="dot"></span> Mnemonics + Examples for every topic</span>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <nav class="nav">
+    <button class="nb on" onclick="go('u1',this)">Unit I — Risk Mgmt</button>
+    <button class="nb" onclick="go('u2',this)">Unit II — Org &amp; Policy</button>
+    <button class="nb" onclick="go('u3',this)">Unit III — Incident Response</button>
+    <button class="nb" onclick="go('u4',this)">Unit IV — Domains &amp; Tools</button>
+    <button class="nb" onclick="go('u5',this)">Unit V — Compliance</button>
+    <button class="nb" onclick="go('bonus',this)">Bonus — Cookies/GDPR/UPI</button>
+  </nav>
+
+  <!-- ═══════════════ UNIT I ═══════════════ -->
+  <div id="u1" class="pg on">
+    <div class="sec-head">
+      <h2>Unit I — Information Security Risk Management</h2>
+      <span class="co-pill">CO1 · CO2</span>
+      <span class="src-pill">Stallings Ch.1, 3 · NIST SP 800-30, 800-37, 800-39</span>
+    </div>
+
+    <div class="unit-intro">
+      <h3>What this unit covers</h3>
+      <p>The complete risk management lifecycle — from defining "What is risk?" to identifying assets, finding threats, calculating risk values, choosing strategies, and treating risks. This is the foundation of CPISE14.</p>
+      <div class="topics-strip">
+        <span class="topic-tag">Definition of Risk</span><span class="topic-tag">RM Process</span><span class="topic-tag">Asset ID</span>
+        <span class="topic-tag">Threat ID</span><span class="topic-tag">Risk Assessment</span><span class="topic-tag">Risk Determination</span>
+        <span class="topic-tag">Risk Control Strategies</span><span class="topic-tag">Cost-Benefit</span><span class="topic-tag">Risk Treatment</span>
+      </div>
+    </div>
+
+    <!-- 1.1 Definition & Overview -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">1.1</span>
+        <span class="topic-pill">Foundations</span>
+        <div class="qtitle">Definition &amp; Overview of Information Security Risk Management</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition (Stallings + NIST SP 800-39)</div>
+        <p><b>Risk</b> = "A measure of the extent to which an entity is threatened by a potential circumstance or event, expressed as a function of (i) the adverse impacts that would arise if the event occurs, and (ii) the likelihood of occurrence." (NIST SP 800-30 Rev.1)<br><br>
+        <b>Information Security Risk Management (ISRM)</b> = The ongoing process of identifying, assessing, treating, and monitoring risks to information assets in an organization, with the goal of reducing risk to a level acceptable to management.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — Risk Equation</div>
+        <div class="mtext">"TVA × I = Risk"</div>
+        <div class="mexp"><b>T</b>hreat × <b>V</b>ulnerability × <b>A</b>sset value × <b>I</b>mpact likelihood = Total Risk Exposure</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Why ISRM matters:</b> Organizations cannot eliminate all risks (zero risk = impossible). ISRM helps prioritize WHICH risks to fix first using limited resources.</li>
+        <li><b>Three pillars (CIA Triad):</b> Confidentiality (no unauthorized read), Integrity (no unauthorized change), Availability (system reachable when needed).</li>
+        <li><b>Stallings' definition:</b> "Risk Management is the process of identifying risk, assessing risk, and taking steps to reduce risk to an acceptable level."</li>
+        <li><b>NIST 3-Tier Approach (SP 800-39):</b> Tier 1 = Organization level · Tier 2 = Mission/Business level · Tier 3 = Information System level.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.3</span> <span class="refpill">NIST SP 800-39</span> <span class="refpill">NIST SP 800-30 Rev.1</span></div>
+    </div>
+
+    <!-- 1.2 Risk Management Process -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">1.2</span>
+        <span class="topic-pill">Process</span>
+        <div class="qtitle">The Risk Management Process — Step-by-Step</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — NIST RMF 7 Steps</div>
+        <div class="mtext">"PCS-IAAM" → "Please Categorize Systems, Implement And Authorize Monitoring"</div>
+        <div class="mexp"><b>P</b>repare → <b>C</b>ategorize → <b>S</b>elect → <b>I</b>mplement → <b>A</b>ssess → <b>A</b>uthorize → <b>M</b>onitor</div>
+      </div></div>
+
+      <div class="block"><div class="fblock">
+        <div class="block-label">NIST Risk Management Framework (RMF) — Flowchart</div>
+        <pre>
+<span class="hl">Step 0: PREPARE</span> (added in NIST 800-37 Rev.2, 2018)
+  → Establish context, identify stakeholders, define risk tolerance
+          ▼
+<span class="hl">Step 1: CATEGORIZE</span> the system
+  → Use FIPS 199: Low / Moderate / High impact for C, I, A
+          ▼
+<span class="hl">Step 2: SELECT</span> security controls from NIST 800-53
+  → Tailor baseline controls to your specific risk profile
+          ▼
+<span class="hl">Step 3: IMPLEMENT</span> controls
+  → Deploy firewalls, encryption, access control, training
+          ▼
+<span class="hl">Step 4: ASSESS</span> control effectiveness (NIST 800-53A)
+  → Test, audit, penetration testing, code review
+          ▼
+<span class="hl">Step 5: AUTHORIZE</span> system to operate
+  → Authorizing Official (AO) signs off based on residual risk
+          ▼
+<span class="hl">Step 6: MONITOR</span> continuously
+  → Ongoing logs, SIEM alerts, periodic reassessment
+          ▼
+   <span class="hl2">[New threat or change → loop back to Categorize]</span>
+        </pre>
+      </div></div>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">Stallings' Simpler 4-Step Cycle</div>
+        <p><b>1. Risk Assessment</b> → <b>2. Risk Mitigation</b> → <b>3. Risk Monitoring</b> → <b>4. Risk Communication.</b> Both Stallings and NIST agree: risk management is a <em>continuous loop</em>, never a one-time activity.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-37 Rev.2</span> <span class="refpill">Stallings Ch.3.2</span> <span class="refpill">FIPS 199</span></div>
+    </div>
+
+    <!-- 1.3 Risk & Threat Identification -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">1.3</span>
+        <span class="topic-pill">Identification</span>
+        <div class="qtitle">Risk Identification, Threat Identification &amp; Asset Identification</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — What to Identify First</div>
+        <div class="mtext">"ATV — Assets, Threats, Vulnerabilities"</div>
+        <div class="mexp">Always identify in order: <b>Assets</b> (what you own) → <b>Threats</b> (who/what attacks) → <b>Vulnerabilities</b> (weaknesses they exploit)</div>
+      </div></div>
+
+      <div class="block-label" style="color:var(--text2)">A. Identifying Information Assets</div>
+      <ul class="pts">
+        <li><b>People assets:</b> Employees, contractors, customers, vendors with system access.</li>
+        <li><b>Procedures:</b> SOPs, IT policies, recovery plans, training docs.</li>
+        <li><b>Data assets:</b> Databases, customer records, IP, source code, financial data, emails.</li>
+        <li><b>Software:</b> OS, applications, custom code, security tools.</li>
+        <li><b>Hardware:</b> Servers, laptops, mobile devices, network equipment.</li>
+        <li><b>Networking:</b> Routers, firewalls, internet links, VPN tunnels.</li>
+      </ul>
+
+      <div class="block-label" style="color:var(--text2);margin-top:1.25rem">B. Threat Identification (Stallings' 12 Categories)</div>
+      <ul class="pts">
+        <li><b>1. Acts of Human Error/Failure</b> — Accidental: employee mistakes, accidental deletion.</li>
+        <li><b>2. Compromises to Intellectual Property</b> — Piracy, copyright violation.</li>
+        <li><b>3. Deliberate Acts of Espionage</b> — Spying for competitors/nation-states.</li>
+        <li><b>4. Deliberate Acts of Information Extortion</b> — Ransomware, blackmail.</li>
+        <li><b>5. Deliberate Acts of Sabotage/Vandalism</b> — Stuxnet, website defacement.</li>
+        <li><b>6. Deliberate Acts of Theft</b> — Stealing equipment or data.</li>
+        <li><b>7. Deliberate Software Attacks</b> — Viruses, worms, ransomware, trojans.</li>
+        <li><b>8. Forces of Nature</b> — Floods, earthquakes, fires.</li>
+        <li><b>9. Deviations in QoS by Service Providers</b> — ISP outage, cloud downtime.</li>
+        <li><b>10. Technical Hardware Failures/Errors</b> — Disk crash, RAM errors.</li>
+        <li><b>11. Technical Software Failures/Errors</b> — Bugs, buffer overflows.</li>
+        <li><b>12. Technological Obsolescence</b> — End-of-life unsupported systems.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.1 "Threats"</span> <span class="refpill">NIST SP 800-30 Appendix D</span></div>
+    </div>
+
+    <!-- 1.4 Risk Assessment & Determination -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">1.4</span>
+        <span class="topic-pill">Assessment</span>
+        <div class="qtitle">Risk Assessment, Risk Determination &amp; Evaluation</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p><b>Risk Assessment</b> = The process of identifying threats, vulnerabilities, and the likelihood × impact of each threat-vulnerability pair on each asset, resulting in a risk score.</p>
+      </div></div>
+
+      <div class="block"><div class="fblock">
+        <div class="block-label">Risk Determination Formulas (Stallings + NIST 800-30)</div>
+        <pre>
+<span class="hl">Qualitative Risk:</span>
+  Risk = Likelihood × Impact
+  (Both rated as Low / Medium / High)
+
+<span class="hl">Quantitative Risk:</span>
+  SLE  = Asset Value × Exposure Factor
+  ALE  = SLE × ARO
+  Risk = ALE (annual financial loss expected)
+
+<span class="hl">Stallings' Detailed Formula:</span>
+  Risk = (Likelihood × Asset Value) − (% Risk mitigated by current controls)
+       + Uncertainty factor
+
+<span class="hl3">Example:</span>
+  Likelihood   = 0.5
+  Asset Value  = ₹1,00,000
+  Control      = 60% effective
+  Residual     = 0.5 × ₹1,00,000 × (1 − 0.6) = <span class="hl2">₹20,000</span>
+        </pre>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">Risk Evaluation — Decision Phase</div>
+        <p>After determining the risk score, compare it to the organization's <b>risk appetite</b>. If Risk &gt; Appetite → must treat. If Risk ≤ Appetite → can accept &amp; document. NIST calls this "Risk Response Decision" (SP 800-39 §3.2).</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-30 Rev.1</span> <span class="refpill">Stallings Ch.3.3</span></div>
+    </div>
+
+    <!-- 1.5 Risk Control Strategies -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">1.5</span>
+        <span class="topic-pill">Strategies</span>
+        <div class="qtitle">Risk Control Strategies + Selecting the Right Strategy</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — 5 Strategies</div>
+        <div class="mtext">"DTAMA — Don't Take A Massive Approach lightly"</div>
+        <div class="mexp"><b>D</b>efense (avoidance) · <b>T</b>ransference · <b>A</b>cceptance · <b>M</b>itigation · <b>T</b>ermination</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>1. Defense / Avoidance:</b> Apply safeguards (firewalls, encryption, MFA) to eliminate the risk. <em>Best when: cost of control &lt; risk impact.</em></li>
+        <li><b>2. Transference:</b> Shift risk to a third party (cyber insurance, outsource to MSSP, contractual indemnity). <em>Best when: risk can be insured economically.</em></li>
+        <li><b>3. Mitigation:</b> Reduce damage when risk occurs — IRP, DRP, BCP. <em>Best when: risk cannot be fully prevented.</em></li>
+        <li><b>4. Acceptance:</b> Knowingly take the risk because cost-of-fix &gt; potential damage. Must be formally documented &amp; signed.</li>
+        <li><b>5. Termination:</b> Stop the risky activity altogether (e.g., discontinue a vulnerable service).</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">How to SELECT the Right Strategy — Decision Tree</div>
+        <p><b>Q1:</b> Can we eliminate it cheaply? → YES → <b>Defense</b><br>
+        <b>Q2:</b> Can someone else carry the risk for us? → YES → <b>Transference</b><br>
+        <b>Q3:</b> Can we reduce damage if it happens? → YES → <b>Mitigation</b><br>
+        <b>Q4:</b> Is the risk smaller than the cost to fix? → YES → <b>Acceptance</b><br>
+        <b>Q5:</b> Is the activity itself too risky? → YES → <b>Termination</b></p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.3.4</span> <span class="refpill">NIST SP 800-39 §2.4</span></div>
+    </div>
+
+    <!-- 1.6 Cost-Benefit Analysis -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">1.6</span>
+        <span class="topic-pill">Math</span>
+        <div class="qtitle">Cost-Benefit Analysis (CBA) for Risk Control</div>
+      </div>
+
+      <div class="block"><div class="fblock">
+        <div class="block-label">CBA Formula — Step-by-Step</div>
+        <pre>
+<span class="hl">Step 1:</span> Calculate ALE BEFORE the control
+  ALE_before = SLE × ARO
+
+<span class="hl">Step 2:</span> Estimate ALE AFTER the control
+  ALE_after  = New SLE × New ARO
+
+<span class="hl">Step 3:</span> Compute CBA
+  <span class="hl2">CBA = ALE_before − ALE_after − Annual Cost of Control</span>
+
+<span class="hl">Decision Rule:</span>
+  If CBA > 0  → Implement the control (saves money)
+  If CBA < 0  → Reject (control costs more than the risk)
+
+<span class="hl3">Example — Firewall worth installing?</span>
+  ALE_before = ₹6,00,000  (frequent intrusions)
+  ALE_after  = ₹1,00,000  (firewall blocks 83%)
+  Cost       = ₹2,00,000  /year
+  CBA = 6,00,000 − 1,00,000 − 2,00,000 = <span class="hl2">+₹3,00,000</span>
+  → Positive: <b>INSTALL the firewall</b>
+        </pre>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.3.5</span> <span class="refpill">NIST SP 800-30 Appendix G</span></div>
+    </div>
+
+    <!-- 1.7 Risk Treatment -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">1.7</span>
+        <span class="topic-pill">Treatment</span>
+        <div class="qtitle">Information Security Risk Treatment (ISO 27005 + NIST view)</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p><b>Risk Treatment</b> = The phase of risk management where you actually <em>execute</em> the chosen strategy. ISO 27005 calls it the implementation step that follows risk evaluation.</p>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Step 1:</b> Develop Risk Treatment Plan (RTP) — owners, deadlines, budgets, KPIs.</li>
+        <li><b>Step 2:</b> Implement controls (NIST 800-53 catalog: ~1000 controls in 20 families).</li>
+        <li><b>Step 3:</b> Document residual risk and obtain management sign-off (Authorizing Official in NIST RMF).</li>
+        <li><b>Step 4:</b> Communicate &amp; train all stakeholders on new procedures.</li>
+        <li><b>Step 5:</b> Monitor effectiveness continuously; reassess every 6–12 months.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">ISO 27005</span> <span class="refpill">NIST SP 800-53 Rev.5</span> <span class="refpill">Stallings Ch.3.6</span></div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ UNIT II ═══════════════ -->
+  <div id="u2" class="pg">
+    <div class="sec-head">
+      <h2>Unit II — Security Risk Management as an Organization</h2>
+      <span class="co-pill">CO3 · CO4</span>
+      <span class="src-pill">Stallings Ch.14, 17 · NIST SP 800-12, 800-100</span>
+    </div>
+
+    <div class="unit-intro">
+      <h3>What this unit covers</h3>
+      <p>How security is governed at the organization level — through governance bodies, ISMS, policies (EISP, ISSP, SSP), standards, and procedures. The "people &amp; paper" side of security.</p>
+      <div class="topics-strip">
+        <span class="topic-tag">InfoSec Governance</span><span class="topic-tag">ISMS</span><span class="topic-tag">EISP</span>
+        <span class="topic-tag">ISSP</span><span class="topic-tag">SSP</span><span class="topic-tag">Standards</span>
+        <span class="topic-tag">Procedures</span><span class="topic-tag">InfoSec Evaluation</span>
+      </div>
+    </div>
+
+    <!-- 2.1 InfoSec Governance -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">2.1</span>
+        <span class="topic-pill">Governance</span>
+        <div class="qtitle">Information Security Governance</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition (NIST SP 800-100)</div>
+        <p><b>Information Security Governance</b> = The system by which an organization directs and controls its information security activities. It ensures that security strategy aligns with business strategy, risks are managed properly, and resources are used responsibly.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — 5 Governance Outcomes</div>
+        <div class="mtext">"SAVOR governance like a fine wine"</div>
+        <div class="mexp"><b>S</b>trategic alignment · <b>A</b>ccountability · <b>V</b>alue delivery · <b>O</b>perational risk mgmt · <b>R</b>esource management</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Strategic Alignment:</b> Security goals match business goals — security is a business enabler, not a blocker.</li>
+        <li><b>Risk Management:</b> Risks are identified, prioritized, treated within risk appetite.</li>
+        <li><b>Resource Management:</b> Budget, people, tools allocated efficiently.</li>
+        <li><b>Performance Measurement:</b> KPIs track security effectiveness (e.g., mean time to detect MTTD).</li>
+        <li><b>Value Delivery:</b> Security spend produces measurable business value.</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">Governance Structure Example</div>
+        <p><b>Board of Directors</b> → Sets risk appetite. <b>CEO</b> → Accountable. <b>CISO</b> → Owns InfoSec strategy. <b>IT Security Team</b> → Implements. <b>Internal Audit</b> → Independent verification. <b>All Employees</b> → Daily compliance.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-100 Ch.2</span> <span class="refpill">ISO 27014</span> <span class="refpill">Stallings Ch.14</span></div>
+    </div>
+
+    <!-- 2.2 ISMS -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">2.2</span>
+        <span class="topic-pill">ISMS</span>
+        <div class="qtitle">Information Security Management System (ISMS)</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition (ISO/IEC 27001)</div>
+        <p><b>ISMS</b> = A systematic approach consisting of <em>policies, procedures, processes, and people</em> that an organization uses to manage information security risks. It is the management system that sustains InfoSec governance over time.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — Deming/PDCA Cycle</div>
+        <div class="mtext">"PDCA — Plan, Do, Check, Act"</div>
+        <div class="mexp">ISO 27001 ISMS follows the Deming cycle: <b>Plan</b> ISMS → <b>Do</b> (implement) → <b>Check</b> (audit) → <b>Act</b> (improve)</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>PLAN:</b> Define scope, set policies, conduct risk assessment, choose controls (ISO 27001 Annex A or NIST 800-53).</li>
+        <li><b>DO:</b> Implement controls, train staff, deploy technologies.</li>
+        <li><b>CHECK:</b> Internal audits, management reviews, monitoring &amp; logging.</li>
+        <li><b>ACT:</b> Corrective &amp; preventive actions, continual improvement.</li>
+        <li><b>Outcome:</b> Organization can pursue ISO 27001 certification — globally recognized proof of strong InfoSec.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">ISO/IEC 27001:2022</span> <span class="refpill">NIST SP 800-53 (parallel framework)</span></div>
+    </div>
+
+    <!-- 2.3 InfoSec Policy & EISP -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">2.3</span>
+        <span class="topic-pill">Policies</span>
+        <div class="qtitle">Information Security Policy &amp; EISP (Enterprise InfoSec Policy)</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — EISP Components</div>
+        <div class="mtext">"OSCAR runs the enterprise security"</div>
+        <div class="mexp"><b>O</b>verview · <b>S</b>cope · <b>C</b>ompliance · <b>A</b>uthority &amp; roles · <b>R</b>eferences to sub-policies</div>
+      </div></div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p>An <b>Information Security Policy</b> is a formal document that defines management's intent, expectations, and rules for protecting information assets. The <b>EISP</b> is the highest-level policy — also called the master/security program policy.</p>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Statement of Purpose:</b> Why the policy exists (e.g., protect customer data, ensure compliance).</li>
+        <li><b>Scope:</b> WHO and WHAT the policy applies to (all employees, all systems, contractors).</li>
+        <li><b>Authority &amp; Responsibilities:</b> CISO owns it, IT enforces, employees comply.</li>
+        <li><b>Compliance:</b> Regulations adhered to (IT Act 2000, GDPR, HIPAA, PCI-DSS).</li>
+        <li><b>References:</b> Points to ISSPs (issue-specific) and SSPs (system-specific).</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.14.3</span> <span class="refpill">NIST SP 800-12 Rev.1 Ch.5</span></div>
+    </div>
+
+    <!-- 2.4 ISSP vs SSP -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">2.4</span>
+        <span class="topic-pill">Policy Types</span>
+        <div class="qtitle">Issue-Specific (ISSP) vs System-Specific (SSP) Policies</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic</div>
+        <div class="mtext">"ISSP = behavior · SSP = configuration"</div>
+        <div class="mexp">ISSP tells <em>people</em> what they may/may not do. SSP tells <em>systems</em> exactly how they must be configured.</div>
+      </div></div>
+
+      <div class="grid2">
+        <div class="cmp">
+          <div class="cmp-title" style="color:var(--purple)">Issue-Specific Policy (ISSP)</div>
+          <ul class="pts">
+            <li>Focus: a specific topic / behavior</li>
+            <li>Audience: all employees</li>
+            <li>Language: plain English</li>
+            <li>Author: HR / Legal / Mgmt</li>
+            <li>Examples: Email AUP, BYOD policy, Social media policy, Internet usage</li>
+          </ul>
+        </div>
+        <div class="cmp">
+          <div class="cmp-title" style="color:var(--blue)">System-Specific Policy (SSP)</div>
+          <ul class="pts">
+            <li>Focus: a specific technology / system</li>
+            <li>Audience: sysadmins / engineers</li>
+            <li>Language: technical</li>
+            <li>Author: IT / Security team</li>
+            <li>Examples: Firewall ACL, password complexity rules, DB backup schedule, AWS IAM config</li>
+          </ul>
+        </div>
+      </div>
+
+      <table class="diff-table">
+        <tr><th>Basis</th><th>EISP</th><th>ISSP</th><th>SSP</th></tr>
+        <tr><td>Level</td><td>Highest (umbrella)</td><td>Mid</td><td>Lowest (technical)</td></tr>
+        <tr><td>Updated</td><td>Rarely (3–5 years)</td><td>When laws change</td><td>When system changes</td></tr>
+        <tr><td>Length</td><td>Short (2–5 pages)</td><td>Medium (5–10)</td><td>Detailed (config files)</td></tr>
+        <tr><td>Approver</td><td>CEO / Board</td><td>CISO / CIO</td><td>System owner</td></tr>
+      </table>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.14.3</span> <span class="refpill">NIST SP 800-12 Rev.1</span></div>
+    </div>
+
+    <!-- 2.5 Standards & Procedures -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">2.5</span>
+        <span class="topic-pill">Hierarchy</span>
+        <div class="qtitle">Policies vs Standards vs Procedures vs Guidelines</div>
+      </div>
+
+      <div class="block"><div class="fblock">
+        <div class="block-label">The Documentation Hierarchy</div>
+        <pre>
+<span class="hl">POLICY</span>     ← What &amp; Why (mandatory, high-level)
+   │       Example: "All sensitive data must be encrypted."
+   ▼
+<span class="hl">STANDARDS</span>  ← Specific rules to enforce policy (mandatory)
+   │       Example: "Use AES-256 with TLS 1.3 minimum."
+   ▼
+<span class="hl">PROCEDURES</span> ← Step-by-step how-to (mandatory)
+   │       Example: "1. Generate key in HSM. 2. Configure
+   │                 OpenSSL. 3. Test with openssl s_client..."
+   ▼
+<span class="hl">GUIDELINES</span> ← Best-practice suggestions (optional)
+           Example: "Recommended: rotate keys every 90 days."
+        </pre>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Policy:</b> What &amp; why — mandatory, abstract.</li>
+        <li><b>Standard:</b> Mandatory specific rules (e.g., must use AES-256).</li>
+        <li><b>Procedure:</b> Mandatory step-by-step instructions.</li>
+        <li><b>Guideline:</b> Recommended best practices — not mandatory.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.14.3</span> <span class="refpill">NIST SP 800-12 Rev.1</span></div>
+    </div>
+
+    <!-- 2.6 InfoSec Evaluation -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">2.6</span>
+        <span class="topic-pill">Evaluation</span>
+        <div class="qtitle">Information Security Evaluation (Maturity Models &amp; Audits)</div>
+      </div>
+
+      <ul class="pts">
+        <li><b>Internal Audits:</b> Periodic check by org's own audit team — verify ISMS works.</li>
+        <li><b>External Audits:</b> Independent third-party assessment (e.g., for ISO 27001 certification).</li>
+        <li><b>Gap Analysis:</b> Compare current state vs target framework (NIST CSF / ISO).</li>
+        <li><b>Penetration Testing:</b> Ethical hackers try to break in — find vulnerabilities before attackers.</li>
+        <li><b>Maturity Models:</b> CMMI, NIST CSF Tiers (Partial → Risk-Informed → Repeatable → Adaptive), C2M2.</li>
+        <li><b>Metrics &amp; KPIs:</b> MTTD, MTTR, # of incidents, % patching SLA met, training completion %.</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">NIST CSF 2.0 — 6 Functions for Evaluation</div>
+        <p><b>GOVERN</b> (new in 2.0) → <b>IDENTIFY</b> → <b>PROTECT</b> → <b>DETECT</b> → <b>RESPOND</b> → <b>RECOVER</b>. Each function has Categories &amp; Subcategories that can be evaluated against current implementation.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST CSF 2.0</span> <span class="refpill">ISO/IEC 27001 Audit</span> <span class="refpill">Stallings Ch.14.7</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ UNIT III ═══════════════ -->
+  <div id="u3" class="pg">
+    <div class="sec-head">
+      <h2>Unit III — Security Incident Response</h2>
+      <span class="co-pill">CO5</span>
+      <span class="src-pill">Stallings Ch.17 · NIST SP 800-61 Rev.2 · NIST SP 800-83</span>
+    </div>
+
+    <div class="unit-intro">
+      <h3>What this unit covers</h3>
+      <p>How to respond when (not if) a cyber incident happens — the full lifecycle from preparation through follow-up, including the role of CSIRT and security architecture design.</p>
+      <div class="topics-strip">
+        <span class="topic-tag">Incident Lifecycle</span><span class="topic-tag">Preparation</span><span class="topic-tag">Detection</span>
+        <span class="topic-tag">Containment</span><span class="topic-tag">Recovery</span><span class="topic-tag">CSIRT</span>
+        <span class="topic-tag">Security Architecture</span>
+      </div>
+    </div>
+
+    <!-- 3.1 Incident Response Overview -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">3.1</span>
+        <span class="topic-pill">Foundations</span>
+        <div class="qtitle">Understanding Security Incident Response (IR)</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definitions (NIST SP 800-61 Rev.2)</div>
+        <p><b>Event</b> = Any observable occurrence in a system (e.g., user logs in, file changes).<br>
+        <b>Adverse event</b> = Event with negative consequences (system crash, malware infection).<br>
+        <b>Incident</b> = A violation or imminent threat of violation of security policies / acceptable use.<br>
+        <b>Incident Response (IR)</b> = The structured organizational process for handling incidents to limit damage, recover quickly, and learn from each event.</p>
+      </div></div>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">Why a Formal IR Program Matters</div>
+        <p><b>1.</b> Reduces dwell time (time attacker stays in system). <b>2.</b> Limits financial damage. <b>3.</b> Required by law (GDPR demands 72-hour notification). <b>4.</b> Preserves forensic evidence for prosecution. <b>5.</b> Builds customer trust through transparent handling.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-61 Rev.2 §1</span> <span class="refpill">Stallings Ch.17.1</span></div>
+    </div>
+
+    <!-- 3.2 IR Lifecycle -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">3.2</span>
+        <span class="topic-pill">Lifecycle</span>
+        <div class="qtitle">Life Cycle of Security Incident Response (NIST 4 Phases)</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — NIST 800-61 Lifecycle</div>
+        <div class="mtext">"PICERL — People In Crisis Easily Recover &amp; Learn"</div>
+        <div class="mexp"><b>P</b>reparation · <b>I</b>dentification · <b>C</b>ontainment · <b>E</b>radication · <b>R</b>ecovery · <b>L</b>essons learned (also known as PICERL or SANS 6-step)</div>
+      </div></div>
+
+      <div class="block"><div class="fblock">
+        <div class="block-label">NIST SP 800-61 Rev.2 — 4-Phase Cycle</div>
+        <pre>
+<span class="hl">PHASE 1: PREPARATION</span>
+  • Build IR team (CSIRT)
+  • Create IR plan, policies, playbooks
+  • Deploy tools (SIEM, EDR, forensics kit)
+  • Train staff, run tabletop exercises
+          ▼
+<span class="hl">PHASE 2: DETECTION &amp; ANALYSIS</span>
+  • Monitor logs, SIEM alerts, IDS/IPS
+  • Validate incident is real (not false positive)
+  • Categorize: malware? insider? DDoS?
+  • Determine scope &amp; severity
+          ▼
+<span class="hl">PHASE 3: CONTAINMENT, ERADICATION &amp; RECOVERY</span>
+  • <b>Containment:</b> Isolate infected hosts (short-term)
+  • <b>Eradication:</b> Remove malware, close vulnerabilities
+  • <b>Recovery:</b> Restore from clean backups, validate
+          ▼
+<span class="hl">PHASE 4: POST-INCIDENT ACTIVITY</span>
+  • Lessons learned meeting (within 2 weeks)
+  • Update playbooks, controls, training
+  • Legal &amp; PR follow-up
+  • Evidence retention for prosecution
+          ▼
+   <span class="hl2">[Loop back: improvements feed Phase 1]</span>
+        </pre>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-61 Rev.2 §3</span> <span class="refpill">SANS PICERL Model</span></div>
+    </div>
+
+    <!-- 3.3 Preparation -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">3.3</span>
+        <span class="topic-pill">Phase 1</span>
+        <div class="qtitle">Preparation for Cyber Security Incidents</div>
+      </div>
+
+      <ul class="pts">
+        <li><b>IR Policy &amp; Plan:</b> Approved by management, defines roles, escalation paths.</li>
+        <li><b>Playbooks:</b> Step-by-step guides for common incidents (ransomware, phishing, DDoS).</li>
+        <li><b>Tools:</b> SIEM (Splunk/QRadar), EDR (CrowdStrike), forensic suite (FTK, EnCase), packet capture (Wireshark).</li>
+        <li><b>Communication Plan:</b> Who to call: legal, PR, law enforcement, regulators (CERT-In in India, 6-hour reporting rule).</li>
+        <li><b>Training &amp; Drills:</b> Tabletop exercises every quarter; full red-team annually.</li>
+        <li><b>Backups:</b> 3-2-1 rule (3 copies, 2 media, 1 offsite); test restorations monthly.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-61 §3.1</span> <span class="refpill">CERT-In Directive 2022 (India)</span></div>
+    </div>
+
+    <!-- 3.4 Responding -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">3.4</span>
+        <span class="topic-pill">Phase 2 &amp; 3</span>
+        <div class="qtitle">Responding to a Cyber Security Incident</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — Containment Strategy</div>
+        <div class="mtext">"SCRAMble — Stop, Capture, Restore, Analyze, Mitigate"</div>
+        <div class="mexp">When an incident hits: <b>S</b>top the spread → <b>C</b>apture forensic evidence → <b>R</b>estore from clean state → <b>A</b>nalyze root cause → <b>M</b>itigate future risk</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Detection sources:</b> SIEM alerts, IDS/IPS, antivirus, user reports ("I clicked a weird link"), threat intel feeds.</li>
+        <li><b>Triage:</b> Validate incident, assign severity (Critical/High/Medium/Low).</li>
+        <li><b>Short-term containment:</b> Disconnect from network, block malicious IPs, disable accounts.</li>
+        <li><b>Forensic capture:</b> Memory dump, disk image — preserve evidence chain of custody.</li>
+        <li><b>Long-term containment:</b> Apply patches, reset all credentials, deploy new controls.</li>
+        <li><b>Eradication:</b> Remove malware, close vulnerabilities, rebuild compromised systems.</li>
+        <li><b>Recovery:</b> Restore from verified clean backups; monitor closely for re-infection.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-61 §3.2-3.3</span> <span class="refpill">Stallings Ch.17.4</span></div>
+    </div>
+
+    <!-- 3.5 Follow-Up -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">3.5</span>
+        <span class="topic-pill">Phase 4</span>
+        <div class="qtitle">Cyber Security Incident Follow-Up (Post-Incident Activity)</div>
+      </div>
+
+      <ul class="pts">
+        <li><b>Lessons-Learned Meeting:</b> Held within 2 weeks; ALL stakeholders attend (IR team, mgmt, IT, legal).</li>
+        <li><b>Key questions:</b> Exactly what happened? When was it detected? How fast was response? What worked? What failed?</li>
+        <li><b>Update artifacts:</b> Playbooks, IR plan, controls, training material based on lessons.</li>
+        <li><b>Regulatory reporting:</b> File required notifications (GDPR 72hrs, CERT-In 6hrs, RBI for banks).</li>
+        <li><b>Evidence retention:</b> Keep logs &amp; forensic data for 1–7 years for legal action.</li>
+        <li><b>Metrics:</b> MTTD (mean time to detect), MTTR (mean time to respond), $ damage, # systems affected.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-61 §3.4</span></div>
+    </div>
+
+    <!-- 3.6 CSIRT -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">3.6</span>
+        <span class="topic-pill">Team</span>
+        <div class="qtitle">Computer Security Incident Response Team (CSIRT)</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p>A <b>CSIRT</b> is a designated team of skilled professionals responsible for receiving, reviewing, and responding to computer security incidents. Also called <b>CERT</b> (Computer Emergency Response Team) or <b>SOC</b> (Security Operations Center) for 24×7 ops.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — CSIRT Roles</div>
+        <div class="mtext">"TIMID HF — Team has Incident Manager, Investigator, Decision-maker, Hunter, Forensicator"</div>
+        <div class="mexp">CSIRT = mix of leadership, technical, legal, and communications experts</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Incident Manager / IR Lead:</b> Coordinates response, makes decisions.</li>
+        <li><b>Security Analysts (Tier 1, 2, 3):</b> Triage alerts, deep investigation, threat hunting.</li>
+        <li><b>Forensic Investigator:</b> Captures evidence, performs malware analysis.</li>
+        <li><b>Threat Intelligence Analyst:</b> Correlates with known TTPs (MITRE ATT&amp;CK).</li>
+        <li><b>Legal Counsel:</b> Compliance, breach notification laws.</li>
+        <li><b>PR / Communications:</b> Internal &amp; external messaging.</li>
+        <li><b>Mgmt Liaison:</b> Reports to executives, board.</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">CSIRT Models</div>
+        <p><b>Central CSIRT:</b> One team for whole org. <b>Distributed CSIRT:</b> Multiple regional teams. <b>Coordinating CSIRT:</b> Between many orgs (e.g., CERT-In, US-CERT). <b>Outsourced/MSSP:</b> Hired third-party 24×7 SOC.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-61 §2.4</span> <span class="refpill">CERT-In (India)</span> <span class="refpill">FIRST.org</span></div>
+    </div>
+
+    <!-- 3.7 Security Architecture -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">3.7</span>
+        <span class="topic-pill">Architecture</span>
+        <div class="qtitle">Design of Security Architecture</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p><b>Security Architecture</b> = The structured design of security controls, technologies, and policies arranged in layers across an organization's IT environment. It implements the <b>Defense in Depth</b> principle.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — Defense Layers</div>
+        <div class="mtext">"PNESH-DA — Physical, Network, Endpoint, System, Human, Data &amp; Application"</div>
+        <div class="mexp">7 protective layers from outside in: Physical → Perimeter (Network) → Endpoint → System (OS) → Human (training) → Data → Application</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>1. Physical Layer:</b> Locks, biometrics, CCTV, guards.</li>
+        <li><b>2. Network/Perimeter:</b> Firewalls, IDS/IPS, VPN, WAF.</li>
+        <li><b>3. Endpoint:</b> Antivirus, EDR, host firewall, MDM.</li>
+        <li><b>4. System:</b> OS hardening, patches, least privilege.</li>
+        <li><b>5. Application:</b> Secure coding, code reviews, WAF, OWASP Top 10 mitigation.</li>
+        <li><b>6. Data:</b> Encryption at rest &amp; in transit, DLP, tokenization.</li>
+        <li><b>7. Human:</b> Awareness training, phishing simulations.</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">Modern Architectures (2024+)</div>
+        <p><b>Zero Trust Architecture (ZTA)</b> — NIST SP 800-207. "Never trust, always verify." Every request authenticated. <b>SASE</b> (Secure Access Service Edge) — combines SD-WAN + security in cloud. <b>SOAR</b> — Security Orchestration, Automation &amp; Response.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-207 (Zero Trust)</span> <span class="refpill">Stallings Ch.16</span> <span class="refpill">SABSA Framework</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ UNIT IV ═══════════════ -->
+  <div id="u4" class="pg">
+    <div class="sec-head">
+      <h2>Unit IV — Risk Management Across Domains</h2>
+      <span class="co-pill">CO6</span>
+      <span class="src-pill">Stallings Ch.3 · PMBOK · ISO 31000 · BHIM/GPay Case</span>
+    </div>
+
+    <div class="unit-intro">
+      <h3>What this unit covers</h3>
+      <p>How risk management is applied differently in finance, projects, business strategy, and software engineering — plus tools and a real-world Indian case study (BHIM &amp; Google Pay).</p>
+      <div class="topics-strip">
+        <span class="topic-tag">Financial RM</span><span class="topic-tag">Project RM (PMBOK)</span><span class="topic-tag">Business RM</span>
+        <span class="topic-tag">Software Engineering RM</span><span class="topic-tag">RM Tools</span><span class="topic-tag">BHIM Case</span><span class="topic-tag">GPay Case</span>
+      </div>
+    </div>
+
+    <!-- 4.1 Financial -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">4.1</span>
+        <span class="topic-pill">Financial</span>
+        <div class="qtitle">Risk Management in Financial Processing</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — 5 Financial Risks</div>
+        <div class="mtext">"COMRO — Credit, Operational, Market, Reputational, Outage"</div>
+        <div class="mexp">5 main risks for banks &amp; payment processors</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Credit Risk:</b> Borrower defaults on loan. Mitigation: credit scoring, collateral.</li>
+        <li><b>Operational Risk:</b> Internal failures (rogue trader, IT outage). Mitigation: audits, SoD (Segregation of Duties).</li>
+        <li><b>Market Risk:</b> Adverse market price moves (FX, interest rates). Mitigation: hedging, VaR (Value at Risk).</li>
+        <li><b>Cyber Risk:</b> Hacks, fraud, data breach. Mitigation: NIST CSF, RBI Cybersecurity Framework 2016/2021.</li>
+        <li><b>Compliance/Regulatory Risk:</b> Failing AML, KYC, PCI-DSS rules. Mitigation: dedicated compliance team.</li>
+        <li><b>Frameworks used:</b> Basel III (banks), SOX (US listed cos), RBI Master Directions (India), PCI-DSS for cards.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Basel III</span> <span class="refpill">RBI Cybersecurity Framework 2016/2021</span> <span class="refpill">PCI-DSS v4.0</span></div>
+    </div>
+
+    <!-- 4.2 Project Mgmt -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">4.2</span>
+        <span class="topic-pill">PMBOK</span>
+        <div class="qtitle">Risk Management Process in Project Management (PMBOK)</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — PMBOK 6 Steps</div>
+        <div class="mtext">"PIQ-QPM — Plan, Identify, Qualitative, Quantitative, Plan responses, Monitor"</div>
+        <div class="mexp">PMI's 6-process risk management area</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>1. Plan Risk Management:</b> Define methodology, roles, budget. Output: Risk Management Plan.</li>
+        <li><b>2. Identify Risks:</b> Brainstorming, SWOT, expert interviews, checklists. Output: Risk Register.</li>
+        <li><b>3. Qualitative Analysis:</b> Probability × Impact matrix. Quick prioritization (H/M/L).</li>
+        <li><b>4. Quantitative Analysis:</b> Numerical analysis — Monte Carlo, EMV (Expected Monetary Value), decision trees.</li>
+        <li><b>5. Plan Risk Responses:</b> Avoid · Transfer · Mitigate · Accept (positive risks: Exploit · Share · Enhance · Accept).</li>
+        <li><b>6. Monitor &amp; Control:</b> Track risks throughout project; adjust as new risks appear.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">PMBOK 7th Edition (PMI)</span> <span class="refpill">ISO 31000</span></div>
+    </div>
+
+    <!-- 4.3 Business -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">4.3</span>
+        <span class="topic-pill">ERM</span>
+        <div class="qtitle">Risk Management Process in Business (Enterprise Risk Mgmt)</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition (COSO ERM Framework)</div>
+        <p><b>Enterprise Risk Management (ERM)</b> = An integrated approach to identifying and managing all risks across the entire organization — strategic, operational, financial, compliance, reputational. Focused on creating, preserving, and realizing value.</p>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Strategic risks:</b> New competitors, disruption (Uber to taxi industry).</li>
+        <li><b>Operational risks:</b> Supply chain breakdown, staff turnover.</li>
+        <li><b>Financial risks:</b> Cash flow, currency fluctuations.</li>
+        <li><b>Compliance risks:</b> GDPR fines, lawsuits.</li>
+        <li><b>Reputational risks:</b> Bad PR, social media crisis.</li>
+        <li><b>Frameworks:</b> COSO ERM (2017), ISO 31000:2018, NIST CSF (cyber subset).</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">COSO ERM 2017</span> <span class="refpill">ISO 31000:2018</span></div>
+    </div>
+
+    <!-- 4.4 Software Engineering -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">4.4</span>
+        <span class="topic-pill">SE</span>
+        <div class="qtitle">Risk Management in Software Engineering (Boehm's Model)</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — Boehm's 6 Steps</div>
+        <div class="mtext">"IAPP-RMR — Identify, Analyze, Prioritize, Plan, Resolve, Monitor, Review"</div>
+        <div class="mexp">Barry Boehm's classic software risk management model (1991)</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Common SE risks:</b> Schedule slippage, budget overrun, scope creep, key personnel leaving, technology obsolescence, security vulns.</li>
+        <li><b>Risk Identification:</b> Brainstorming, checklists, prior project data.</li>
+        <li><b>Risk Analysis:</b> Estimate probability &amp; impact (man-hours lost, $ cost).</li>
+        <li><b>Risk Prioritization:</b> Top-N risks; focus there.</li>
+        <li><b>Risk Resolution:</b> Mitigation actions in sprint plans.</li>
+        <li><b>Risk Monitoring:</b> Daily standups, burndown charts, retrospectives.</li>
+        <li><b>Microsoft SDL &amp; NIST SSDF:</b> Add security risk management at every dev phase.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Boehm 1991</span> <span class="refpill">NIST SP 800-218 (SSDF)</span> <span class="refpill">Microsoft SDL</span></div>
+    </div>
+
+    <!-- 4.5 RM Tools -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">4.5</span>
+        <span class="topic-pill">Tools</span>
+        <div class="qtitle">Risk Assessment &amp; Management Tools</div>
+      </div>
+
+      <ul class="pts">
+        <li><b>OCTAVE</b> (CMU SEI): Operationally Critical Threat, Asset, &amp; Vulnerability Evaluation — self-directed for orgs.</li>
+        <li><b>FAIR</b> (Factor Analysis of Information Risk): Quantitative, financial-impact focused.</li>
+        <li><b>NIST SP 800-30:</b> Standard guide for conducting risk assessments — qualitative/quantitative/hybrid.</li>
+        <li><b>ISO 27005:</b> Risk management for ISMS — companion to ISO 27001.</li>
+        <li><b>RiskWatch / RSA Archer / ServiceNow GRC / MetricStream:</b> Commercial GRC platforms — automate risk register, controls, audits.</li>
+        <li><b>OpenVAS / Nessus / Qualys:</b> Vulnerability scanners — find weaknesses.</li>
+        <li><b>Nmap / Burp Suite / Metasploit:</b> Penetration testing tools.</li>
+        <li><b>SIEM (Splunk, QRadar, ELK):</b> Continuous risk monitoring.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-30 Rev.1</span> <span class="refpill">CMU SEI OCTAVE</span> <span class="refpill">FAIR Institute</span></div>
+    </div>
+
+    <!-- 4.6 BHIM & GPay Case -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">4.6</span>
+        <span class="topic-pill">Case Study</span>
+        <div class="qtitle">Case Study: BHIM App &amp; Google Pay — Risk Analysis</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Background</div>
+        <p><b>BHIM</b> (Bharat Interface for Money) launched by NPCI in 2016. <b>Google Pay</b> (formerly Tez, 2017). Both run on UPI. In <b>May 2020</b>, vpnMentor researchers discovered a <b>misconfigured AWS S3 bucket</b> linked to BHIM exposing 7.26 million users' Aadhaar, PAN, UPI IDs, and bank info.</p>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Risk 1 — Cloud Misconfiguration (BHIM):</b> S3 bucket left public. NIST CSF: PROTECT-PT-PS failure. Fix: CSPM tools, automated audits, principle of least privilege.</li>
+        <li><b>Risk 2 — Identity Theft / Data Privacy:</b> Aadhaar exposure → KYC fraud, fake loans. Fix: data minimization, tokenization, encryption at rest (AES-256).</li>
+        <li><b>Risk 3 — Phishing &amp; Fake Apps:</b> Fake "BHIM" apps on Play Store steal UPI PIN. Fix: NPCI app whitelisting, certificate pinning, user education.</li>
+        <li><b>Risk 4 — SIM Swap / OTP Interception:</b> Attacker hijacks phone number → catches OTPs. Fix: device binding, biometric auth, anomaly-based fraud detection.</li>
+        <li><b>Risk 5 — Social Engineering ("Request Money" scams):</b> Scammer sends collect requests pretending to "send" money. Fix: UI redesign, education campaigns, transaction limits.</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">Google Pay's Architecture Advantage</div>
+        <p>GPay uses <b>tokenization</b> (real card numbers never stored), <b>device binding</b>, Google's ML-driven anomaly detection, and Google Play Protect. This gives it a stronger risk posture than BHIM, which had the 2020 leak.</p>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">NIST CSF 2.0 Mapping</div>
+        <p><b>GOVERN:</b> NPCI sets policy. <b>IDENTIFY:</b> Map UPI IDs, servers, Aadhaar links. <b>PROTECT:</b> AES-256, MFA, tokenization. <b>DETECT:</b> Real-time anomaly alerts (location/amount). <b>RESPOND:</b> Freeze accounts, NPCI dispute resolution. <b>RECOVER:</b> Refund framework, user notification within 24 hrs.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">vpnMentor BHIM Report 2020</span> <span class="refpill">NPCI UPI Procedural Guidelines</span> <span class="refpill">RBI Master Direction on Digital Payments</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ UNIT V ═══════════════ -->
+  <div id="u5" class="pg">
+    <div class="sec-head">
+      <h2>Unit V — Compliance &amp; Regulatory Frameworks</h2>
+      <span class="co-pill">CO7</span>
+      <span class="src-pill">NIST SP 800-53 · NIST SP 800-171 · GDPR · AICPA SOC</span>
+    </div>
+
+    <div class="unit-intro">
+      <h3>What this unit covers</h3>
+      <p>The legal and regulatory side of InfoSec — SOC reports, GDPR (Europe's privacy law), and the two foundational NIST frameworks: 800-53 (federal systems) and 800-171 (CUI in non-federal systems).</p>
+      <div class="topics-strip">
+        <span class="topic-tag">Compliance Framework</span><span class="topic-tag">SOC 1/2/3</span><span class="topic-tag">GDPR</span>
+        <span class="topic-tag">NIST 800-53</span><span class="topic-tag">NIST 800-171</span>
+      </div>
+    </div>
+
+    <!-- 5.1 Compliance Framework Overview -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">5.1</span>
+        <span class="topic-pill">Overview</span>
+        <div class="qtitle">Compliance &amp; Regulatory Framework — Overview</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p><b>Compliance</b> = Adherence to laws, regulations, contractual obligations, and internal policies. <b>Regulatory Framework</b> = The system of rules issued by governments and industry bodies that organizations must follow.</p>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Why comply?</b> Avoid fines (GDPR up to 4% of global revenue), avoid lawsuits, win contracts, build customer trust.</li>
+        <li><b>Global laws:</b> GDPR (EU), CCPA/CPRA (California), LGPD (Brazil), PIPEDA (Canada), DPDP Act 2023 (India).</li>
+        <li><b>Industry-specific:</b> HIPAA (US healthcare), PCI-DSS (payment cards), SOX (US listed cos), GLBA (US finance).</li>
+        <li><b>Frameworks (voluntary):</b> NIST CSF, ISO 27001, COBIT, CIS Controls.</li>
+        <li><b>India-specific:</b> IT Act 2000 (amended 2008), DPDP Act 2023, RBI Cybersecurity Framework, SEBI CSCRF, CERT-In Directive 2022.</li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">DPDP Act 2023</span> <span class="refpill">IT Act 2000</span> <span class="refpill">CERT-In Directive 2022</span></div>
+    </div>
+
+    <!-- 5.2 SOC Reports -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">5.2</span>
+        <span class="topic-pill">SOC</span>
+        <div class="qtitle">Service Organization Controls (SOC) Reports — SOC 1, 2, 3</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition (AICPA)</div>
+        <p>A <b>SOC report</b> is an independent audit report issued by a CPA firm that examines the internal controls at a service organization. Used by customers to verify the org securely handles their data/processes. Three types: SOC 1, SOC 2, SOC 3.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — SOC at a Glance</div>
+        <div class="mtext">"1 = $$ · 2 = 🔒 · 3 = 📢"</div>
+        <div class="mexp">SOC 1 = Financial controls · SOC 2 = Security/data controls · SOC 3 = Public-facing trust seal</div>
+      </div></div>
+
+      <table class="diff-table">
+        <tr><th>Aspect</th><th>SOC 1</th><th>SOC 2</th><th>SOC 3</th></tr>
+        <tr><td>Focus</td><td>Internal Controls over Financial Reporting (ICFR)</td><td>Trust Services Criteria (Security, Availability, PI, Confidentiality, Privacy)</td><td>Same as SOC 2 (TSC)</td></tr>
+        <tr><td>Audience</td><td>Customers' financial auditors</td><td>Customers' security/risk teams (under NDA)</td><td>General public</td></tr>
+        <tr><td>Distribution</td><td>Restricted</td><td>Restricted (NDA)</td><td>Public — website OK</td></tr>
+        <tr><td>Detail level</td><td>Detailed control listings</td><td>Very detailed: controls, tests, results</td><td>Summary only</td></tr>
+        <tr><td>Use case</td><td>Payroll, billing, claims processors</td><td>SaaS, cloud, data centers</td><td>Marketing trust seal</td></tr>
+        <tr><td>Standard</td><td>SSAE 18 / ISAE 3402</td><td>AICPA TSC + SSAE 18 / ISAE 3000</td><td>Derived from SOC 2</td></tr>
+      </table>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">SOC Type I vs Type II</div>
+        <p><b>Type I:</b> Snapshot — "are controls properly designed at this point in time?" (faster, weaker assurance).<br>
+        <b>Type II:</b> Operational over 3–12 months — "do controls actually work over time?" (stronger assurance, what enterprise buyers want).</p>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">SOC 2 — The 5 Trust Services Criteria (TSC)</div>
+        <p><b>1. Security</b> (mandatory) — protect from unauthorized access. <b>2. Availability</b> — system is up &amp; accessible per SLA. <b>3. Processing Integrity</b> — system processes data accurately. <b>4. Confidentiality</b> — protect confidential business info. <b>5. Privacy</b> — handle PII per privacy notice.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">AICPA SSAE 18</span> <span class="refpill">AICPA TSC 2017 (revised 2022)</span></div>
+    </div>
+
+    <!-- 5.3 GDPR -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">5.3</span>
+        <span class="topic-pill">GDPR</span>
+        <div class="qtitle">General Data Protection Regulation (GDPR)</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p><b>GDPR</b> = European Union Regulation (EU) 2016/679, effective <b>25 May 2018</b>. The world's most strict and comprehensive data privacy law. Applies to any organization globally that processes personal data of EU residents (extra-territorial).</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — GDPR's 7 Principles</div>
+        <div class="mtext">"LIST-DAI — Lawfulness, Integrity, Storage, Transparency, Data minimization, Accuracy, Accountability"</div>
+        <div class="mexp">Article 5 — the 7 fundamental principles of GDPR</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>1. Lawfulness, Fairness, Transparency:</b> Have legal basis (consent, contract, legitimate interest); be honest with users.</li>
+        <li><b>2. Purpose Limitation:</b> Only use data for the specific stated purpose.</li>
+        <li><b>3. Data Minimization:</b> Collect only what is strictly necessary.</li>
+        <li><b>4. Accuracy:</b> Keep data accurate; correct mistakes promptly.</li>
+        <li><b>5. Storage Limitation:</b> Don't keep data longer than needed.</li>
+        <li><b>6. Integrity &amp; Confidentiality:</b> Protect data with encryption, access control.</li>
+        <li><b>7. Accountability:</b> Can demonstrate compliance with all of the above.</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">8 Data Subject Rights (Articles 12–22)</div>
+        <p><b>1.</b> Right to be informed · <b>2.</b> Right of access · <b>3.</b> Right to rectification · <b>4.</b> Right to erasure ("right to be forgotten") · <b>5.</b> Right to restrict processing · <b>6.</b> Right to data portability · <b>7.</b> Right to object · <b>8.</b> Rights related to automated decision-making.</p>
+      </div></div>
+
+      <div class="block"><div class="wblock">
+        <div class="block-label">GDPR Penalties</div>
+        <p>Up to <b>€20 million</b> OR <b>4% of global annual turnover</b> — whichever is HIGHER. Examples: Amazon fined €746M (2021), Meta fined €1.2 billion (2023), Google fined €50M (2019). Breach notification within <b>72 hours</b> to the Data Protection Authority.</p>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">Key Roles</div>
+        <p><b>Data Controller:</b> Decides why &amp; how data is processed. <b>Data Processor:</b> Processes on controller's behalf. <b>DPO (Data Protection Officer):</b> Mandatory for large-scale or sensitive data processing. <b>Supervisory Authority:</b> National regulator (e.g., CNIL in France, ICO in UK).</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">EU Regulation 2016/679</span> <span class="refpill">GDPR.eu</span> <span class="refpill">India DPDP Act 2023 (similar)</span></div>
+    </div>
+
+    <!-- 5.4 NIST 800-53 -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">5.4</span>
+        <span class="topic-pill">NIST 800-53</span>
+        <div class="qtitle">NIST SP 800-53 — Security &amp; Privacy Controls for Federal Systems</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p><b>NIST SP 800-53</b> (currently <b>Rev.5</b>, 2020) is the comprehensive catalog of <b>1,189+ security &amp; privacy controls</b> organized into <b>20 families</b>, used to protect U.S. federal information systems. Mandatory under <b>FISMA</b> for federal agencies.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — NIST 800-53 in 1 line</div>
+        <div class="mtext">"800-53 = Federal · 20 families · 1000+ controls · 3 baselines"</div>
+        <div class="mexp">3 baselines (Low/Moderate/High) based on FIPS 199 categorization</div>
+      </div></div>
+
+      <div class="block-label" style="color:var(--text2)">The 20 Control Families (Rev.5)</div>
+      <div class="grid2">
+        <div class="cmp">
+          <div class="cmp-title">Group A (1–10)</div>
+          <ul class="pts">
+            <li><b>AC</b> — Access Control</li>
+            <li><b>AT</b> — Awareness &amp; Training</li>
+            <li><b>AU</b> — Audit &amp; Accountability</li>
+            <li><b>CA</b> — Assessment, Authorization, Monitoring</li>
+            <li><b>CM</b> — Configuration Management</li>
+            <li><b>CP</b> — Contingency Planning</li>
+            <li><b>IA</b> — Identification &amp; Authentication</li>
+            <li><b>IR</b> — Incident Response</li>
+            <li><b>MA</b> — Maintenance</li>
+            <li><b>MP</b> — Media Protection</li>
+          </ul>
+        </div>
+        <div class="cmp">
+          <div class="cmp-title">Group B (11–20)</div>
+          <ul class="pts">
+            <li><b>PE</b> — Physical &amp; Environmental Protection</li>
+            <li><b>PL</b> — Planning</li>
+            <li><b>PM</b> — Program Management</li>
+            <li><b>PS</b> — Personnel Security</li>
+            <li><b>PT</b> — PII Processing &amp; Transparency (NEW in Rev.5)</li>
+            <li><b>RA</b> — Risk Assessment</li>
+            <li><b>SA</b> — System &amp; Services Acquisition</li>
+            <li><b>SC</b> — System &amp; Communications Protection</li>
+            <li><b>SI</b> — System &amp; Information Integrity</li>
+            <li><b>SR</b> — Supply Chain Risk Mgmt (NEW in Rev.5)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">3 Control Baselines (FIPS 199 Impact Levels)</div>
+        <p><b>LOW:</b> Limited adverse effect — basic controls. <b>MODERATE:</b> Serious adverse effect — most common, ~287 controls. <b>HIGH:</b> Severe/catastrophic — extensive controls including continuous monitoring. Each baseline progressively adds more rigor.</p>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">Who Must Comply with 800-53?</div>
+        <p>Mandatory: U.S. federal agencies (FISMA), federal contractors with access to federal systems, FedRAMP cloud providers (AWS GovCloud, Azure Gov). Voluntary: state/local govt, large private firms wanting top-tier security.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-53 Rev.5</span> <span class="refpill">FIPS 199</span> <span class="refpill">FISMA 2014</span></div>
+    </div>
+
+    <!-- 5.5 NIST 800-171 -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">5.5</span>
+        <span class="topic-pill">NIST 800-171</span>
+        <div class="qtitle">NIST SP 800-171 — Protecting CUI in Non-Federal Systems</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p><b>NIST SP 800-171</b> is a streamlined set of <b>110 security requirements across 14 families</b> designed to protect <b>Controlled Unclassified Information (CUI)</b> when handled by <b>non-federal organizations</b> (contractors, subcontractors, universities). Mandated by <b>DFARS 252.204-7012</b> for all DoD contractors.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — NIST 800-171 in 1 line</div>
+        <div class="mtext">"171 = Contractors · 14 families · 110 controls · CUI"</div>
+        <div class="mexp">A subset/derivative of 800-53 Moderate baseline, tailored for non-federal entities</div>
+      </div></div>
+
+      <div class="block-label" style="color:var(--text2)">The 14 Control Families</div>
+      <div class="grid2">
+        <div class="cmp">
+          <div class="cmp-title">Group A (1–7)</div>
+          <ul class="pts">
+            <li><b>3.1</b> — Access Control</li>
+            <li><b>3.2</b> — Awareness &amp; Training</li>
+            <li><b>3.3</b> — Audit &amp; Accountability</li>
+            <li><b>3.4</b> — Configuration Management</li>
+            <li><b>3.5</b> — Identification &amp; Authentication</li>
+            <li><b>3.6</b> — Incident Response</li>
+            <li><b>3.7</b> — Maintenance</li>
+          </ul>
+        </div>
+        <div class="cmp">
+          <div class="cmp-title">Group B (8–14)</div>
+          <ul class="pts">
+            <li><b>3.8</b> — Media Protection</li>
+            <li><b>3.9</b> — Personnel Security</li>
+            <li><b>3.10</b> — Physical Protection</li>
+            <li><b>3.11</b> — Risk Assessment</li>
+            <li><b>3.12</b> — Security Assessment</li>
+            <li><b>3.13</b> — System &amp; Communications Protection</li>
+            <li><b>3.14</b> — System &amp; Information Integrity</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">What is CUI?</div>
+        <p><b>Controlled Unclassified Information</b> = Sensitive but not classified federal data. Examples: technical specs of defense systems, export-controlled data, financial records, certain PII. Not "Top Secret" but if leaked, harms national interest.</p>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">CMMC 2.0 — The Enforcement Mechanism</div>
+        <p>The U.S. DoD's <b>Cybersecurity Maturity Model Certification (CMMC) 2.0</b> requires DoD contractors to undergo <em>third-party audits</em> proving NIST 800-171 compliance. <b>Level 1:</b> FCI protection (basic). <b>Level 2:</b> CUI protection (= 800-171's 110 reqs). <b>Level 3:</b> Advanced (800-172).</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-171 Rev.3</span> <span class="refpill">DFARS 252.204-7012</span> <span class="refpill">CMMC 2.0</span></div>
+    </div>
+
+    <!-- 5.6 NIST 800-53 vs 800-171 -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">5.6</span>
+        <span class="topic-pill">Comparison</span>
+        <div class="qtitle">NIST 800-53 vs NIST 800-171 — Side-by-Side</div>
+      </div>
+
+      <table class="diff-table">
+        <tr><th>Aspect</th><th>NIST SP 800-53</th><th>NIST SP 800-171</th></tr>
+        <tr><td>Purpose</td><td>Protect federal information systems comprehensively</td><td>Protect CUI on non-federal systems</td></tr>
+        <tr><td>Audience</td><td>Federal agencies, FedRAMP CSPs</td><td>DoD contractors, subcontractors, universities</td></tr>
+        <tr><td>Mandated by</td><td>FISMA (Federal Info Security Modernization Act)</td><td>DFARS 252.204-7012 + CMMC</td></tr>
+        <tr><td># of controls</td><td>~1,189 across 20 families</td><td>110 across 14 families</td></tr>
+        <tr><td>Customization</td><td>Highly customizable (3 baselines: L/M/H)</td><td>Fixed — limited tailoring via ODPs</td></tr>
+        <tr><td>Privacy controls</td><td>Yes (PT family)</td><td>Focus on confidentiality only</td></tr>
+        <tr><td>Assessment</td><td>Government audits (RMF)</td><td>Self-assess + 3rd party (CMMC)</td></tr>
+        <tr><td>Complexity</td><td>Very high — enterprise-grade</td><td>Moderate — achievable for SMBs</td></tr>
+        <tr><td>Relationship</td><td>The full catalog (parent)</td><td>Derived from 800-53 Moderate baseline</td></tr>
+      </table>
+
+      <div class="block"><div class="tblock">
+        <div class="block-label">Key Insight (must remember!)</div>
+        <p><b>NIST 800-171 is essentially a tailored SUBSET of NIST 800-53.</b> It strips out federal-specific controls (continuous monitoring, personnel clearances) and focuses on confidentiality of CUI. If you're already compliant with 800-53 Moderate, you're 80%+ compliant with 800-171.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST SP 800-53 Rev.5</span> <span class="refpill">NIST SP 800-171 Rev.3</span> <span class="refpill">CompliancePoint Comparison</span></div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ BONUS ═══════════════ -->
+  <div id="bonus" class="pg">
+    <div class="sec-head">
+      <h2>Bonus Topics — Cookies, GDPR Compliance &amp; UPI</h2>
+      <span class="co-pill">Extra</span>
+      <span class="src-pill">For viva, vivace &amp; surprise short-questions</span>
+    </div>
+
+    <div class="unit-intro">
+      <h3>What this section covers</h3>
+      <p>Three topics frequently asked in vivas and short-question sections: <b>Types of Cookies</b> (web security), <b>GDPR Compliance</b> (how to actually achieve it), and <b>UPI</b> (Unified Payments Interface — India's payment backbone).</p>
+    </div>
+
+    <!-- B.1 Cookies -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">B.1</span>
+        <span class="topic-pill">Web Security</span>
+        <div class="qtitle">Types of Cookies — Complete Guide</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p>An <b>HTTP Cookie</b> is a small piece of data (usually &lt;4KB) that a website stores on the user's browser. The browser sends it back with every subsequent request to that site. Used for sessions, preferences, tracking, authentication.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — 8 Types of Cookies</div>
+        <div class="mtext">"SP-FT-SS-HZ — Session/Persistent, First/Third, Secure/SameSite, HttpOnly/Zombie"</div>
+        <div class="mexp">Categorized 4 ways: by lifetime, by origin, by security flags, by special types</div>
+      </div></div>
+
+      <div class="block-label" style="color:var(--text2)">Category 1 — By Lifetime</div>
+      <ul class="pts">
+        <li><b>1. Session Cookies:</b> Stored only in RAM. Deleted when browser closes. Used for shopping carts, login sessions. <em>Most secure for sessions.</em></li>
+        <li><b>2. Persistent Cookies:</b> Stored on disk with expiry date (days–years). Used for "remember me", language preferences, ad tracking.</li>
+      </ul>
+
+      <div class="block-label" style="color:var(--text2);margin-top:1.25rem">Category 2 — By Origin</div>
+      <ul class="pts">
+        <li><b>3. First-Party Cookies:</b> Set by the website you're visiting (e.g., amazon.com sets a cookie when you visit Amazon). Generally safer.</li>
+        <li><b>4. Third-Party Cookies:</b> Set by another domain embedded on the site (e.g., DoubleClick ads on amazon.com). Used heavily for cross-site tracking. Being phased out by Chrome (2024–25), already blocked by Safari, Firefox.</li>
+      </ul>
+
+      <div class="block-label" style="color:var(--text2);margin-top:1.25rem">Category 3 — By Security Flags</div>
+      <ul class="pts">
+        <li><b>5. Secure Cookies:</b> Only sent over HTTPS. Set with <code>Secure</code> flag. Prevents eavesdropping.</li>
+        <li><b>6. HttpOnly Cookies:</b> Cannot be accessed by JavaScript (<code>document.cookie</code>). Set with <code>HttpOnly</code> flag. Prevents XSS attacks from stealing session cookies.</li>
+        <li><b>7. SameSite Cookies:</b> Restrict cookie sending in cross-site requests. Three values: <code>Strict</code> (never cross-site) · <code>Lax</code> (default in modern browsers) · <code>None</code> (must also be Secure). Prevents CSRF attacks.</li>
+      </ul>
+
+      <div class="block-label" style="color:var(--text2);margin-top:1.25rem">Category 4 — Special Types</div>
+      <ul class="pts">
+        <li><b>8. Zombie Cookies / Supercookies:</b> Cookies that recreate themselves after deletion using HTML5 LocalStorage, Flash LSOs, or ETags. <b>Privacy violation</b> — banned in many jurisdictions.</li>
+        <li><b>9. Authentication Cookies:</b> Specifically used for login state. Should be Secure + HttpOnly + SameSite=Strict.</li>
+        <li><b>10. Tracking/Analytics Cookies:</b> Google Analytics _ga, Facebook _fbp. Need user consent under GDPR.</li>
+      </ul>
+
+      <div class="block"><div class="fblock">
+        <div class="block-label">Example — A Secure Cookie</div>
+        <pre>
+Set-Cookie: sessionId=abc123;
+            <span class="hl">Secure</span>;        ← only sent over HTTPS
+            <span class="hl">HttpOnly</span>;      ← JS cannot read it
+            <span class="hl">SameSite=Strict</span>; ← no cross-site
+            Max-Age=3600;       ← expires in 1 hour
+            Path=/;
+            Domain=bank.com
+        </pre>
+      </div></div>
+
+      <div class="block"><div class="wblock">
+        <div class="block-label">Cookie-Related Attacks</div>
+        <p><b>Session Hijacking:</b> Steal session cookie → impersonate user. Mitigated by Secure + HttpOnly. <b>CSRF (Cross-Site Request Forgery):</b> Trick browser into sending cookie with malicious request. Mitigated by SameSite + CSRF tokens. <b>XSS (Cross-Site Scripting):</b> Inject JS to read cookies. Mitigated by HttpOnly + Content Security Policy (CSP).</p>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">GDPR &amp; Cookies — The Cookie Banner Law</div>
+        <p>Under GDPR + ePrivacy Directive, any non-essential cookie (analytics, ads, tracking) requires <b>explicit, informed, opt-in consent</b> from users BEFORE setting. That's why every EU website shows a "Accept Cookies" banner. Essential cookies (session, login) don't need consent.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">RFC 6265 (HTTP State Mgmt)</span> <span class="refpill">OWASP Session Management</span> <span class="refpill">EU ePrivacy Directive</span></div>
+    </div>
+
+    <!-- B.2 GDPR Compliance -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">B.2</span>
+        <span class="topic-pill">Privacy Law</span>
+        <div class="qtitle">GDPR Compliance — How to Actually Comply</div>
+      </div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — 10 Steps to GDPR Compliance</div>
+        <div class="mtext">"DAMP-CRIBED — Document, Audit, Map, Privacy, Consent, Rights, Incident, Breach, Encrypt, DPO"</div>
+        <div class="mexp">A practical 10-step compliance roadmap</div>
+      </div></div>
+
+      <ul class="pts">
+        <li><b>Step 1 — Awareness:</b> Train all employees and management. GDPR is everyone's responsibility.</li>
+        <li><b>Step 2 — Data Audit / Mapping:</b> Document WHAT personal data you collect, WHY, WHERE it's stored, WHO has access, HOW LONG you keep it. Output: <em>Record of Processing Activities (RoPA)</em>, mandatory under Article 30.</li>
+        <li><b>Step 3 — Lawful Basis:</b> For every data use, identify a legal basis from Art. 6: (a) Consent (b) Contract (c) Legal obligation (d) Vital interests (e) Public task (f) Legitimate interest.</li>
+        <li><b>Step 4 — Update Privacy Notice:</b> Plain language. Tell users what data, why, how long, who you share with, their rights, contact details of DPO.</li>
+        <li><b>Step 5 — Consent Mechanism:</b> Where consent is the legal basis, must be <b>freely given, specific, informed, unambiguous</b>. Pre-ticked checkboxes are NOT valid. Easy to withdraw.</li>
+        <li><b>Step 6 — Data Subject Rights:</b> Build processes to handle the 8 rights (access, rectification, erasure, etc.) within 30 days.</li>
+        <li><b>Step 7 — Privacy by Design (Art. 25):</b> Bake privacy into systems from day 1 — not bolted on later. Use data minimization, encryption, pseudonymization.</li>
+        <li><b>Step 8 — DPIA (Data Protection Impact Assessment):</b> Mandatory for high-risk processing (large-scale profiling, biometrics, etc.).</li>
+        <li><b>Step 9 — Breach Notification:</b> Notify supervisory authority within <b>72 hours</b>. Notify affected users without undue delay if high risk.</li>
+        <li><b>Step 10 — Appoint a DPO:</b> Mandatory for: public bodies, large-scale monitoring, large-scale special category data. The DPO reports independently to senior management.</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">Technical &amp; Organizational Measures (TOMs) — Article 32</div>
+        <p><b>Technical:</b> Encryption (AES-256) at rest &amp; in transit, pseudonymization, access control, MFA, backups, intrusion detection.<br>
+        <b>Organizational:</b> Policies, training, NDAs, vendor due diligence, breach response plan, regular audits, DPO oversight.</p>
+      </div></div>
+
+      <div class="block"><div class="wblock">
+        <div class="block-label">Cross-Border Transfers (Critical!)</div>
+        <p>Sending EU data outside EU is restricted. Allowed only via: <b>Adequacy decisions</b> (countries deemed safe — UK, Switzerland, Japan, but NOT India yet). <b>Standard Contractual Clauses (SCCs)</b> — most common. <b>Binding Corporate Rules (BCRs)</b> — for multinationals. After Schrems II ruling (2020), US transfers need extra safeguards.</p>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">India's DPDP Act 2023 — GDPR's Cousin</div>
+        <p>India's <b>Digital Personal Data Protection Act 2023</b> mirrors GDPR but is simpler. Key differences: <b>No "right to be forgotten"</b> (only erasure on consent withdrawal), <b>no DPO concept</b> (Significant Data Fiduciary instead), penalties up to ₹250 crore, child consent threshold = 18 (vs 16 in GDPR). DPDP Rules notified Jan 2025.</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">EU Reg 2016/679 (GDPR)</span> <span class="refpill">DPDP Act 2023 (India)</span> <span class="refpill">ICO Compliance Guide</span></div>
+    </div>
+
+    <!-- B.3 UPI -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">B.3</span>
+        <span class="topic-pill">Payments</span>
+        <div class="qtitle">UPI — Unified Payments Interface (Complete Guide)</div>
+      </div>
+
+      <div class="block"><div class="dblock">
+        <div class="block-label">Definition</div>
+        <p><b>UPI (Unified Payments Interface)</b> = An instant real-time payment system developed by <b>NPCI (National Payments Corporation of India)</b>, launched <b>11 April 2016</b>. Allows instant fund transfers between any two bank accounts using just a <b>Virtual Payment Address (VPA / UPI ID)</b>, mobile number, QR code, or Aadhaar.</p>
+      </div></div>
+
+      <div class="block"><div class="mblock">
+        <div class="block-label">Mnemonic — UPI Components</div>
+        <div class="mtext">"4 Pillars: PSP-PSP-Bank-Bank"</div>
+        <div class="mexp"><b>Payer's PSP App</b> ↔ <b>Payee's PSP App</b> ↔ via <b>NPCI UPI Switch</b> ↔ between <b>Payer's Bank</b> and <b>Payee's Bank</b></div>
+      </div></div>
+
+      <div class="block"><div class="fblock">
+        <div class="block-label">UPI Transaction Flow</div>
+        <pre>
+<span class="hl3">User A wants to pay ₹500 to User B</span>
+
+1. User A opens GPay (PSP app) → enters User B's UPI ID
+2. Enters ₹500 → enters 4/6-digit UPI PIN
+3. GPay → encrypts request → sends to <span class="hl">NPCI UPI Switch</span>
+4. NPCI verifies User A's PIN with <span class="hl">User A's Bank</span>
+5. User A's Bank debits ₹500
+6. NPCI routes credit to <span class="hl">User B's Bank</span>
+7. User B's Bank credits ₹500 → confirms back via NPCI
+8. Both User A &amp; User B see SMS/notification — <span class="hl2">all in 2-5 seconds!</span>
+        </pre>
+      </div></div>
+
+      <div class="block-label" style="color:var(--text2)">Key Features</div>
+      <ul class="pts">
+        <li><b>24×7×365:</b> Works any time including holidays — unlike NEFT/RTGS earlier.</li>
+        <li><b>Single Click 2-Factor Auth:</b> Device binding (phone bound to bank account) + UPI PIN.</li>
+        <li><b>Virtual Payment Address (VPA):</b> abc@oksbi or 9876543210@ybl — no need to share account number.</li>
+        <li><b>Push &amp; Pull:</b> Send money OR request money (collect request).</li>
+        <li><b>Limits:</b> Up to ₹1 lakh per transaction (₹2L for capital markets, education, healthcare). 20 txns per day.</li>
+        <li><b>Free for users:</b> No charges (zero MDR for P2P/P2M up to ₹2,000).</li>
+        <li><b>Volume:</b> 14+ billion transactions/month (2024) — world's largest real-time payment system.</li>
+      </ul>
+
+      <div class="block"><div class="eblock">
+        <div class="block-label">UPI Security Architecture</div>
+        <p><b>1. Device Binding:</b> UPI app bound to one specific phone (SIM + IMEI). New phone = re-register.<br>
+        <b>2. UPI PIN:</b> Set inside app via debit card; only user knows it. Encrypted at NPCI level.<br>
+        <b>3. Tokenization:</b> Real account number never shared with merchants. Tokens used.<br>
+        <b>4. End-to-end encryption:</b> Every UPI message encrypted using AES-256.<br>
+        <b>5. NPCI Fraud Risk Management (FRM):</b> ML-based real-time anomaly detection.<br>
+        <b>6. Two-factor by design:</b> Possession (phone) + Knowledge (PIN).</p>
+      </div></div>
+
+      <div class="block-label" style="color:var(--text2);margin-top:1.25rem">UPI Variants &amp; Innovations</div>
+      <ul class="pts">
+        <li><b>UPI 2.0 (2018):</b> Linked overdraft accounts, signed intent, invoice in inbox.</li>
+        <li><b>UPI Lite (2022):</b> Wallet-style for small amounts (≤₹500), no PIN required, faster.</li>
+        <li><b>UPI on Credit Cards (RuPay):</b> Pay via credit card linked to UPI (2023).</li>
+        <li><b>UPI International:</b> UAE, Singapore, France, Sri Lanka, Mauritius, Bhutan, Nepal — and growing.</li>
+        <li><b>UPI AutoPay:</b> Recurring mandates (Netflix subscriptions, SIPs).</li>
+        <li><b>UPI 123Pay (2022):</b> Feature phone UPI — works without internet via IVR/missed call.</li>
+        <li><b>UPI Circle / Family UPI (2024):</b> Allow trusted users to pay from your account with limits.</li>
+      </ul>
+
+      <div class="block"><div class="wblock">
+        <div class="block-label">Common UPI Scams &amp; How to Avoid</div>
+        <p><b>1. "Collect Request" Scam:</b> Scammer sends money REQUEST disguised as "I'm sending you money." Victim approves &amp; loses money. → <em>Never enter UPI PIN to RECEIVE money.</em><br>
+        <b>2. Fake Customer Support:</b> Fraudsters pose as bank/Paytm support, install AnyDesk, take over phone. → <em>Banks never ask for PIN/OTP.</em><br>
+        <b>3. QR Code Scam:</b> Scanning a malicious QR sends YOUR money. → <em>Scanning + entering PIN = paying, not receiving.</em><br>
+        <b>4. SIM Swap:</b> Attacker hijacks your phone number. → <em>Use UPI Lite for small txns; enable extra bank alerts.</em></p>
+      </div></div>
+
+      <div class="block"><div class="nblock">
+        <div class="block-label">UPI Ecosystem Players</div>
+        <p><b>NPCI:</b> Operates UPI switch (the central rail). <b>Banks:</b> ~500+ on UPI; provide accounts. <b>PSP Apps:</b> User-facing apps — Google Pay, PhonePe, Paytm, BHIM, WhatsApp Pay, CRED, Amazon Pay (top 7 = 90%+ market share). <b>RBI:</b> Regulator. <b>NPCI Bharat BillPay:</b> For utility bills.</p>
+      </div></div>
+
+      <div class="block"><div class="tblock">
+        <div class="block-label">Risk Management View on UPI</div>
+        <p>UPI's risk management aligns with NIST CSF: <b>IDENTIFY</b> (device binding maps users to phones) → <b>PROTECT</b> (encryption, tokenization, 2FA) → <b>DETECT</b> (FRM ML model, anomaly detection) → <b>RESPOND</b> (Auto-block suspicious accounts, dispute resolution within T+1) → <b>RECOVER</b> (Refunds via NPCI's Online Dispute Resolution).</p>
+      </div></div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NPCI UPI Procedural Guidelines</span> <span class="refpill">RBI Master Direction on Digital Payment Security</span> <span class="refpill">CERT-In UPI Advisories</span></div>
+    </div>
+
+    <!-- B.4 Quick Recap Card -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">B.4</span>
+        <span class="topic-pill">Quick Recap</span>
+        <div class="qtitle">Last-Minute Revision Sheet</div>
+      </div>
+
+      <div class="block"><div class="fblock">
+        <div class="block-label">If you have only 30 minutes before exam — read this</div>
+        <pre>
+<span class="hl">UNIT I — RISK MGMT</span>
+  Risk = Threat × Vulnerability × Asset Value
+  ALE = SLE × ARO ;  SLE = AV × EF
+  Strategies: Defense · Transfer · Mitigate · Accept · Terminate
+  CBA &gt; 0 → implement control
+
+<span class="hl">UNIT II — POLICIES</span>
+  Hierarchy: Policy → Standard → Procedure → Guideline
+  EISP (umbrella) → ISSP (behavior) + SSP (technical)
+  ISMS = PDCA cycle (ISO 27001)
+
+<span class="hl">UNIT III — INCIDENT RESPONSE</span>
+  NIST 4 phases: Prepare → Detect/Analyze → Contain/Eradicate/Recover → Post-Incident
+  CSIRT roles: Manager, Analyst, Forensic, Legal, PR
+  Defense in Depth: 7 layers (PNESH-DA)
+
+<span class="hl">UNIT IV — DOMAINS</span>
+  PMBOK 6 steps: Plan-ID-Qual-Quant-Plan responses-Monitor
+  Boehm's SE risk: Identify-Analyze-Prioritize-Plan-Resolve-Monitor
+  BHIM 2020 leak = AWS S3 misconfig (7.26M users)
+
+<span class="hl">UNIT V — COMPLIANCE</span>
+  SOC 1 = $$ ; SOC 2 = 🔒 ; SOC 3 = public
+  GDPR fine = €20M or 4% global revenue
+  GDPR breach notification = 72 hours
+  NIST 800-53: Federal · 1000+ controls · 20 families
+  NIST 800-171: Contractors · 110 controls · 14 families · CUI
+
+<span class="hl">BONUS</span>
+  Cookies: Session/Persistent · 1st/3rd · Secure/HttpOnly/SameSite
+  GDPR comply = 10 steps (DAMP-CRIBED)
+  UPI = NPCI · 24×7 · VPA · 2FA · device binding
+        </pre>
+      </div></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  CPISE14 · Information Security &amp; Risk Management · Complete Syllabus Notes (5 Units + Bonus)<br>
+  Based on: William Stallings "Computer Security: Principles &amp; Practice" · NIST SP 800-30/37/39/53/61/100/171/207 · CSF 2.0 · ISO 27001/27005<br>
+  All the best for your end-sem 2025! 🎯
+</div>
+
+<script>
+function go(id, btn) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

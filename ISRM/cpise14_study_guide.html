@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPISE14 — Information Security & Risk Management | Exam Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE6;
+    --border: #E2DDD4;
+    --border2: #CCC6BA;
+    --text: #1C1917;
+    --text2: #57534E;
+    --text3: #A8A29E;
+    --accent: #2D6A4F;
+    --accent-light: #D8F3DC;
+    --accent-text: #1B4332;
+    --amber: #92400E;
+    --amber-bg: #FEF3C7;
+    --amber-border: #F59E0B;
+    --blue: #1E3A5F;
+    --blue-bg: #DBEAFE;
+    --blue-border: #3B82F6;
+    --purple: #4C1D95;
+    --purple-bg: #EDE9FE;
+    --purple-border: #8B5CF6;
+    --red: #7F1D1D;
+    --red-bg: #FEE2E2;
+    --red-border: #EF4444;
+    --teal: #134E4A;
+    --teal-bg: #CCFBF1;
+    --teal-border: #14B8A6;
+    --mono: 'JetBrains Mono', monospace;
+    --body: 'DM Sans', sans-serif;
+    --serif: 'Lora', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--text);
+    color: #F7F4EF;
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 40px solid rgba(255,255,255,0.04);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 10%;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 28px solid rgba(255,255,255,0.03);
+  }
+  .header-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .header-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #86EFAC;
+    margin-bottom: 0.75rem;
+  }
+  .header h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+    color: #FAF9F6;
+  }
+  .header-meta {
+    font-size: 14px;
+    color: #A8A29E;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .header-meta span { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; background: #86EFAC; display: inline-block; }
+
+  /* ── Layout ── */
+  .layout { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ── Nav tabs ── */
+  .nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 0.75rem 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+  .nb {
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--body);
+    border: 1.5px solid var(--border2);
+    border-radius: 100px;
+    background: var(--surface);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .nb:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .nb.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .pg { display: none; }
+  .pg.on { display: block; }
+
+  /* ── Section heading ── */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .sec-head h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .sec-head .co-pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--accent-light);
+    color: var(--accent-text);
+  }
+
+  /* ── Question card ── */
+  .qcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .qcard:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .qcard-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .qnum {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: var(--text);
+    color: #FAF9F6;
+    letter-spacing: 0.3px;
+  }
+  .marks-pill {
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--amber-bg);
+    color: var(--amber);
+    border: 1px solid #FCD34D;
+    font-weight: 500;
+  }
+  .qtitle {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  /* ── Blocks ── */
+  .block { margin-bottom: 1.25rem; }
+  .block-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .block-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.2;
+  }
+
+  /* Mnemonic */
+  .mblock {
+    background: var(--amber-bg);
+    border: 1px solid #FCD34D;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+  .mblock .block-label { color: var(--amber); }
+  .mblock .mtext {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--amber);
+    margin-bottom: 0.4rem;
+    font-style: italic;
+  }
+  .mblock .mexp {
+    font-size: 13px;
+    color: #78350F;
+    line-height: 1.6;
+  }
+
+  /* Definition */
+  .dblock {
+    background: var(--blue-bg);
+    border: 1px solid #BFDBFE;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+  .dblock .block-label { color: var(--blue); }
+  .dblock p { font-size: 14px; color: #1E3A5F; line-height: 1.75; }
+
+  /* Example */
+  .eblock {
+    background: var(--accent-light);
+    border: 1px solid #95D5B2;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+  .eblock .block-label { color: var(--accent-text); }
+  .eblock p { font-size: 14px; color: var(--accent-text); line-height: 1.75; }
+
+  /* Note */
+  .nblock {
+    background: var(--purple-bg);
+    border: 1px solid #C4B5FD;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+  .nblock .block-label { color: var(--purple); }
+  .nblock p { font-size: 14px; color: #3B0764; line-height: 1.75; }
+
+  /* Warning */
+  .wblock {
+    background: var(--red-bg);
+    border: 1px solid #FECACA;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+  .wblock .block-label { color: var(--red); }
+  .wblock p { font-size: 14px; color: #7F1D1D; line-height: 1.75; }
+
+  /* Formula */
+  .fblock {
+    background: #1C1917;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+  }
+  .fblock .block-label { color: #86EFAC; }
+  .fblock pre {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: #E7E5E4;
+    line-height: 2;
+    white-space: pre-wrap;
+  }
+  .fblock pre .hl { color: #86EFAC; font-weight: 500; }
+  .fblock pre .hl2 { color: #FCD34D; }
+  .fblock pre .hl3 { color: #93C5FD; }
+
+  /* Points list */
+  .pts { list-style: none; padding: 0; }
+  .pts li {
+    font-size: 14px;
+    color: var(--text);
+    padding: 0.65rem 0 0.65rem 1.5rem;
+    position: relative;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--border);
+  }
+  .pts li:last-child { border-bottom: none; }
+  .pts li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.1rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .pts li b { color: var(--text); font-weight: 600; }
+
+  /* Two-column grid */
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  @media(max-width:600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* Comparison card inside grid */
+  .cmp {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    background: var(--surface2);
+  }
+  .cmp-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cmp .pts li { font-size: 13px; }
+
+  /* Reference bar */
+  .refbar {
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 1.25rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .refbar strong { color: var(--text2); font-weight: 600; }
+  .refpill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 2px 10px;
+    font-size: 11px;
+    color: var(--text2);
+  }
+
+  /* Inline diff table */
+  .diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 1rem;
+  }
+  .diff-table th {
+    background: var(--text);
+    color: #FAF9F6;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+  .diff-table th:first-child { border-radius: 8px 0 0 0; }
+  .diff-table th:last-child { border-radius: 0 8px 0 0; }
+  .diff-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .diff-table tr:last-child td { border-bottom: none; }
+  .diff-table tr:nth-child(even) td { background: var(--surface2); }
+  .diff-table td:first-child { color: var(--text); font-weight: 500; }
+
+  /* Teal info block */
+  .tblock {
+    background: var(--teal-bg);
+    border: 1px solid #5EEAD4;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+  .tblock .block-label { color: var(--teal); }
+  .tblock p { font-size: 14px; color: #042F2E; line-height: 1.75; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--text3);
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
+
+  /* Print */
+  @media print {
+    .nav { display: none; }
+    .pg { display: block !important; }
+    .qcard { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-tag">M.Tech (IS) · 2nd Semester · End-Sem 2025</div>
+    <h1>Information Security &amp;<br>Risk Management</h1>
+    <div style="font-size:14px;color:#D6D3D1;margin-top:0.5rem;font-family:var(--body)">Course Code: CPISE14 &nbsp;·&nbsp; Max Marks: 40 &nbsp;·&nbsp; Time: 3 Hours</div>
+    <div class="header-meta">
+      <span><span class="dot"></span> Attempt any 2 of 3 per question</span>
+      <span><span class="dot"></span> Based on Stallings &amp; NIST Framework</span>
+      <span><span class="dot"></span> All answers include mnemonics &amp; examples</span>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <nav class="nav">
+    <button class="nb on" onclick="go('q1',this)">Q1 — Foundations</button>
+    <button class="nb" onclick="go('q2',this)">Q2 — Threats &amp; Risk</button>
+    <button class="nb" onclick="go('q3',this)">Q3 — Risk Control</button>
+    <button class="nb" onclick="go('q4',this)">Q4 — Policy</button>
+    <button class="nb" onclick="go('q5',this)">Q5 — Attacks</button>
+  </nav>
+
+  <!-- ══════════ Q1 ══════════ -->
+  <div id="q1" class="pg on">
+    <div class="sec-head">
+      <h2>Q1 — Information Security Foundations</h2>
+      <span class="co-pill">CO1</span>
+    </div>
+
+    <!-- Q1a -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q1a</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">5 Components of an Information System — which are most impacted by Computer Security?</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic</div>
+          <div class="mtext">"SHIPS sail through cyber storms"</div>
+          <div class="mexp"><strong>S</strong> — Software &nbsp;|&nbsp; <strong>H</strong> — Hardware &nbsp;|&nbsp; <strong>I</strong> — Information/Data &nbsp;|&nbsp; <strong>P</strong> — People &nbsp;|&nbsp; <strong>S</strong> — Systems/Networks/Procedures</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">Definition (Stallings)</div>
+          <p>An Information System is a set of interrelated components that collect, process, store, and distribute information to support decision-making and control in an organization.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-label" style="color:var(--text2)">The 5 Components — Explained Simply</div>
+        <ul class="pts">
+          <li><b>Hardware</b> — All physical devices: servers, computers, routers, hard drives. Security impact: theft, physical damage, hardware keyloggers. <em>Example: Stealing a laptop = instant data breach.</em></li>
+          <li><b>Software</b> — Programs, OS, applications. Most directly attacked! Malware, ransomware, buffer overflow exploits target software. <em>Example: WannaCry attacked a Windows OS vulnerability.</em></li>
+          <li><b>Data / Information</b> — Raw facts stored in the system. Prime target of every attacker — they want YOUR data. Confidentiality, Integrity, Availability (CIA triad) all apply here. <em>Example: Stealing a customer database.</em></li>
+          <li><b>People</b> — Users, admins, operators. Called the "weakest link" in security. Social engineering, phishing, insider threats exploit people. <em>Example: Employee clicking a phishing email = breach entry point.</em></li>
+          <li><b>Networks / Procedures</b> — Communication links + rules for operating the system. Attacks: DoS, eavesdropping, man-in-the-middle. <em>Example: Attacker sniffing unencrypted Wi-Fi traffic.</em></li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">Most Impacted by Computer Security</div>
+          <p><b>1. Software</b> — Most exploited. Every virus, malware, ransomware targets software vulnerabilities.<br>
+          <b>2. Data</b> — Most valuable. The entire goal of most attacks is to steal or corrupt data.<br>
+          <b>3. Networks</b> — Most exposed. DoS, MITM, eavesdropping are the most common modern attacks.<br>
+          People and Hardware are impacted too, but Software + Data + Networks face the highest attack frequency.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="nblock">
+          <div class="block-label">Exam Note</div>
+          <p>Your teacher's version (Hardware, Software, Data, People, Procedures) is correct for the "5 components" part. For the "security impact" part, additionally mention Networks and highlight Software + Data as prime targets. Write both — you get full marks!</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.1</span> <span class="refpill">NIST SP 800-12 Rev.1 §2</span></div>
+    </div>
+
+    <!-- Q1b -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q1b</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">What is the Security Development Life Cycle (SDLC)? Who leads the process?</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic — Phases in order</div>
+          <div class="mtext">"Train Really, Design It, Verify Results"</div>
+          <div class="mexp">Training → Requirements → Design → Implementation → Verification → Release → Response</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">Definition</div>
+          <p>The Security Development Life Cycle (SDL) is a software development process that adds security activities at every phase of development to reduce vulnerabilities in software before it is released.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-label" style="color:var(--text2)">7 Phases — Easy Explanation</div>
+        <ul class="pts">
+          <li><b>Phase 1 — Training:</b> Teach all developers about secure coding, threats, and best practices BEFORE they write a single line of code.</li>
+          <li><b>Phase 2 — Requirements:</b> Define WHAT security the software needs. E.g., "must use AES-256 encryption for passwords."</li>
+          <li><b>Phase 3 — Design:</b> Create threat models. Ask "how can an attacker break this?" and design to prevent it. Use attack surface analysis.</li>
+          <li><b>Phase 4 — Implementation:</b> Write code following secure coding rules. Use static analysis tools to find bugs automatically.</li>
+          <li><b>Phase 5 — Verification:</b> Test the software for security: penetration testing, fuzzing (sending random bad inputs), code review.</li>
+          <li><b>Phase 6 — Release:</b> Final security check before launch. Prepare an incident response plan in case something goes wrong after launch.</li>
+          <li><b>Phase 7 — Response:</b> After launch — monitor for issues, release patches for found vulnerabilities, handle security incidents quickly.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">Who Leads the Process?</div>
+          <p>The <b>CISO (Chief Information Security Officer)</b> leads at the organizational level. Within the dev team, a <b>Security Champion</b> (a developer trained in security) leads day-to-day. Microsoft introduced this model in 2004 — it became the industry standard. NIST calls this the "Secure Software Development Framework (SSDF)" in SP 800-218.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.1</span> <span class="refpill">Microsoft SDL 2004</span> <span class="refpill">NIST SP 800-218 (SSDF)</span></div>
+    </div>
+
+    <!-- Q1c -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q1c</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Why is methodology important in Information Security? How does it improve the process?</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic</div>
+          <div class="mtext">"CRISP methodology keeps security fresh"</div>
+          <div class="mexp"><strong>C</strong> — Consistency &nbsp;|&nbsp; <strong>R</strong> — Repeatability &nbsp;|&nbsp; <strong>I</strong> — Identifies gaps &nbsp;|&nbsp; <strong>S</strong> — Standardization &nbsp;|&nbsp; <strong>P</strong> — Prioritization</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">What is a Methodology? (Simple Definition)</div>
+          <p>A methodology is a structured, step-by-step approach to solving a problem. In information security, it means following a defined process to identify, assess, and fix security issues — instead of doing things randomly or based on guesswork.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-label" style="color:var(--text2)">Why is it Important? — 5 Key Reasons</div>
+        <ul class="pts">
+          <li><b>Consistency:</b> Every system in the organization gets the same security level. No system is left unprotected because someone "forgot."</li>
+          <li><b>Repeatability:</b> The process can be audited, repeated, and improved every time. Like a recipe — same steps = reliable result every time.</li>
+          <li><b>Identifies Gaps:</b> A structured checklist finds vulnerabilities that random checks would miss. Nothing slips through the cracks.</li>
+          <li><b>Legal Compliance:</b> Following NIST or ISO 27001 methodology proves to regulators you follow the law (IT Act 2000, GDPR). Avoids fines.</li>
+          <li><b>Resource Prioritization:</b> Limited budget? Methodology tells you which risks to fix FIRST based on impact — not guesswork.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">How it Improves the Process</div>
+          <p><b>Before methodology:</b> Security is ad-hoc, reactive, inconsistent — patch one problem, miss ten others.<br><b>After methodology:</b> Proactive, structured, auditable. The NIST CSF 2.0 methodology is: <b>Govern → Identify → Protect → Detect → Respond → Recover.</b> Each function has defined outcomes and measurable metrics — improvement is now trackable.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="nblock">
+          <div class="block-label">Real-World Example</div>
+          <p>A hospital without methodology patches whatever their vendor mentions that week. With NIST RMF methodology: they identify all assets, classify data (patient records = HIGH impact), apply controls based on risk level, and review every 6 months. Result: structured, auditable, and compliant security posture.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.1</span> <span class="refpill">NIST CSF 2.0</span> <span class="refpill">NIST SP 800-37 Rev.2</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════ Q2 ══════════ -->
+  <div id="q2" class="pg">
+    <div class="sec-head">
+      <h2>Q2 — Threats &amp; Risk Management</h2>
+      <span class="co-pill">CO2</span>
+    </div>
+
+    <!-- Q2a -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q2a</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">4 Common Threats: IP Compromise · Espionage · Sabotage · Software Attacks</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic</div>
+          <div class="mtext">"Intelligent Enemies Sabotage Systems" = I·E·S·S</div>
+          <div class="mexp">Intellectual Property · Espionage · Sabotage · Software Attacks</div>
+        </div>
+      </div>
+
+      <ul class="pts">
+        <li><b>(i) Compromises to Intellectual Property (IP):</b> Stealing trade secrets, source code, patents, or copyrighted material without permission. The attacker gains unfair competitive advantage. Countermeasures: DRM (Digital Rights Management), access control, NDAs, watermarking. <em>Example: Rival company hacks your database to steal your product design.</em></li>
+        <li><b>(ii) Deliberate Acts of Espionage:</b> Secretly monitoring or accessing systems to gather confidential information for competitive or political purposes. Countermeasures: End-to-end encryption, network monitoring, IDS/IPS. <em>Example: Nation-state hackers spying on DRDO/ISRO research servers.</em></li>
+        <li><b>(iii) Deliberate Acts of Sabotage or Vandalism:</b> Intentionally damaging or disrupting systems to cause operational harm. Can be physical (breaking hardware) or digital (deleting data, defacing websites). Countermeasures: Physical security, backups, intrusion prevention systems. <em>Example: Stuxnet worm (2010) destroyed Iranian nuclear centrifuges.</em></li>
+        <li><b>(iv) Deliberate Software Attacks:</b> Using malicious programs to damage, disrupt, or gain unauthorized access. Includes viruses, worms, ransomware, Trojans, spyware. Countermeasures: Antivirus software, regular patching, sandboxing, user training. <em>Example: WannaCry ransomware (2017) encrypted files in 150 countries, demanded Bitcoin ransom.</em></li>
+      </ul>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.1 "Threats"</span> <span class="refpill">NIST SP 800-30 Rev.1 Appendix D</span></div>
+    </div>
+
+    <!-- Q2b -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q2b</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Define Risk Management + Roles of 3 Communities of Interest</div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">Definition (Stallings — Exact Words)</div>
+          <p>"Risk Management is the process of identifying risk, assessing risk, and taking steps to reduce risk to an acceptable level." — Stallings, <em>Computer Security: Principles and Practice</em></p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic — 3 Communities</div>
+          <div class="mtext">"IBM manages all risk"</div>
+          <div class="mexp"><strong>I</strong> — IT Security community &nbsp;|&nbsp; <strong>B</strong> — Business/Functional community &nbsp;|&nbsp; <strong>M</strong> — Management community</div>
+        </div>
+      </div>
+
+      <ul class="pts">
+        <li><b>Community 1 — IT Security:</b> The technical experts who implement and operate security controls. They monitor for threats, respond to incidents, manage firewalls, IDS, and encryption. Role: Identify risks and implement technical controls. <em>Know WHAT to protect and HOW.</em></li>
+        <li><b>Community 2 — Business / Functional:</b> The departments that own and use business assets (Finance, HR, Operations). They understand the business value of information and define what risk level is acceptable. Role: Define acceptable risk thresholds and fund security investments.</li>
+        <li><b>Community 3 — Management / Executive:</b> CEOs, Board of Directors, CISOs. They set overall direction, allocate budget, sign off on policies, and are legally accountable for security failures. Role: Set strategy, approve risk decisions, ensure regulatory compliance.</li>
+      </ul>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">Simple Analogy</div>
+          <p>Think of a hospital: IT Security = doctors who diagnose and treat; Business = hospital departments that define patient safety needs; Management = hospital board that sets policy and budget. All three must work together for patient (data) safety.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.3 "Risk Management"</span> <span class="refpill">NIST SP 800-37 Rev.2</span></div>
+    </div>
+
+    <!-- Q2c -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q2c</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">3 Main Risk Control Strategies with their Safeguards</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic</div>
+          <div class="mtext">"ATA — Always Think About risk"</div>
+          <div class="mexp">Avoidance (Apply safeguards) · Transference · Acceptance (+ Mitigation)</div>
+        </div>
+      </div>
+
+      <ul class="pts">
+        <li><b>Strategy 1 — Avoidance (Apply Safeguards):</b> Add security controls that eliminate or reduce the risk to an acceptable level. Best when: cost of control &lt; cost of the risk. Safeguards: firewalls, AES-256 encryption, MFA (multi-factor authentication), access control lists, regular patching, user training. <em>Example: Installing a firewall to block unauthorized network access.</em></li>
+        <li><b>Strategy 2 — Transference:</b> Move the financial or operational responsibility to another party. Best when: risk cannot be eliminated but someone else can handle the cost. Safeguards: Cyber insurance, outsourcing to MSSP (Managed Security Service Provider), contractual liability clauses. <em>Example: A hospital buys cyber insurance — if a breach occurs, insurance pays the damages.</em></li>
+        <li><b>Strategy 3 — Mitigation (Reduce Impact):</b> Cannot eliminate the risk, but reduces damage WHEN it happens. Three sub-plans: (a) <b>Incident Response Plan</b> — immediate actions when attack happens. (b) <b>Disaster Recovery Plan (DRP)</b> — restore IT systems quickly. (c) <b>Business Continuity Plan (BCP)</b> — keep business running during recovery.</li>
+      </ul>
+
+      <div class="block">
+        <div class="nblock">
+          <div class="block-label">4th Strategy — Acceptance</div>
+          <p>Accept the risk when: cost to fix it is MORE than the value of the asset being protected. This must be a deliberate, documented management decision — not laziness or negligence. NIST requires formal sign-off by the Authorizing Official (AO).</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.3</span> <span class="refpill">NIST SP 800-39</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════ Q3 ══════════ -->
+  <div id="q3" class="pg">
+    <div class="sec-head">
+      <h2>Q3 — Risk Control &amp; Cost-Benefit Analysis</h2>
+      <span class="co-pill">CO3</span>
+    </div>
+
+    <!-- Q3a -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q3a</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">4 Ways to Categorize Risk Control + Flowchart of Risk Control Cycle</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic</div>
+          <div class="mtext">"PDCA — Police Detect Crime Always"</div>
+          <div class="mexp">Preventive · Detective · Corrective · Administrative</div>
+        </div>
+      </div>
+
+      <ul class="pts">
+        <li><b>1. Preventive Controls:</b> Stop the threat BEFORE it happens. Goal: block the attacker at the door. Examples: Firewall (blocks unauthorized traffic), access control (only authorized users enter), encryption (makes stolen data unreadable), security training (stops users from making mistakes).</li>
+        <li><b>2. Detective Controls:</b> Identify and ALERT when an attack is happening or has happened. Goal: catch the attacker in action. Examples: Intrusion Detection System (IDS), CCTV cameras, audit logs, SIEM, anti-virus scanning.</li>
+        <li><b>3. Corrective Controls:</b> Reduce damage AFTER the attack and restore normal operations. Goal: fix what the attacker broke. Examples: Data backups, patch management, incident response teams, system reimaging.</li>
+        <li><b>4. Administrative Controls:</b> Policies, rules, laws, and guidelines that govern how security is managed. Goal: create a framework of rules. Examples: Security policies, NIST frameworks, ISO 27001 compliance, employee acceptable-use policies, background checks.</li>
+      </ul>
+
+      <div class="block">
+        <div class="fblock">
+          <div class="block-label" style="color:#86EFAC">Risk Control Cycle — Flowchart</div>
+          <pre>
+<span class="hl">Step 1: IDENTIFY RISK</span>
+  → What assets exist? What are the threats & vulnerabilities?
+          |
+          ▼
+<span class="hl">Step 2: ASSESS RISK</span>
+  → How likely? How severe? Calculate ALE = SLE × ARO
+          |
+          ▼
+<span class="hl">Step 3: SELECT CONTROLS</span>
+  → Choose Preventive / Detective / Corrective / Administrative
+          |
+          ▼
+<span class="hl">Step 4: IMPLEMENT CONTROLS</span>
+  → Deploy firewalls, train staff, write policies
+          |
+          ▼
+<span class="hl">Step 5: MONITOR & REVIEW</span>
+  → Is the control working? Any new threats?
+          |
+          ▼
+<span class="hl2">  [If ineffective or new risk → loop back to Step 1]</span>
+          </pre>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.3</span> <span class="refpill">NIST SP 800-53 Rev.5</span> <span class="refpill">NIST CSF 2.0</span></div>
+    </div>
+
+    <!-- Q3b -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q3b</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Mathematics of Cost-Benefit Analysis for Risk Control</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic — Key Terms</div>
+          <div class="mtext">"AVoid Every Annual Loss" = AV · EF · SLE · ARO · ALE</div>
+          <div class="mexp">Asset Value · Exposure Factor · Single Loss Expectancy · Annual Rate of Occurrence · Annual Loss Expectancy</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="fblock">
+          <div class="block-label" style="color:#86EFAC">Step-by-Step Formulas</div>
+          <pre>
+<span class="hl">Step 1: Asset Value (AV)</span>
+  = How much is this asset worth to the organization?
+  Example: Customer database = ₹10,00,000
+
+<span class="hl">Step 2: Exposure Factor (EF)</span>
+  = What % of the asset is lost if threat occurs? (0 to 1)
+  Example: Ransomware encrypts 30% of data → EF = 0.30
+
+<span class="hl">Step 3: Single Loss Expectancy (SLE)</span>
+  SLE = AV × EF
+  SLE = ₹10,00,000 × 0.30 = <span class="hl2">₹3,00,000</span>
+  (= How much you lose in ONE attack incident)
+
+<span class="hl">Step 4: Annual Rate of Occurrence (ARO)</span>
+  = How many times does this attack happen per year?
+  Example: Ransomware hits 2 times/year → ARO = 2
+
+<span class="hl">Step 5: Annual Loss Expectancy (ALE)</span>
+  ALE = SLE × ARO
+  ALE = ₹3,00,000 × 2 = <span class="hl2">₹6,00,000</span>
+  (= Total expected loss per year WITHOUT any control)
+
+<span class="hl">Step 6: Cost-Benefit Analysis (CBA)</span>
+  CBA = ALE(before control) − ALE(after control) − Annual Cost of Control
+
+  Example: ALE before = ₹6L, ALE after = ₹1L, Control cost = ₹2L/year
+  CBA = ₹6L − ₹1L − ₹2L = <span class="hl2">₹3,00,000</span> ← POSITIVE → Implement it!
+          </pre>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">Decision Rule — Easy to Remember</div>
+          <p>If CBA is <b>POSITIVE</b> → implement the control (you save more than you spend).<br>
+          If CBA is <b>NEGATIVE</b> → control costs more than the risk itself → accept risk or find cheaper control.<br>
+          Think of car insurance: if premium (cost) &lt; expected accident cost → buy the insurance!</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.3</span> <span class="refpill">NIST SP 800-30 Rev.1 Appendix G</span></div>
+    </div>
+
+    <!-- Q3c -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q3c</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Define Risk Mathematically + Compute Risk for the Given Problem</div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">Mathematical Definition of Risk</div>
+          <p><b>Risk = Likelihood of threat × Value of information asset × Vulnerability level</b><br><br>
+          In simpler form: <b>Risk = Threat × Asset Value × Vulnerability</b><br><br>
+          Quantitatively: Risk is measured as <b>ALE = SLE × ARO</b> (expected annual financial loss).</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="fblock">
+          <div class="block-label" style="color:#86EFAC">Solving the Given Problem — Step by Step</div>
+          <pre>
+<span class="hl3">Given Information:</span>
+  Asset Value (AV)  = 100
+  Data accuracy     = 80%  (multiply final answer by 0.8)
+
+<span class="hl">Vulnerability 1:</span>
+  Likelihood                    = 0.5
+  Current control covers        = 60% of the risk
+  Residual likelihood           = 0.5 × (1 − 0.60)
+                                = 0.5 × 0.40
+                                = <span class="hl2">0.20</span>
+  Risk from V1                  = 0.20 × 100 = <span class="hl2">20</span>
+
+<span class="hl">Vulnerability 2:</span>
+  Likelihood                    = 0.2
+  Current control covers        = 70% of the risk
+  Residual likelihood           = 0.2 × (1 − 0.70)
+                                = 0.2 × 0.30
+                                = <span class="hl2">0.06</span>
+  Risk from V2                  = 0.06 × 100 = <span class="hl2">6</span>
+
+<span class="hl">Total Risk (before accuracy):</span>
+  = Risk(V1) + Risk(V2) = 20 + 6 = 26
+
+<span class="hl">Adjusted for 80% data accuracy:</span>
+  = 26 × 0.80 = <span class="hl2">20.8</span>
+
+∴ Total Residual Risk ≈ <span class="hl2">20.8 (out of 100)</span>
+          </pre>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">What This Answer Means</div>
+          <p>The organization still faces a residual risk of approximately <b>20.8%</b> on this asset even after existing controls are applied. Since this may exceed the organization's risk appetite, additional controls should be evaluated using CBA. The 80% accuracy factor reflects real-world uncertainty — risk assessments always have some built-in uncertainty.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.3</span> <span class="refpill">NIST SP 800-30 Rev.1 "Risk Calculation"</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════ Q4 ══════════ -->
+  <div id="q4" class="pg">
+    <div class="sec-head">
+      <h2>Q4 — Security Policy</h2>
+      <span class="co-pill">CO4</span>
+    </div>
+
+    <!-- Q4a -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q4a</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Discuss Enterprise Information Security Policy (EISP)</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic — EISP Components</div>
+          <div class="mtext">"OSCAR runs the enterprise security"</div>
+          <div class="mexp">Overview · Scope · Compliance · Authority/Roles · References to sub-policies</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">Definition</div>
+          <p>The Enterprise Information Security Policy (EISP) is the highest-level security policy document in an organization. It sets the overall philosophy, direction, and framework for all information security activities. Also called the "Security Program Policy" or "Master Security Policy."</p>
+        </div>
+      </div>
+
+      <ul class="pts">
+        <li><b>Overview / Statement of Purpose:</b> WHY the organization cares about security. Sets the security philosophy at board level. Example: "XYZ Bank is committed to protecting customer financial data from unauthorized access."</li>
+        <li><b>Scope:</b> WHO and WHAT is covered. All employees, contractors, third-party vendors. All systems: cloud, on-premise, mobile. No one is exempt from this policy.</li>
+        <li><b>Authority &amp; Roles:</b> WHO is responsible? CISO owns the policy. IT department implements it. Employees must follow it. Management approves it. Clear chain of accountability established.</li>
+        <li><b>Compliance Requirements:</b> Legal and regulatory obligations the organization must meet: IT Act 2000 (India), GDPR (Europe), PCI-DSS (payments), HIPAA (healthcare). Non-compliance = fines + legal action.</li>
+        <li><b>References:</b> Points to lower-level policies: Issue-Specific Policies (email use, BYOD) and System-Specific Policies (firewall rules, server config). EISP is the umbrella; these are the details.</li>
+      </ul>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">Example EISP Statement</div>
+          <p>"ABC Corporation is committed to ensuring the confidentiality, integrity, and availability of all its information assets. All employees and contractors are required to comply with this policy. The CISO is responsible for maintaining and enforcing this policy."</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="nblock">
+          <div class="block-label">Exam Note — Important!</div>
+          <p>EISP is the <b>umbrella policy</b>. It does NOT go into technical details — it says WHAT the organization will do about security. The HOW is handled by Issue-Specific and System-Specific policies below it. Think of EISP as the <b>Constitution</b> — everything else flows from it.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.4 "Security Policies"</span> <span class="refpill">NIST SP 800-12 Rev.1 Ch.5</span></div>
+    </div>
+
+    <!-- Q4b -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q4b</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Differentiate: Systems-Specific Policy (SysSP) vs Issue-Specific Policy (ISSP)</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic</div>
+          <div class="mtext">"SYS = HOW the machine · ISS = WHAT behavior"</div>
+          <div class="mexp">SysSP = technical rules for a specific system · ISSP = behavioral rules about a specific topic</div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="cmp">
+          <div class="cmp-title" style="color:var(--blue)">Systems-Specific Policy (SysSP)</div>
+          <ul class="pts">
+            <li>Governs technical configuration of a specific system</li>
+            <li>Written in technical language</li>
+            <li>Written by: IT / Security team</li>
+            <li>Audience: System administrators</li>
+            <li>Example: Firewall access control rules</li>
+            <li>Example: Server password complexity</li>
+            <li>Example: Database backup schedules</li>
+          </ul>
+        </div>
+        <div class="cmp">
+          <div class="cmp-title" style="color:var(--purple)">Issue-Specific Policy (ISSP)</div>
+          <ul class="pts">
+            <li>Governs employee behavior on a specific topic</li>
+            <li>Written in plain, non-technical language</li>
+            <li>Written by: Management / HR / Legal</li>
+            <li>Audience: All employees</li>
+            <li>Example: Email and internet acceptable use</li>
+            <li>Example: Social media policy at work</li>
+            <li>Example: BYOD (personal devices) policy</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <table class="diff-table">
+          <tr><th>Basis</th><th>SysSP</th><th>ISSP</th></tr>
+          <tr><td>Focus</td><td>Specific technology / system</td><td>Specific behavior / topic</td></tr>
+          <tr><td>Language</td><td>Technical</td><td>Plain / non-technical</td></tr>
+          <tr><td>Written by</td><td>IT Security team</td><td>Management / HR / Legal</td></tr>
+          <tr><td>Example</td><td>Firewall configuration rules</td><td>Email acceptable use policy</td></tr>
+          <tr><td>Audience</td><td>System administrators</td><td>All employees</td></tr>
+          <tr><td>Updates</td><td>When system changes</td><td>When law/regulation changes</td></tr>
+        </table>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.4</span> <span class="refpill">NIST SP 800-12 Rev.1 "Types of Policies"</span></div>
+    </div>
+
+    <!-- Q4c -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q4c</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Risk Management Process in Project Management</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic — PMBOK Risk Steps</div>
+          <div class="mtext">"Please Identify Quality Quantities, Plan Responses, Monitor"</div>
+          <div class="mexp">Plan → Identify → Qualitative Analysis → Quantitative Analysis → Plan Responses → Monitor &amp; Control</div>
+        </div>
+      </div>
+
+      <ul class="pts">
+        <li><b>Step 1 — Plan Risk Management:</b> Decide HOW you will handle risk in this project. Define methodology, roles, tools, and budget for risk activities. Output: <em>Risk Management Plan document.</em></li>
+        <li><b>Step 2 — Identify Risks:</b> List ALL possible things that could go wrong. Use brainstorming, checklists, SWOT analysis, expert interviews. Output: <em>Risk Register (a log of all identified risks).</em></li>
+        <li><b>Step 3 — Qualitative Risk Analysis:</b> Prioritize risks using a Probability × Impact Matrix (High / Medium / Low). Fast, no math needed. Helps decide which risks need deeper analysis first.</li>
+        <li><b>Step 4 — Quantitative Risk Analysis:</b> For high-priority risks, calculate actual financial impact. Methods: Monte Carlo simulation, Expected Monetary Value (EMV), decision trees. Output: <em>Numerical risk scores.</em></li>
+        <li><b>Step 5 — Plan Risk Responses:</b> Decide what to DO about each risk. Options: Avoid (change plan), Transfer (insurance), Mitigate (reduce likelihood/impact), Accept (document and move on).</li>
+        <li><b>Step 6 — Monitor &amp; Control Risks:</b> Throughout the entire project, track risks, check if responses are working, and identify new risks. This is never a one-time activity — it's continuous.</li>
+      </ul>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">Example — Cloud Migration Project</div>
+          <p>Risk identified: "Data breach during migration." Qualitative: High probability × High impact → Priority 1. Quantitative: Estimated loss = ₹50 Lakhs. Response: Mitigate — use encrypted transfer (TLS 1.3), MFA for all access, penetration testing before go-live. Monitor: Weekly security review meetings during the migration window.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">PMBOK 7th Edition (PMI)</span> <span class="refpill">Stallings Ch.3</span> <span class="refpill">NIST SP 800-30</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════ Q5 ══════════ -->
+  <div id="q5" class="pg">
+    <div class="sec-head">
+      <h2>Q5 — Attacks &amp; Advanced Topics</h2>
+      <span class="co-pill">CO5</span>
+    </div>
+
+    <!-- Q5a -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q5a</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Case Study: BHIM App and Google Pay in the Context of Risk</div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">Background</div>
+          <p>BHIM (Bharat Interface for Money) and Google Pay are UPI-based digital payment systems used by millions in India. In 2020, cybersecurity firm vpnMentor discovered that <b>7.26 million BHIM users' sensitive data</b> was exposed due to a misconfigured AWS S3 cloud storage bucket — left publicly accessible with no password protection.</p>
+        </div>
+      </div>
+
+      <ul class="pts">
+        <li><b>Risk 1 — Misconfiguration (BHIM Breach):</b> AWS S3 bucket was mistakenly set to "public." Exposed: Aadhaar numbers, PAN cards, bank account details, UPI IDs of 7.26M users. NIST Category: Protect — Configuration Management failure. Countermeasure: Regular cloud security audits, CSPM tools (Cloud Security Posture Management), principle of least privilege.</li>
+        <li><b>Risk 2 — Data Privacy Violation:</b> Aadhaar-linked biometric and financial data exposed. Risk: Identity theft, financial fraud, account takeover. Countermeasure: Data minimization (collect only what is needed), encryption at rest (AES-256), tokenization of all sensitive fields.</li>
+        <li><b>Risk 3 — Phishing &amp; Fake Apps:</b> Fraudsters create fake BHIM/GPay apps identical to real ones. Users enter UPI PIN → attacker captures credentials. Countermeasure: App signing with certificates, Google Play Protect, NPCI user awareness campaigns.</li>
+        <li><b>Risk 4 — SIM Swap / OTP Interception:</b> Attacker convinces telecom to transfer victim's number to attacker's SIM → now receives all OTPs. Countermeasure: Device binding (UPI app linked to one specific device), biometric authentication, anomaly detection (unusual transaction location/amount triggers alert).</li>
+      </ul>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">Google Pay's Security Advantage</div>
+          <p>Google Pay uses <b>tokenization</b> — actual card/bank numbers are never stored or transmitted. A one-time token is generated per transaction. Additionally uses Google's global threat intelligence and machine learning to flag suspicious transactions in real-time. This is why GPay has had significantly fewer breaches than BHIM historically.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="nblock">
+          <div class="block-label">NIST CSF 2.0 Applied to Both</div>
+          <p><b>Identify:</b> Map all assets (user data, UPI IDs, servers) → <b>Protect:</b> Encrypt data, use MFA, train staff → <b>Detect:</b> Monitor for unusual transactions, real-time anomaly alerts → <b>Respond:</b> Freeze compromised accounts instantly → <b>Recover:</b> Notify users, restore access, compensate losses.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">NIST CSF 2.0</span> <span class="refpill">RBI Cybersecurity Framework 2021</span> <span class="refpill">vpnMentor BHIM Report 2020</span></div>
+    </div>
+
+    <!-- Q5b -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q5b</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">DoS vs DDoS — Which is More Dangerous and Why?</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic</div>
+          <div class="mtext">"DDoS is Deadly because it's Distributed from a Dark army"</div>
+          <div class="mexp">Single attacker (DoS) vs Millions of bots/zombies (DDoS) — scale makes DDoS far more devastating and nearly impossible to stop</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">Definitions</div>
+          <p><b>DoS (Denial of Service):</b> A single attacker sends massive amounts of traffic or requests to a target server to overwhelm it, making it unavailable to legitimate users.<br><br>
+          <b>DDoS (Distributed Denial of Service):</b> Thousands or millions of compromised machines (called a botnet or zombie army) simultaneously attack a target from different locations worldwide.</p>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="cmp">
+          <div class="cmp-title" style="color:var(--accent-text)">DoS Attack</div>
+          <ul class="pts">
+            <li>Single attacker, single source IP</li>
+            <li>Relatively easy to block (block that one IP)</li>
+            <li>Limited bandwidth — one machine</li>
+            <li>Attacker is easily traceable</li>
+            <li>Impact: Moderate, usually short-lived</li>
+            <li>Example: SYN flood from one PC</li>
+          </ul>
+        </div>
+        <div class="cmp">
+          <div class="cmp-title" style="color:var(--red)">DDoS Attack</div>
+          <ul class="pts">
+            <li>Thousands/millions of machines (botnet)</li>
+            <li>Cannot block — IPs change constantly</li>
+            <li>Massive bandwidth: up to 1–3 Tbps</li>
+            <li>Attacker hides behind innocent victims</li>
+            <li>Impact: Catastrophic, long-lasting</li>
+            <li>Example: Mirai Botnet, 2016 (1.2 Tbps)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="wblock">
+          <div class="block-label">Why DDoS is More Dangerous — 4 Reasons</div>
+          <p>
+          <b>1. SCALE:</b> Mirai Botnet (2016) generated 1.2 Tbps — took down Dyn DNS, making Twitter, Netflix, Amazon, and Reddit unreachable for hours across the USA.<br>
+          <b>2. ANONYMITY:</b> Real attacker controls bots remotely and is nearly untraceable — they hide behind innocent hacked devices.<br>
+          <b>3. IMPOSSIBLE TO SIMPLY BLOCK:</b> Cannot block millions of different IPs. Traditional firewalls completely fail against this scale.<br>
+          <b>4. ECONOMIC DAMAGE:</b> Average DDoS attack costs a company $50,000–$2 million per hour in lost revenue and recovery costs.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="eblock">
+          <div class="block-label">Countermeasures</div>
+          <p><b>For DoS:</b> Block source IP at firewall, rate limiting on server.<br>
+          <b>For DDoS:</b> CDN-based scrubbing centers (Cloudflare, Akamai), Anycast traffic diffusion, ISP-level traffic filtering, BGP blackholing, dedicated cloud DDoS protection services.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.7 "Denial of Service"</span> <span class="refpill">NIST SP 800-61 Rev.2</span> <span class="refpill">Mirai Botnet Case 2016</span></div>
+    </div>
+
+    <!-- Q5c -->
+    <div class="qcard">
+      <div class="qcard-header">
+        <span class="qnum">Q5c</span>
+        <span class="marks-pill">4 Marks</span>
+        <div class="qtitle">Discuss: (i) Man-in-the-Middle Attack &nbsp; (ii) Risk Appetite &nbsp; (iii) Residual Risk</div>
+      </div>
+
+      <div class="block">
+        <div class="mblock">
+          <div class="block-label">Mnemonic — Remember All 3</div>
+          <div class="mtext">"MAN with Appetite leaves Residue"</div>
+          <div class="mexp">MITM attack · Risk Appetite (how much you'll accept) · Residual Risk (what's left after controls)</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="dblock">
+          <div class="block-label">(i) Man-in-the-Middle (MITM) Attack — Definition</div>
+          <p>A MITM attack is when an attacker secretly positions himself between two communicating parties — intercepting, reading, and sometimes modifying their messages — without either party knowing the communication has been compromised.</p>
+        </div>
+      </div>
+
+      <ul class="pts">
+        <li><b>How it works:</b> Alice sends message to Bob. Attacker intercepts it, reads it, may modify it, then forwards to Bob. Both Alice and Bob think they're communicating directly with each other.</li>
+        <li><b>Types:</b> ARP Spoofing (on local network), SSL Stripping (downgrades HTTPS → HTTP), DNS Spoofing (redirects to fake website), Rogue Wi-Fi (fake hotspot at coffee shop/airport).</li>
+        <li><b>Threats caused:</b> Confidentiality breach (attacker reads your data), Integrity breach (attacker modifies messages), Authentication bypass.</li>
+        <li><b>Real example:</b> You connect to "Free_Cafe_WiFi" — it's the attacker's rogue hotspot. They intercept your banking session and steal your login credentials.</li>
+        <li><b>Countermeasures:</b> Always use HTTPS/TLS, use VPN on public Wi-Fi, certificate pinning in apps, mutual authentication (both sides verify identity).</li>
+      </ul>
+
+      <div class="block">
+        <div class="dblock" style="margin-top:1rem">
+          <div class="block-label">(ii) Risk Appetite — Definition</div>
+          <p>Risk Appetite is the amount and type of risk an organization is <b>willing to accept</b> in pursuit of its business objectives. It is set by senior management or the Board of Directors and documented in the Risk Management Strategy.</p>
+        </div>
+      </div>
+      <ul class="pts">
+        <li><b>High risk appetite:</b> A startup that prioritizes fast growth over security. Willing to accept some data breach risk to ship features quickly. Less investment in controls.</li>
+        <li><b>Low risk appetite:</b> A hospital or bank — near-zero tolerance for data breaches because patient/customer lives and money are at stake. Heavy investment in controls.</li>
+        <li><b>How it's used:</b> Every security decision is checked against risk appetite. If residual risk &gt; risk appetite → must add more controls or escalate decision to management.</li>
+      </ul>
+
+      <div class="block">
+        <div class="dblock" style="margin-top:1rem">
+          <div class="block-label">(iii) Residual Risk — Definition</div>
+          <p>Residual Risk is the risk that <b>REMAINS after all security controls have been applied</b>. It is impossible to eliminate 100% of risk — what's left over is residual risk.<br><br>
+          <b>Formula: Residual Risk = Total/Inherent Risk − Risk covered by controls</b></p>
+        </div>
+      </div>
+      <ul class="pts">
+        <li><b>Example:</b> A firewall blocks 95% of attacks. The remaining 5% chance of a successful attack = residual risk.</li>
+        <li><b>What to do with it:</b> Compare residual risk with risk appetite. If residual risk &lt; risk appetite → acceptable, formally document and sign off. If residual risk &gt; risk appetite → add more controls.</li>
+        <li><b>NIST process:</b> The Authorizing Official (AO) formally reviews and accepts residual risk before a system goes live (NIST SP 800-37 Rev.2).</li>
+        <li><b>Key insight:</b> Residual risk never reaches zero. Even after every possible control, there is always some unknown or uncontrollable risk remaining — this is a fundamental truth of security.</li>
+      </ul>
+
+      <div class="block">
+        <div class="tblock">
+          <div class="block-label">How All 3 Connect Together</div>
+          <p>A <b>MITM attack</b> is a <em>threat</em>. An organization's <b>Risk Appetite</b> determines how much chance of MITM they can tolerate. After applying controls (TLS, VPN, certificate pinning), the remaining chance of a MITM attack succeeding = <b>Residual Risk</b>. If residual risk exceeds risk appetite, stronger controls must be implemented.</p>
+        </div>
+      </div>
+      <div class="refbar"><strong>Ref:</strong> <span class="refpill">Stallings Ch.6 (MITM)</span> <span class="refpill">NIST SP 800-39 §2.3 (Risk Appetite)</span> <span class="refpill">NIST SP 800-37 Rev.2 (Residual Risk)</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  CPISE14 · Information Security &amp; Risk Management · M.Tech (IS) 2nd Semester · End-Sem 2025<br>
+  Based on: Stallings "Computer Security: Principles and Practice" · NIST Framework (SP 800-30, 800-37, 800-39, 800-53, CSF 2.0)
+</div>
+
+<script>
+function go(id, btn) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
