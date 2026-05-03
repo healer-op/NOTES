@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repository Viewer</title>
+    <style>
+        body { 
+            font-family: system-ui, -apple-system, sans-serif; 
+            padding: 30px; 
+            background: #f6f8fa;
+            color: #24292f;
+        }
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 6px;
+            border: 1px solid #d0d7de;
+            box-shadow: 0 3px 6px rgba(140,149,159,0.15);
+        }
+        h2 { margin-top: 0; border-bottom: 1px solid #d0d7de; padding-bottom: 10px; }
+        ul { list-style-type: none; padding: 0; margin: 0; }
+        li { 
+            border-bottom: 1px solid #d0d7de;
+        }
+        li:last-child { border-bottom: none; }
+        a { 
+            text-decoration: none; 
+            color: #0969da; 
+            display: flex; 
+            align-items: center; 
+            padding: 12px 8px;
+            font-weight: 500;
+        }
+        a:hover { background: #f3f4f6; color: #0969da; text-decoration: underline; border-radius: 6px;}
+        .icon { margin-right: 12px; font-size: 1.2rem; }
+        .folder { color: #54aeff; }
+        .error { color: #cf222e; padding: 10px; background: #ffebe9; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📂 Repository Files</h2>
+        <ul id="file-list">Loading files from GitHub...</ul>
+    </div>
+
+    <script>
+        // 🛑 CHANGE THESE TWO VARIABLES TO YOUR GITHUB DETAILS 🛑
+        const GITHUB_USERNAME = 'healer-op'; 
+        const REPO_NAME = 'NOTES';
+        // Optional: change this if your files are in a specific subfolder, otherwise leave as ''
+        const FOLDER_PATH = ''; 
+
+        async function fetchGitHubFiles() {
+            const list = document.getElementById('file-list');
+            const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER_PATH}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
+                }
+
+                const files = await response.json();
+                list.innerHTML = ''; // Clear loading text
+
+                // Sort files so folders appear at the top
+                files.sort((a, b) => {
+                    if (a.type === b.type) return a.name.localeCompare(b.name);
+                    return a.type === 'dir' ? -1 : 1;
+                });
+
+                files.forEach(file => {
+                    // Skip the index.html file itself so it doesn't clutter the list
+                    if (file.name === 'index.html') return;
+
+                    const li = document.createElement('li');
+                    const isFolder = file.type === 'dir';
+                    const icon = isFolder ? '📁' : '📄';
+                    
+                    // Creates a relative link (e.g., "./style.css") so it opens directly on GitHub Pages
+                    li.innerHTML = `
+                        <a href="./${file.path}" target="_blank">
+                            <span class="icon ${isFolder ? 'folder' : ''}">${icon}</span> ${file.name}
+                        </a>
+                    `;
+                    list.appendChild(li);
+                });
+
+            } catch (error) {
+                list.innerHTML = `<li class="error"><strong>Error fetching files:</strong> ${error.message}<br><br>Make sure your username and repo name are correct in the code!</li>`;
+                console.error(error);
+            }
+        }
+
+        fetchGitHubFiles();
+    </script>
+</body>
+</html>
