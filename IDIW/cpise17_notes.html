@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPISE17 — Complete Notes | Intrusion Detection & Information Warfare</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Nunito:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F1117;--surface:#171B26;--surface2:#1E2333;--surface3:#252B3D;
+  --border:#2C3348;--border2:#3A4260;
+  --text:#E8EAF0;--text2:#9AA3BE;--text3:#5C6480;
+  --accent:#4F8EF7;--accent2:#7B5CEA;
+  --green:#34D399;--amber:#FBBF24;--red:#F87171;--teal:#2DD4BF;--pink:#F472B6;
+  --mono:'Fira Code',monospace;--body:'Nunito',sans-serif;--serif:'Playfair Display',serif;
+  --r:12px;--r2:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.75;font-size:15px}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#080B14 0%,#0D1220 60%,#111827 100%);border-bottom:1px solid var(--border);padding:3rem 2rem 2.5rem;position:relative;overflow:hidden}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(79,142,247,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,0.03) 1px,transparent 1px);background-size:48px 48px}
+.hc{max-width:1100px;margin:0 auto;position:relative}
+.htag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.htag::before{content:'';width:20px;height:2px;background:var(--accent)}
+.header h1{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:0.5rem}
+.header h1 span{color:var(--accent)}
+.hsub{font-size:13px;color:var(--text3);margin-top:0.5rem}
+.hpills{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.25rem}
+.hpill{font-size:12px;padding:5px 14px;border-radius:100px;background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);color:var(--accent);font-weight:500}
+
+/* TWO-COLUMN LAYOUT */
+.wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1.5rem 5rem;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start}
+@media(max-width:760px){.wrap{grid-template-columns:1fr}}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:1rem}
+.side-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:0.75rem;padding-left:4px}
+.side-unit{margin-bottom:0.25rem}
+.side-btn{display:block;width:100%;text-align:left;padding:8px 12px;font-size:13px;font-family:var(--body);font-weight:500;border:1px solid transparent;border-radius:var(--r2);background:transparent;color:var(--text2);cursor:pointer;transition:all .18s}
+.side-btn:hover{background:var(--surface);color:var(--text);border-color:var(--border)}
+.side-btn.on{background:rgba(79,142,247,0.12);border-color:rgba(79,142,247,0.3);color:var(--accent)}
+.side-sub{display:block;font-size:11px;color:var(--text3);margin-top:1px;padding-left:0}
+
+/* CONTENT */
+.content{}
+.pg{display:none}.pg.on{display:block}
+
+/* UNIT HEADER */
+.unit-head{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.unit-head h2{font-family:var(--serif);font-size:1.5rem;color:#fff;margin-bottom:4px}
+.unit-head p{font-size:13px;color:var(--text3);line-height:1.6}
+.unit-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.75rem}
+.utag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);color:var(--green)}
+
+/* TOPIC CARD */
+.tc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.tc-title{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);font-style:italic}
+
+/* BLOCKS */
+.blk{margin-bottom:1rem}
+.lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:0.5rem;display:flex;align-items:center;gap:8px}
+.lbl::after{content:'';flex:1;height:1px;background:currentColor;opacity:0.15}
+
+.mn{background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.2);border-radius:var(--r2);padding:1rem 1.25rem}
+.mn .lbl{color:var(--amber)}.mn-t{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--amber);font-style:italic;margin-bottom:4px}
+.mn-e{font-size:13px;color:#D97706;line-height:1.7}
+
+.df{background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.18);border-radius:var(--r2);padding:1rem 1.25rem}
+.df .lbl{color:var(--accent)}.df p{font-size:14px;color:#93C5FD;line-height:1.75}
+
+.ex{background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.18);border-radius:var(--r2);padding:1rem 1.25rem}
+.ex .lbl{color:var(--green)}.ex p{font-size:14px;color:#6EE7B7;line-height:1.75}
+
+.nt{background:rgba(123,92,234,0.07);border:1px solid rgba(123,92,234,0.2);border-radius:var(--r2);padding:1rem 1.25rem}
+.nt .lbl{color:var(--accent2)}.nt p{font-size:14px;color:#C4B5FD;line-height:1.75}
+
+.wn{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.18);border-radius:var(--r2);padding:1rem 1.25rem}
+.wn .lbl{color:var(--red)}.wn p{font-size:14px;color:#FCA5A5;line-height:1.75}
+
+.tl{background:rgba(45,212,191,0.06);border:1px solid rgba(45,212,191,0.18);border-radius:var(--r2);padding:1rem 1.25rem}
+.tl .lbl{color:var(--teal)}.tl p{font-size:14px;color:#5EEAD4;line-height:1.75}
+
+.pk{background:rgba(244,114,182,0.06);border:1px solid rgba(244,114,182,0.18);border-radius:var(--r2);padding:1rem 1.25rem}
+.pk .lbl{color:var(--pink)}.pk p{font-size:14px;color:#F9A8D4;line-height:1.75}
+
+.cd{background:#0A0D14;border:1px solid var(--border);border-radius:var(--r2);padding:1.25rem 1.5rem;overflow-x:auto}
+.cd .lbl{color:var(--green)}
+.cd pre{font-family:var(--mono);font-size:12px;color:#CBD5E1;line-height:2;white-space:pre-wrap}
+.cd pre .g{color:var(--green)}.cd pre .a{color:var(--amber)}.cd pre .b{color:var(--accent)}.cd pre .p{color:var(--pink)}.cd pre .t{color:var(--teal)}
+
+/* POINTS */
+.pts{list-style:none;padding:0}
+.pts li{font-size:14px;color:var(--text2);padding:0.6rem 0 0.6rem 1.5rem;position:relative;line-height:1.6;border-bottom:1px solid var(--border)}
+.pts li:last-child{border-bottom:none}
+.pts li::before{content:'';position:absolute;left:2px;top:1.05rem;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.pts li b,.pts li strong{color:var(--text);font-weight:600}
+
+/* GRID 2 */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+@media(max-width:600px){.g2{grid-template-columns:1fr}}
+.gcrd{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r2);padding:1rem}
+.gcrd-t{font-size:13px;font-weight:700;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+
+/* TABLE */
+.tb{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:1rem;border-radius:var(--r);overflow:hidden}
+.tb th{background:var(--surface3);color:var(--text);padding:9px 12px;text-align:left;font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+.tb td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5}
+.tb tr:last-child td{border-bottom:none}
+.tb tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.tb td:first-child{color:var(--text);font-weight:600}
+
+/* REF */
+.ref{font-size:11px;color:var(--text3);margin-top:1rem;padding-top:0.75rem;border-top:1px dashed var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ref strong{color:var(--text2)}
+.rp{background:var(--surface2);border:1px solid var(--border);border-radius:100px;padding:2px 10px;font-size:11px;color:var(--text3)}
+
+/* DIVIDER */
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:1.5rem 0}
+
+/* FOOTER */
+.footer{text-align:center;padding:2rem;font-size:12px;color:var(--text3);border-top:1px solid var(--border);margin-top:3rem}
+
+/* MOBILE NAV */
+.mob-nav{display:none}
+@media(max-width:760px){
+  .sidebar{display:none}
+  .mob-nav{display:flex;gap:6px;flex-wrap:wrap;padding:0.75rem 1rem;background:rgba(15,17,23,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border)}
+  .mob-nav button{padding:6px 12px;font-size:12px;font-family:var(--body);font-weight:600;border:1px solid var(--border2);border-radius:100px;background:var(--surface);color:var(--text2);cursor:pointer}
+  .mob-nav button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="hgrid"></div>
+  <div class="hc">
+    <div class="htag">Complete Notes — M.Tech IS · 2nd Sem · 2025</div>
+    <h1>CPISE17 — Intrusion Detection<br>&amp; <span>Information Warfare</span></h1>
+    <div class="hsub">All 5 Units · Every Topic · Mnemonics + Definitions + Examples + Exam Tips</div>
+    <div class="hpills">
+      <span class="hpill">Unit I — IDS Concepts</span>
+      <span class="hpill">Unit II — Information Warfare</span>
+      <span class="hpill">Unit III — Attack Types</span>
+      <span class="hpill">Unit IV — Countermeasures</span>
+      <span class="hpill">Unit V — IDPS Systems</span>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Nav -->
+<div class="mob-nav">
+  <button class="on" onclick="go('u1',this)">Unit I</button>
+  <button onclick="go('u2',this)">Unit II</button>
+  <button onclick="go('u3',this)">Unit III</button>
+  <button onclick="go('u4',this)">Unit IV</button>
+  <button onclick="go('u5',this)">Unit V</button>
+</div>
+
+<div class="wrap">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="side-title">Course Units</div>
+  <div class="side-unit"><button class="side-btn on" onclick="go('u1',this)">Unit I<span class="side-sub">IDS Fundamentals</span></button></div>
+  <div class="side-unit"><button class="side-btn" onclick="go('u2',this)">Unit II<span class="side-sub">Information Warfare</span></button></div>
+  <div class="side-unit"><button class="side-btn" onclick="go('u3',this)">Unit III<span class="side-sub">Attack Types</span></button></div>
+  <div class="side-unit"><button class="side-btn" onclick="go('u4',this)">Unit IV<span class="side-sub">Countermeasures</span></button></div>
+  <div class="side-unit"><button class="side-btn" onclick="go('u5',this)">Unit V<span class="side-sub">IDPS Systems &amp; Tools</span></button></div>
+</aside>
+
+<div class="content">
+
+<!-- ═══════════ UNIT I ═══════════ -->
+<div id="u1" class="pg on">
+  <div class="unit-head">
+    <h2>Unit I — Intrusion Detection: Fundamentals</h2>
+    <p>Basic IDS concepts · Signature-based · Anomaly-based · Specification-based · Hybrid IDS</p>
+    <div class="unit-tags"><span class="utag">CO1 — Explain intrusion detection methods</span></div>
+  </div>
+
+  <!-- Topic 1.1 -->
+  <div class="tc">
+    <div class="tc-title">1.1 — What is an Intrusion? What is an IDS?</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"IDS = Intelligent Door Security — watches who comes in"</div>
+        <div class="mn-e">Monitors → Analyses → Alerts → (IPS also Blocks)</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definitions (Stallings)</div>
+        <p><b>Intrusion:</b> Any unauthorized access, use, modification, or denial of service on a computer system or network by a person (insider or outsider) or an automated attack tool.<br><br>
+        <b>Intrusion Detection System (IDS):</b> Software and/or hardware that monitors network traffic or host activity and detects possible intrusions, generating alerts for security administrators.<br><br>
+        <b>Intrusion Prevention System (IPS):</b> An IDS that can also automatically BLOCK detected attacks in real-time — not just alert.</p>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="lbl" style="color:var(--text2)">Who are intruders?</div>
+      <ul class="pts">
+        <li><b>Masqueraders:</b> External attackers who gain unauthorized access by using a legitimate user's credentials (stolen passwords).</li>
+        <li><b>Misfeasors (Insider threats):</b> Legitimate users who abuse their authorized access — e.g., an employee copying company data before resigning.</li>
+        <li><b>Clandestine users:</b> Attackers who gain superuser/admin access and use it to cover their tracks and evade audit controls.</li>
+      </ul>
+    </div>
+    <div class="blk">
+      <div class="tl"><div class="lbl">IDS vs IPS — Key Difference</div>
+        <p><b>IDS (Detection only):</b> Monitors traffic, generates alerts, does NOT block. Like a security camera — it records everything but cannot physically stop a thief.<br>
+        <b>IPS (Detection + Prevention):</b> Monitors AND automatically blocks malicious traffic. Like a security guard with a locked door — can physically stop the threat.<br>
+        Modern systems are called <b>IDPS</b> (Intrusion Detection and Prevention System) — they do both.</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18</span><span class="rp">NIST SP 800-94</span></div>
+  </div>
+
+  <!-- Topic 1.2 -->
+  <div class="tc">
+    <div class="tc-title">1.2 — Signature-Based (Misuse) Detection</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"SIGDET — See If it matches, Generate alert, Defend, Else let Through"</div>
+        <div class="mn-e">Capture → Match Signature DB → Alert if match → Pass if no match</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition</div>
+        <p>Signature-based detection maintains a database of known attack patterns (signatures). Observed traffic/events are compared against this database. A match = alert. Also called <b>Knowledge-based</b> or <b>Misuse Detection</b>.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Signature Database:</b> Contains thousands of patterns — specific byte sequences, protocol flags, regex patterns. Example: Snort has 50,000+ community signatures. Must be updated frequently (like antivirus).</li>
+      <li><b>Exact Match:</b> Byte-by-byte comparison. Very fast but rigid — a single bit change in attack code breaks the match. Polymorphic malware evades this.</li>
+      <li><b>Heuristic Match:</b> Uses flexible rules — partially matches similar patterns. More resilient to small variations. Slightly higher false positives.</li>
+      <li><b>State-based Match:</b> Tracks multi-step attacks that unfold over several packets/sessions. Example: detecting a port scan followed by a specific exploit attempt — both needed for alert.</li>
+      <li><b>Snort Rule Syntax:</b> <code>alert tcp any any → 192.168.1.0/24 80 (content:"/etc/passwd"; msg:"Directory Traversal"; sid:1001;)</code></li>
+    </ul>
+    <div class="blk">
+      <div class="g2">
+        <div class="gcrd"><div class="gcrd-t" style="color:var(--green)">✅ Advantages</div>
+          <ul class="pts">
+            <li>Very low false positives</li>
+            <li>Fast processing (simple matching)</li>
+            <li>Easy to understand and audit</li>
+            <li>Precise — tells you exactly what attack type</li>
+          </ul>
+        </div>
+        <div class="gcrd"><div class="gcrd-t" style="color:var(--red)">❌ Disadvantages</div>
+          <ul class="pts">
+            <li>Cannot detect zero-day attacks</li>
+            <li>Requires constant signature updates</li>
+            <li>Polymorphic malware evades it</li>
+            <li>Fails against encrypted attacks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="ex"><div class="lbl">Real Example</div>
+        <p>Snort IDS detects SQL injection: a web request containing <code>' OR '1'='1</code> matches a known SQL injection signature → Snort fires alert "SQL Injection Attempt" and logs the attacker's IP. The admin is notified within milliseconds.</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18 "IDS"</span></div>
+  </div>
+
+  <!-- Topic 1.3 -->
+  <div class="tc">
+    <div class="tc-title">1.3 — Anomaly-Based (Statistical) Detection</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"ALIEN spotted — Anomaly = Looks weird compared to normal"</div>
+        <div class="mn-e">Train on normal → Monitor live → Detect deviation → Alert</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition</div>
+        <p>Anomaly-based detection builds a statistical model of normal system/user behaviour (baseline). Any significant deviation from this baseline triggers an alert. Can detect unknown (zero-day) attacks since it doesn't need prior knowledge of the attack.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Baseline Training Phase:</b> System monitors "clean" traffic for days/weeks to learn normal patterns — average bandwidth, login times, typical commands used, normal packet sizes. This profile is the baseline.</li>
+      <li><b>Statistical Models used:</b> Mean and Standard Deviation (flag if value exceeds μ ± 3σ), Markov Models (sequence analysis), Neural Networks (deep learning-based modern systems), Clustering algorithms (K-means).</li>
+      <li><b>Types of anomalies detected:</b> (a) Volume anomaly: 10GB download at 3AM. (b) Protocol anomaly: malformed packet headers. (c) Behaviour anomaly: employee accessing 1000 files in 5 minutes (likely data exfiltration).</li>
+      <li><b>Self-Learning:</b> Modern anomaly IDS uses Machine Learning (ML) — the model continuously updates as "normal" evolves. Avoids manual re-tuning.</li>
+    </ul>
+    <div class="blk">
+      <div class="nt"><div class="lbl">6 Limitations — Must Know for Exam!</div>
+        <p><b>HITFAC:</b><br>
+        <b>H</b>igh false positives — unusual but legitimate activity triggers alerts<br>
+        <b>I</b>nsider threats missed — malicious but "normal-looking" behaviour<br>
+        <b>T</b>raining overhead — weeks of clean traffic needed<br>
+        <b>F</b>ool the IDS — slow/gradual attacks stay within threshold (mimicry attack)<br>
+        <b>A</b>dapting environments — normal changes constantly (new users, new apps)<br>
+        <b>C</b>omputational cost — continuous statistical analysis is CPU-heavy</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18</span></div>
+  </div>
+
+  <!-- Topic 1.4 -->
+  <div class="tc">
+    <div class="tc-title">1.4 — Specification-Based and Hybrid Detection</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"Spec = Strict rulebook; Hybrid = Best of both worlds"</div>
+        <div class="mn-e">Specification = whitelist of allowed behaviour · Hybrid = Signature + Anomaly combined</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Specification-Based Detection</div>
+        <p>Defines the <b>correct/expected behaviour</b> of a system using formal specifications (like a whitelist). Any behaviour OUTSIDE the specification = alert. Unlike anomaly detection, specifications are written by humans — not learned statistically. Example: "A web server process should only access files in /var/www/ — any other file access = alert."</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Advantage over Anomaly:</b> Low false positives (because specifications are precise, not statistical). Can detect insider threats (even legitimate users violating spec).</li>
+      <li><b>Advantage over Signature:</b> Can detect zero-day attacks (unknown attacks still violate spec).</li>
+      <li><b>Limitation:</b> Very hard and expensive to write complete specifications for complex systems. Any unspecified legitimate behaviour = false positive.</li>
+      <li><b>Use cases:</b> SCADA/ICS systems (power grids, water treatment — very predictable behaviour), network protocols, safety-critical embedded systems.</li>
+    </ul>
+    <div class="div"></div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Hybrid Detection</div>
+        <p>Combines two or more detection methods — most commonly Signature + Anomaly. Uses signature detection for known attacks (fast, accurate) AND anomaly detection for unknown attacks (catches zero-days). Modern enterprise IDS systems (like Cisco Firepower, Palo Alto NGFW) are all hybrid.</p>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="tl"><div class="lbl">Full Comparison Table</div>
+        <p></p>
+      </div>
+    </div>
+    <table class="tb">
+      <tr><th>Feature</th><th>Signature</th><th>Anomaly</th><th>Specification</th><th>Hybrid</th></tr>
+      <tr><td>Detects known attacks</td><td>✅ Best</td><td>✅ Yes</td><td>✅ Yes</td><td>✅ Best</td></tr>
+      <tr><td>Detects zero-day</td><td>❌ No</td><td>✅ Yes</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+      <tr><td>False positives</td><td>Low</td><td>High</td><td>Low-Med</td><td>Medium</td></tr>
+      <tr><td>Maintenance</td><td>DB updates</td><td>Retraining</td><td>Spec writing</td><td>Both</td></tr>
+      <tr><td>Example tool</td><td>Snort</td><td>UEBA systems</td><td>SCADA IDS</td><td>Cisco Firepower</td></tr>
+    </table>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18</span><span class="rp">NIST SP 800-94</span></div>
+  </div>
+</div>
+
+<!-- ═══════════ UNIT II ═══════════ -->
+<div id="u2" class="pg">
+  <div class="unit-head">
+    <h2>Unit II — Information Warfare</h2>
+    <p>Introduction to IW · Taxonomies · Wireless IW · Network Attacks · Host Attacks · Wireless Attacks</p>
+    <div class="unit-tags"><span class="utag">CO2 — Perform attacks in view of vulnerabilities</span></div>
+  </div>
+
+  <!-- Topic 2.1 -->
+  <div class="tc">
+    <div class="tc-title">2.1 — Introduction to Information Warfare (IW)</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"IW = Information as a Weapon and a Target"</div>
+        <div class="mn-e">Attacker uses information to fight AND fights to protect/destroy information systems</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition</div>
+        <p>Information Warfare (IW) is the use of information and information technology as both a weapon and a target in conflicts. It involves attacking, defending, and exploiting information systems to gain competitive or strategic advantage over an adversary.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Offensive IW:</b> Attacking enemy information systems — hacking, jamming, propaganda, cyber attacks on infrastructure.</li>
+      <li><b>Defensive IW:</b> Protecting own information systems — firewalls, IDS, encryption, redundancy, deception (honeypots).</li>
+      <li><b>3 Core Goals of IW:</b> (a) Deny enemy information. (b) Exploit enemy's reliance on information. (c) Protect own information systems from attack.</li>
+      <li><b>Difference from traditional warfare:</b> No physical presence needed. Anonymous attacker. Attacks cross international borders instantly. Civilian infrastructure is now a prime target.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings "Network Security Essentials" Ch.1</span></div>
+  </div>
+
+  <!-- Topic 2.2 -->
+  <div class="tc">
+    <div class="tc-title">2.2 — Taxonomy (Classification) of Information Warfare</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic — 7 Classes</div>
+        <div class="mn-t">"CHIN-EPI = Command, Hacker, Intelligence, Network, Economic, Psychological, Information"</div>
+        <div class="mn-e">7 recognized categories of Information Warfare — remember by CHIN-EPI</div>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>1. Command and Control Warfare (C2W):</b> Attacking the enemy's ability to command and control forces. Targets: communication systems, headquarters, command links. Goal: cut decision-makers off from their forces. Example: DDoS on a government's emergency communication system during a crisis. Military: GPS jamming of enemy drones.</li>
+      <li><b>2. Intelligence-Based Warfare (IBW):</b> Using technology to gather intelligence and deny the enemy the same. Includes: satellite imagery analysis, signals intelligence (SIGINT), cyber espionage, surveillance systems. Example: NSA PRISM surveillance programme — collecting metadata from internet companies globally.</li>
+      <li><b>3. Electronic Warfare (EW):</b> Using the electromagnetic spectrum as a weapon. Radar jamming, GPS spoofing, communications interception (SIGINT), electronic countermeasures (ECM). Example: Russia GPS spoofing near NATO waters — ships in Black Sea showed false GPS locations.</li>
+      <li><b>4. Psychological Warfare (PSYWAR):</b> Influencing, manipulating, or demoralizing enemy forces or civilian population through information. Tools: propaganda, fake news, social media manipulation. Example: Cambridge Analytica — used Facebook data to target psychological profiles with political ads to influence elections.</li>
+      <li><b>5. Hacker Warfare:</b> Using hacking skills to disrupt or destroy enemy information systems. Examples: Anonymous hacktivist group attacking government sites; state-sponsored hackers targeting military databases.</li>
+      <li><b>6. Economic Information Warfare:</b> Targeting financial systems, stock markets, banking infrastructure for economic destabilization. Example: NotPetya malware (2017) — initially disguised as ransomware, it permanently destroyed data at Maersk (shipping), FedEx, and others. $10 billion total damage.</li>
+      <li><b>7. Cyber Warfare / Critical Infrastructure Attacks:</b> Nation-state attacks on power grids, water systems, hospitals, financial networks. Example: Colonial Pipeline attack (2021) — ransomware shut down 45% of US East Coast fuel supply. Ukraine power grid attacks (2015, 2016) — first confirmed cyber attack to cause physical power outages.</li>
+    </ul>
+    <div class="blk">
+      <div class="ex"><div class="lbl">Most Famous Example — Stuxnet (2010)</div>
+        <p>Stuxnet combined <b>C2W</b> (sabotaging Iranian nuclear command) + <b>IBW</b> (intelligence gathering on centrifuge specifications) + <b>Cyber Warfare</b> (physically destroying centrifuges through PLC software manipulation). It was the world's first documented cyber weapon designed to cause physical destruction. Joint US-Israel operation.</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.1</span></div>
+  </div>
+
+  <!-- Topic 2.3 -->
+  <div class="tc">
+    <div class="tc-title">2.3 — Network-Based Attacks</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"SPAM-DR — Sniffing, Port scan, ARP poison, MITM, DoS, Replay"</div>
+        <div class="mn-e">6 primary network-based attack categories</div>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Sniffing / Eavesdropping (Passive):</b> Attacker places NIC in promiscuous mode to capture all network packets — even those not addressed to them. Unencrypted protocols (HTTP, FTP, Telnet) fully exposed. Tool: Wireshark. Countermeasure: Use HTTPS/TLS, SSH instead of Telnet.</li>
+      <li><b>Port Scanning (Reconnaissance):</b> Systematically probing ports to find open services. Types: TCP Connect Scan (noisy), SYN Scan (stealthy — half-open), UDP Scan, NULL Scan. Tool: Nmap. Countermeasure: Firewall blocks unknown ports, IDS detects rapid port access.</li>
+      <li><b>ARP Poisoning (MITM Setup):</b> ARP (Address Resolution Protocol) has no authentication. Attacker sends fake ARP replies: "IP 192.168.1.1 is at MAC AA:BB:CC..." — all network machines update their ARP cache. Traffic now flows through attacker. Enables MITM on LAN. Tool: arpspoof, Ettercap.</li>
+      <li><b>Man-in-the-Middle (MITM):</b> Attacker intercepts and possibly modifies traffic between two parties. Enabled by: ARP poisoning, rogue Wi-Fi, DNS spoofing. Can read credentials, modify bank transfers, inject malicious content. Countermeasure: TLS, VPN, certificate pinning, HSTS.</li>
+      <li><b>IP Spoofing:</b> Attacker forges source IP address in packets to impersonate another host, bypass IP-based authentication, or launch reflected DDoS. Countermeasure: Ingress filtering (ISPs block packets with spoofed IPs from their customers).</li>
+      <li><b>Replay Attack:</b> Attacker captures a valid authentication packet (e.g., hashed login) and replays it later to gain access — without knowing the original password. Countermeasure: Timestamps, Nonces (one-time random values), session tokens.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18-19</span></div>
+  </div>
+
+  <!-- Topic 2.4 -->
+  <div class="tc">
+    <div class="tc-title">2.4 — Wireless-Based Attacks</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"RIDE — Rogue AP, Injection, Deauth, Eavesdropping"</div>
+        <div class="mn-e">4 main wireless attack types</div>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Passive Eavesdropping:</b> Wi-Fi signals broadcast in all directions — anyone in range can capture packets using Wireshark + wireless card. WEP-encrypted networks are fully crackable. Countermeasure: WPA3 encryption.</li>
+      <li><b>Rogue Access Point / Evil Twin:</b> Attacker sets up a Wi-Fi AP with the same SSID as a legitimate network. Sends deauthentication frames to disconnect users from real AP → users reconnect to attacker's AP → all traffic intercepted. Example: "Airport_Free_WiFi" vs real airport hotspot.</li>
+      <li><b>Deauthentication (Deauth) Attack:</b> 802.11 management frames are unencrypted by default. Attacker sends fake deauth frames → victims forcibly disconnected. Used to: (a) force reconnection to rogue AP, (b) capture WPA2 4-way handshake for offline cracking, (c) DoS — keep deauthenticating = persistent disconnection. Fix: 802.11w (Management Frame Protection).</li>
+      <li><b>WEP Cracking:</b> WEP uses RC4 with weak IV (Initialization Vector) — IVs repeat after ~5000 packets. Statistical analysis of repeated IVs reveals the key. Tool: Aircrack-ng. Can crack WEP in minutes with 50,000 packets. WEP is completely broken — should NEVER be used.</li>
+      <li><b>WPA2 Cracking:</b> Capture 4-way handshake (during deauth attack) → run offline dictionary/brute-force attack against captured handshake. Tool: Aircrack-ng + wordlist. Only works against weak passwords. WPA2 itself is secure with strong passwords. WPA3 uses SAE — immune to offline dictionary attacks.</li>
+      <li><b>Karma/SSID Probe Attack:</b> Devices broadcast "Probe Requests" for previously connected networks ("looking for Home_WiFi"). Attacker responds to all probes, impersonating every network the device ever connected to — device auto-connects. Completely transparent to user.</li>
+    </ul>
+    <div class="blk">
+      <div class="ex"><div class="lbl">Attack Flow — Evil Twin</div>
+        <p>1. Attacker sets up AP: SSID = "Coffee_Shop_WiFi" (identical to real) · 2. Sends deauth to users on real AP · 3. Users reconnect to Evil Twin · 4. Attacker runs SSLstrip to downgrade HTTPS to HTTP · 5. Captures usernames, passwords, session cookies · 6. User never knows — internet still works.</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.19 "Wireless Security"</span></div>
+  </div>
+
+  <!-- Topic 2.5 -->
+  <div class="tc">
+    <div class="tc-title">2.5 — Phases of an Electronic Attack (Cyber Kill Chain)</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"Real Spies Scan Every Exploit, Then Cover" = RS·SEETC</div>
+        <div class="mn-e">Reconnaissance → Scanning → Enumeration → Exploitation → Escalation → Tracks Covered</div>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Phase 1 — Reconnaissance:</b> Passive: Google dorking, WHOIS, LinkedIn, Shodan. Active: DNS queries, traceroute. Goal: build a complete picture of the target without touching their systems. Footprinting the target.</li>
+      <li><b>Phase 2 — Scanning &amp; Probing:</b> Actively test open ports (Nmap), OS fingerprinting, service version detection, vulnerability scanning (Nessus, OpenVAS). This phase leaves traces in firewall/IDS logs.</li>
+      <li><b>Phase 3 — Enumeration:</b> Extract specific info: usernames (null SMB session), shared resources, group memberships, routing tables, SNMP community strings. Deeper than scanning — requires service interaction.</li>
+      <li><b>Phase 4 — Exploitation / Gaining Access:</b> Use discovered vulnerability to get a shell or execute code. Methods: exploit known CVE (Metasploit), social engineering (spear phishing), brute force credentials, web app attacks (SQLi, XSS, LFI). First foothold established.</li>
+      <li><b>Phase 5 — Privilege Escalation &amp; Lateral Movement:</b> Escalate from user to admin/root (sudo misconfig, kernel exploit, SUID binary). Move across network to reach valuable targets (database server, domain controller). Pivot through the network.</li>
+      <li><b>Phase 6 — Maintaining Access:</b> Install backdoor (Netcat, reverse shell, RAT), rootkit (hides attacker presence), scheduled tasks for persistence. Goal: survive reboots and password changes.</li>
+      <li><b>Phase 7 — Covering Tracks:</b> Clear logs (Event Viewer, /var/log/auth.log, bash_history), modify timestamps, delete evidence. Advanced attackers use log-tampering tools and live-off-the-land techniques to blend in.</li>
+    </ul>
+    <div class="blk">
+      <div class="pk"><div class="lbl">Lockheed Martin Kill Chain (7 Steps)</div>
+        <p>Reconnaissance → Weaponization → Delivery → Exploitation → Installation → Command &amp; Control (C2) → Actions on Objectives.<br>
+        <b>Defender's goal:</b> Break the chain as early as possible. Best: detect at Reconnaissance. Worst: discover only at "Actions on Objectives" (data already stolen).</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18-19</span><span class="rp">Lockheed Martin Cyber Kill Chain</span></div>
+  </div>
+</div>
+
+<!-- ═══════════ UNIT III ═══════════ -->
+<div id="u3" class="pg">
+  <div class="unit-head">
+    <h2>Unit III — Attack Types</h2>
+    <p>DoS · DDoS · Buffer Overflow · Sniffing · Session Hijacking · Password Attacks · Trojans · Viruses · Worms</p>
+    <div class="unit-tags"><span class="utag">CO2 — Attack types and their mechanisms</span></div>
+  </div>
+
+  <!-- Topic 3.1 -->
+  <div class="tc">
+    <div class="tc-title">3.1 — Denial of Service (DoS) and DDoS Attacks</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic — DoS Types</div>
+        <div class="mn-t">"SYN-PUS = SYN flood, Ping of death, UDP flood, Smurf"</div>
+        <div class="mn-e">4 classic DoS attacks — plus HTTP flood and Amplification for modern attacks</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition</div>
+        <p>A <b>Denial of Service (DoS)</b> attack attempts to make a system unavailable to its legitimate users by overwhelming it with traffic or exploiting vulnerabilities to consume all resources. A <b>DDoS</b> uses thousands/millions of compromised machines simultaneously.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>SYN Flood:</b> Exploits TCP 3-way handshake. Attacker sends thousands of SYN packets with spoofed IPs. Server allocates resources for each half-open connection and waits for ACK (that never comes). Connection table fills up → legitimate connections refused. Countermeasure: SYN Cookies (server doesn't allocate resources until handshake complete).</li>
+      <li><b>Ping of Death:</b> Sends ICMP ping packet larger than 65,535 bytes (max allowed). Old OS cannot handle oversized packet reassembly → buffer overflow → system crash. Historic attack — all modern OS are patched. Still asked in exams!</li>
+      <li><b>UDP Flood:</b> Sends massive UDP packets to random ports. Target checks each port for listening application, sends "ICMP Port Unreachable" for each → CPU and bandwidth exhausted. Simple to launch — no connection handshake needed.</li>
+      <li><b>Smurf Attack:</b> Attacker pings network broadcast address with victim's spoofed IP. ALL hosts on network reply to victim → amplification attack. One small ping packet → hundreds of replies hit victim. Countermeasure: Disable directed broadcasts on routers.</li>
+      <li><b>HTTP Flood (Application Layer L7):</b> Sends legitimate-looking HTTP GET/POST requests in massive volume. Bypasses network-level defences. Server must fully process each request. Slowloris: opens partial HTTP connections, holds them open indefinitely → exhausts server thread pool.</li>
+      <li><b>Amplification/Reflection Attack:</b> Attacker sends small packet with victim's spoofed IP to public DNS/NTP server. Server sends LARGE response to victim. Amplification factor: DNS=28-54x, NTP=556x, Memcached=51,000x. Countermeasure: BCP38 (ingress filtering), disable open resolvers.</li>
+      <li><b>DDoS via Botnet:</b> Thousands of compromised IoT devices, PCs, servers — all controlled by attacker's C2 server. Scale: 1-3 Tbps. Mirai Botnet (2016): hacked IoT cameras/routers using default passwords → generated 1.2 Tbps → took down Dyn DNS → Twitter, Netflix, Reddit unreachable.</li>
+    </ul>
+    <div class="blk">
+      <div class="tl"><div class="lbl">3 Layers of DoS</div>
+        <p><b>Volumetric (L3/L4):</b> Saturate bandwidth — UDP flood, ICMP flood, Amplification<br>
+        <b>Protocol (L4):</b> Exhaust connection tables — SYN flood, Smurf<br>
+        <b>Application (L7):</b> Exhaust server resources — HTTP flood, Slowloris<br>
+        DDoS protection needs defence at all 3 layers simultaneously.</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.7 "Denial of Service"</span></div>
+  </div>
+
+  <!-- Topic 3.2 -->
+  <div class="tc">
+    <div class="tc-title">3.2 — Buffer Overflow Attack</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"Buffer BREAKS the BOUNDARY, Return address REDIRECTED"</div>
+        <div class="mn-e">Overflow → overwrite return address → redirect execution → shellcode runs → attacker wins</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition (Stallings)</div>
+        <p>A buffer overflow occurs when a program writes data beyond the boundaries of a fixed-length memory buffer, overwriting adjacent memory locations — including the function's return address on the stack. Attacker crafts malicious input to overwrite the return address, redirecting execution to attacker-controlled shellcode.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Why it happens:</b> C/C++ functions like <code>strcpy(), gets(), sprintf()</code> do not check input length. If input is larger than the buffer, it overflows into adjacent stack memory.</li>
+      <li><b>Stack Layout (Normal):</b> Function call pushes: [Local Variables / Buffer] → [Saved Frame Pointer (SFP)] → [Return Address (RET)] → [Function Arguments].</li>
+      <li><b>The Attack:</b> Attacker provides input larger than buffer size. Overflows into SFP → overwrites RET with address of attacker's shellcode. When function returns → CPU jumps to attacker's shellcode instead of legitimate code.</li>
+      <li><b>Shellcode:</b> Machine code embedded in the attacker's input. Typically opens a root shell (e.g., execve("/bin/sh")). Must be small (fits in buffer) and avoid null bytes (strcpy stops at null).</li>
+      <li><b>Heap Overflow:</b> Same concept but in heap-allocated memory (malloc). Overwrites object pointers, vtable pointers, or heap metadata. Harder to exploit but also harder to defend.</li>
+      <li><b>Famous Exploits:</b> Morris Worm (1988) — fingerd buffer overflow. MS03-026 (Blaster worm) — RPC buffer overflow. EternalBlue (WannaCry) — SMB protocol buffer overflow.</li>
+    </ul>
+    <div class="blk">
+      <div class="tl"><div class="lbl">5 Countermeasures — Must Know</div>
+        <p><b>1. Stack Canaries:</b> Compiler places a random "canary" value between buffer and return address. Before function returns, checks if canary was modified — if changed, abort (attacker's overflow is detected).<br>
+        <b>2. ASLR (Address Space Layout Randomization):</b> Randomizes memory addresses each time program runs — attacker cannot predict where to jump.<br>
+        <b>3. DEP/NX Bit (Data Execution Prevention):</b> Marks stack as non-executable. Shellcode in stack cannot run — CPU raises exception. Defeated by ROP (Return-Oriented Programming) attacks.<br>
+        <b>4. Safe Functions:</b> Use <code>strncpy()</code> instead of <code>strcpy()</code>, <code>fgets()</code> instead of <code>gets()</code> — specify maximum input length.<br>
+        <b>5. Code Auditing &amp; Fuzzing:</b> Static analysis tools (Coverity, CodeQL), dynamic fuzzing (AFL — American Fuzzy Lop) to find overflow bugs before deployment.</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.10 "Buffer Overflow"</span></div>
+  </div>
+
+  <!-- Topic 3.3 -->
+  <div class="tc">
+    <div class="tc-title">3.3 — Sniffing, Session Hijacking, Password Attacks</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"SSP = Sniff the wire, Steal the session, Punch the password"</div>
+        <div class="mn-e">3 related attack categories that chain together in real attacks</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Sniffing</div>
+        <p>Passive capture of network packets passing through a network interface. The NIC is placed in <b>promiscuous mode</b> — captures ALL packets on segment, not just those addressed to it. Can capture cleartext credentials from HTTP, FTP, Telnet, POP3, SMTP.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Types:</b> Passive sniffing (hub network — all traffic visible), Active sniffing (switched network — requires ARP poisoning to redirect traffic to sniffer).</li>
+      <li><b>What can be captured:</b> Usernames and passwords (unencrypted), Email content, Web browsing history, Session cookies (enables session hijacking), VoIP calls.</li>
+      <li><b>Countermeasures:</b> Encrypt all traffic (TLS/HTTPS/SSH/VPN). Use switches (not hubs). Monitor ARP table for poisoning. Use tools like XArp to detect ARP attacks.</li>
+    </ul>
+    <div class="div"></div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Session Hijacking</div>
+        <p>Taking over an active, authenticated user session by stealing or predicting the session token (session ID cookie). The attacker impersonates the legitimate user without needing their password.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>How sessions work:</b> After login, server issues Session ID (cookie). Client sends this cookie with every request. Server trusts anyone presenting a valid session ID.</li>
+      <li><b>Attack methods:</b> (a) Cookie sniffing over HTTP → inject cookie into own browser → instant access. (b) XSS cookie theft → malicious JS sends cookie to attacker. (c) Session fixation → attacker forces victim to use a known session ID. (d) Predictable session IDs → brute-force valid session IDs.</li>
+      <li><b>Countermeasures:</b> HTTPS everywhere (encrypts cookies). HttpOnly flag (JS cannot read cookie). Secure flag (cookie only sent over HTTPS). Session timeout. Regenerate session ID after login. Bind session to IP/User-Agent.</li>
+    </ul>
+    <div class="div"></div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Password Attacks</div>
+        <p>Attempts to discover or bypass user passwords to gain unauthorized access.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Brute Force:</b> Try every possible combination. 100% effective eventually. Limited by: password length, complexity, lockout policies. Example: 8-char lowercase = 26^8 = 208 billion combinations.</li>
+      <li><b>Dictionary Attack:</b> Try words from a wordlist (dictionary). Most passwords are English words + numbers. Tool: Hashcat with RockYou wordlist (14 million real passwords from a breach). Much faster than brute force.</li>
+      <li><b>Rainbow Table Attack:</b> Pre-computed table of hash → password mappings. Given a hash, look up the password in seconds. Defeated by: password salting (adds random value before hashing — makes pre-computed tables useless).</li>
+      <li><b>Credential Stuffing:</b> Using username/password pairs leaked from one breach to try on other sites. Works because people reuse passwords. Example: LinkedIn breach passwords used to attack Dropbox.</li>
+      <li><b>Phishing:</b> Trick user into typing their password on a fake login page. No technical hacking needed — social engineering. Countermeasure: MFA, FIDO2 hardware keys (phishing-resistant).</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.22 "Web Security"</span></div>
+  </div>
+
+  <!-- Topic 3.4 -->
+  <div class="tc">
+    <div class="tc-title">3.4 — Trojans, Viruses, and Worms</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic — Key differences</div>
+        <div class="mn-t">"Trojan PRETENDS, Virus ATTACHES, Worm TRAVELS ALONE"</div>
+        <div class="mn-e">Trojan = fake app · Virus = needs host file · Worm = self-contained, self-propagating</div>
+      </div>
+    </div>
+    <table class="tb">
+      <tr><th>Feature</th><th>Trojan</th><th>Virus</th><th>Worm</th></tr>
+      <tr><td>Disguise</td><td>Looks like legit software</td><td>Attaches to host file</td><td>Standalone program</td></tr>
+      <tr><td>Self-replicates?</td><td>❌ No</td><td>✅ Yes (needs host)</td><td>✅ Yes (no host needed)</td></tr>
+      <tr><td>Spreads how?</td><td>User installs it</td><td>Infects files on execution</td><td>Automatically over network</td></tr>
+      <tr><td>Needs user action?</td><td>Yes (to install)</td><td>Yes (to run infected file)</td><td>❌ No — fully autonomous</td></tr>
+      <tr><td>Famous example</td><td>Zeus banking Trojan</td><td>ILOVEYOU virus (2000)</td><td>Morris Worm (1988)</td></tr>
+      <tr><td>Payload</td><td>Backdoor, keylogger, RAT</td><td>Destroy files, corrupt data</td><td>Propagate, install more malware</td></tr>
+    </table>
+    <ul class="pts">
+      <li><b>Trojan Horse:</b> Malware disguised as useful software. When installed: opens backdoor, steals credentials, downloads more malware. Example: Zeus Trojan — stole banking credentials from millions. Spread via phishing emails with fake invoice attachments.</li>
+      <li><b>Computer Virus:</b> Code that attaches itself to legitimate programs/files. Spreads when infected file is executed and copies virus code to other files. Payload varies: display message, corrupt files, encrypt data (ransomware). ILOVEYOU (2000) — spread via email, overwrote files. $10 billion damage.</li>
+      <li><b>Worm:</b> Self-contained program that spreads across networks without any user interaction. Exploits network services vulnerabilities. Consumes bandwidth just by propagating. SQL Slammer (2003) — doubled in size every 8.5 seconds, infected 75,000 servers in 10 minutes. WannaCry (2017) — worm component spread via EternalBlue SMB exploit.</li>
+      <li><b>Ransomware:</b> Combines Trojan (disguised delivery) + Worm (spreads via network) + Encryption (locks files) + Extortion (demands payment). Most dangerous modern malware category. Example: WannaCry, REvil, LockBit.</li>
+      <li><b>RAT (Remote Access Trojan):</b> Gives attacker complete remote control of victim's machine. Features: keylogging, webcam access, file management, screen capture, command execution. Often installed by Trojan or via phishing.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.6 "Malicious Software"</span></div>
+  </div>
+
+  <!-- Topic 3.5 -->
+  <div class="tc">
+    <div class="tc-title">3.5 — Packet Fragmentation Attack</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"Fragments FOOL the Firewall — split the attack to bypass inspection"</div>
+        <div class="mn-e">Normal: IP splits big packets → Attacker exploits reassembly to evade IDS/crash system</div>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Normal IP Fragmentation:</b> When packet size exceeds MTU (Maximum Transmission Unit — typically 1500 bytes), router splits it into fragments. Each fragment has: ID (same for all fragments of same packet), Fragment Offset (position in original packet), More Fragments (MF) flag.</li>
+      <li><b>Tiny Fragment Attack:</b> Attacker creates an abnormally small first fragment (only 8 bytes — just TCP ports). TCP header split across fragments 1 and 2. Packet filter sees only fragment 1 and cannot determine port/flags → lets it through. Fragment 2 reassembles with malicious content.</li>
+      <li><b>Teardrop Attack:</b> Sends fragments with overlapping offsets — Fragment 2's offset says it starts before Fragment 1 ends. Reassembly calculation: length = (end of frag2) - (start of frag2) = negative value. Old OS (Win95/NT) crash when calculating negative buffer length. Fully patched in modern systems.</li>
+      <li><b>Fragment Overlap Attack:</b> Fragment 1 = innocent traffic (passes IDS). Fragment 2 = overlapping, replaces Fragment 1's content with malicious payload. IDS only inspects first fragment → attack slips through. Destination reassembles → malicious complete packet.</li>
+      <li><b>Countermeasures:</b> Reassemble fragments at firewall/IDS before inspection (resource-intensive but necessary). Drop fragments smaller than minimum (64 bytes). Limit number of fragments per flow. Modern NGFW (Next-Generation Firewall) handles all these cases.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.7 "Network Attacks"</span></div>
+  </div>
+</div>
+
+<!-- ═══════════ UNIT IV ═══════════ -->
+<div id="u4" class="pg">
+  <div class="unit-head">
+    <h2>Unit IV — Countermeasures of Information Warfare</h2>
+    <p>Authentication · Encryption · Auditing · Monitoring · Firewalls (types) · Limitations</p>
+    <div class="unit-tags"><span class="utag">CO3 — Apply countermeasures of IW</span></div>
+  </div>
+
+  <!-- Topic 4.1 -->
+  <div class="tc">
+    <div class="tc-title">4.1 — Authentication as a Countermeasure</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic — 3 Factors</div>
+        <div class="mn-t">"KHA — Know it, Have it, Are it"</div>
+        <div class="mn-e">Something you KNOW (password) · Something you HAVE (token) · Something you ARE (biometric)</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition</div>
+        <p>Authentication is the process of verifying the identity of a user, system, or entity. It answers: "Are you really who you claim to be?" It is the first gate of access control. Strong authentication is the most effective countermeasure against unauthorized access.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Factor 1 — Something you KNOW:</b> Password, PIN, security question answer. Weakest factor — can be stolen, guessed, or phished. Must enforce: minimum length (12+ chars), complexity, no reuse, no dictionary words.</li>
+      <li><b>Factor 2 — Something you HAVE:</b> Hardware token (RSA SecurID), smartphone authenticator app (Google Authenticator — TOTP), smart card, USB security key (YubiKey). One-time codes expire in 30 seconds — replay attacks useless.</li>
+      <li><b>Factor 3 — Something you ARE:</b> Fingerprint, retina scan, face recognition, voice recognition. Biometrics. Cannot be forgotten or easily stolen. Limitation: once compromised, cannot be changed (you only have 10 fingerprints).</li>
+      <li><b>MFA (Multi-Factor Authentication):</b> Combining 2+ factors. Even if password stolen — attacker still needs physical device. Banks (ATM: card + PIN), Google (password + phone OTP). Reduces account compromise by 99.9% (Microsoft research).</li>
+      <li><b>Kerberos Protocol:</b> Enterprise authentication — no passwords sent over network. Client gets Ticket Granting Ticket (TGT) from KDC (Key Distribution Centre). Uses TGT to get service tickets for each resource. Used in Windows Active Directory.</li>
+      <li><b>Digital Certificates / PKI:</b> X.509 certificates bind a public key to an identity, signed by a trusted Certificate Authority (CA). Used in HTTPS — browser verifies website's certificate before trusting it. Foundation of internet security.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.14 "Authentication"</span></div>
+  </div>
+
+  <!-- Topic 4.2 -->
+  <div class="tc">
+    <div class="tc-title">4.2 — Encryption as a Countermeasure</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"SAS — Symmetric for Speed, Asymmetric for Sharing keys Safely"</div>
+        <div class="mn-e">AES (symmetric) = fast bulk encryption · RSA/ECC (asymmetric) = secure key exchange</div>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>AES-256 (Symmetric):</b> Same key encrypts and decrypts. Extremely fast. Used for: disk encryption (BitLocker, VeraCrypt), VPN tunnels, file encryption. Key problem: how do you share the key securely? Solved by asymmetric encryption.</li>
+      <li><b>RSA/ECC (Asymmetric):</b> Public key encrypts (share freely), private key decrypts (keep secret). Slow — only used for: key exchange, digital signatures, certificate signing. RSA-2048 minimum; ECC-256 equivalent strength with smaller key.</li>
+      <li><b>TLS (Transport Layer Security):</b> Combines both. Handshake phase: RSA/ECDHE (asymmetric) exchanges symmetric session key. Data phase: AES-256 (symmetric) encrypts actual data. SHA-256 (hash) ensures integrity. X.509 certificate authenticates server. HTTPS = HTTP + TLS.</li>
+      <li><b>Hashing (SHA-256, SHA-3):</b> One-way function — input → fixed-size digest. Cannot reverse. Used for: password storage (store hash, not password), file integrity verification, digital signatures, blockchain.</li>
+      <li><b>End-to-End Encryption (E2EE):</b> Data encrypted at sender, decrypted only at recipient — even service provider cannot read. Used in: WhatsApp (Signal Protocol), Signal app, PGP email. Countermeasure against: server-side breaches, ISP surveillance, government interception.</li>
+      <li><b>Encryption roles in IW countermeasures:</b> Confidentiality (AES encryption), Integrity (HMAC), Authentication (Digital certificates), Non-repudiation (Digital signatures), Data at rest (Full disk encryption).</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.2-5 "Cryptography"</span></div>
+  </div>
+
+  <!-- Topic 4.3 -->
+  <div class="tc">
+    <div class="tc-title">4.3 — Auditing and Monitoring</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"AML — Audit Makes Liars accountable"</div>
+        <div class="mn-e">Auditing = after-the-fact record · Monitoring = real-time watchdog</div>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Auditing:</b> Recording security-relevant events in logs for later analysis. Examples: login/logout events, file access, privilege escalation, system changes, network connections. Provides evidence for forensic investigation. Required for compliance (PCI-DSS, HIPAA, SOX).</li>
+      <li><b>Key Audit Events to capture:</b> All successful and failed login attempts, privileged account usage, changes to security policies, file access to sensitive data, network connection attempts, system startup/shutdown.</li>
+      <li><b>Monitoring:</b> Real-time analysis of system and network activity. Tools: SIEM (Security Information and Event Management) — collects logs from all devices, correlates events, fires alerts. Example: Splunk, IBM QRadar, Microsoft Sentinel.</li>
+      <li><b>SIEM Capabilities:</b> Log aggregation (one place for all logs), Event correlation (connect related events across systems — failed login + successful login from different IP = alert), Real-time alerting, Dashboards, Compliance reporting.</li>
+      <li><b>Why both are needed:</b> Monitoring catches attacks in real-time (minute-level). Auditing provides historical record for investigation (days/weeks later). Together: detect + prove what happened.</li>
+      <li><b>Limitation:</b> Auditing generates enormous log volume — average enterprise: billions of log events per day. Manual review impossible. SIEM with ML-based correlation is essential to find the needle in the haystack.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18 "Auditing"</span></div>
+  </div>
+
+  <!-- Topic 4.4 -->
+  <div class="tc">
+    <div class="tc-title">4.4 — Firewalls: Types and Architecture</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic — 5 Firewall Types</div>
+        <div class="mn-t">"PASTA — Packet filter, Application proxy, Stateful, Transparent, Application-aware (NGFW)"</div>
+        <div class="mn-e">Each generation adds more intelligence and inspection depth</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition (Stallings)</div>
+        <p>A firewall is a security system that monitors and controls incoming and outgoing network traffic based on a set of predefined security rules. It establishes a barrier between trusted internal networks and untrusted external networks.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>1. Packet Filtering Firewall (1st Gen):</b> Examines each packet in isolation. Filters based on: Source/Dest IP, Source/Dest Port, Protocol (TCP/UDP/ICMP). Simple ACL rules. No state tracking — cannot tell if a packet is part of an established connection. Fast but limited. Cannot stop application-layer attacks.</li>
+      <li><b>2. Stateful Inspection Firewall (2nd Gen):</b> Maintains a state table tracking all active connections. Allows only packets that are part of an ESTABLISHED connection initiated from inside. Can detect TCP sequence number anomalies, SYN flood attacks. Most common enterprise firewall type.</li>
+      <li><b>3. Application Proxy / Gateway Firewall:</b> Acts as a relay for specific applications. Full deep inspection at application layer (L7). Example: web proxy examines all HTTP/HTTPS content. Cannot be bypassed by tunnelling attacks (all traffic inspected). Slower — creates two connections for every session.</li>
+      <li><b>4. Transparent / Switched Firewall:</b> Operates at Layer 2 (Data Link). No IP address on data path — invisible to network. Insert between two segments without reconfiguring IP scheme. Cannot be targeted by IP-based attacks.</li>
+      <li><b>5. Next-Generation Firewall (NGFW):</b> Combines: stateful inspection + application identification (even if port 80) + user identity (who, not just IP) + SSL/TLS inspection + built-in IPS + threat intelligence feeds. Examples: Palo Alto, Fortinet, Cisco Firepower. The modern gold standard.</li>
+    </ul>
+    <div class="blk">
+      <div class="wn"><div class="lbl">Limitations of Firewalls</div>
+        <p>1. Cannot inspect encrypted traffic (unless doing SSL inspection — raises privacy concerns).<br>
+        2. Cannot stop insider threats (malicious authorized users bypass firewall).<br>
+        3. Cannot protect against social engineering (phishing bypasses firewall).<br>
+        4. Application-layer attacks bypass port-based rules (malware over HTTP/80).<br>
+        5. Zero-day exploits may not have matching signatures yet.<br>
+        6. VPN/tunnelling can bypass firewall rules.<br>
+        7. Misconfigured rules leave gaps — human error is the biggest failure point.</p>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="ex"><div class="lbl">Positive vs Negative Filtering</div>
+        <p><b>Positive Filtering (Whitelist):</b> ALLOW only explicitly approved traffic. Default: DENY all. More secure. Example: Only allow HTTP(80), HTTPS(443), DNS(53) — block everything else. Used in: high-security environments, banks, military systems.<br><br>
+        <b>Negative Filtering (Blacklist):</b> BLOCK only explicitly banned traffic. Default: ALLOW all. Easier to manage. Cannot block unknown threats. Example: Block known malicious IPs, block Telnet(23). Used in: general ISP, consumer products, spam filters.</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.20 "Firewalls"</span></div>
+  </div>
+</div>
+
+<!-- ═══════════ UNIT V ═══════════ -->
+<div id="u5" class="pg">
+  <div class="unit-head">
+    <h2>Unit V — IDPS Systems &amp; Tools</h2>
+    <p>Host-based IDPS · Network-based IDPS · Wireless IDPS · Tool Selection · Snort · NFR Security</p>
+    <div class="unit-tags"><span class="utag">CO4 — Analyze HIDS and NIDS</span><span class="utag">CO5 — Evaluate IDS tools</span></div>
+  </div>
+
+  <!-- Topic 5.1 -->
+  <div class="tc">
+    <div class="tc-title">5.1 — Host-Based IDPS (HIDS)</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic — What HIDS monitors</div>
+        <div class="mn-t">"SAFLS — Syscalls, Audit logs, File integrity, Login events, System calls"</div>
+        <div class="mn-e">Everything happening INSIDE one host machine</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition</div>
+        <p>A Host-Based Intrusion Detection System (HIDS) is installed on individual host machines (servers, workstations). It monitors OS-level events, system calls, file activity, user actions, and log files to detect intrusions occurring within that specific host.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>System Call Monitoring:</b> HIDS intercepts all system calls (open, read, write, exec, fork, socket). Unusual call sequences indicate attack. Example: Web server process making exec() calls → likely PHP webshell being executed by attacker.</li>
+      <li><b>File Integrity Monitoring (FIM):</b> Takes SHA-256 hash of critical system files (/etc/passwd, /bin/ls, system DLLs). Periodically re-hashes and compares. Any unauthorized change = alert. Catches rootkits that replace system binaries. Tool: Tripwire, AIDE.</li>
+      <li><b>Log Analysis:</b> Monitors OS logs in real-time. Example: 100 failed SSH logins in 60 seconds = brute force attack → alert + auto-block IP. Windows Event Log analysis — looks for Event ID 4625 (failed login), 4672 (special privileges assigned).</li>
+      <li><b>Process Monitoring:</b> Tracks all running processes, parent-child relationships. Alert: Apache (web server) spawning cmd.exe or bash shell = likely command injection attack.</li>
+      <li><b>Registry Monitoring (Windows):</b> Critical registry keys monitored for changes — startup keys, security settings, service configurations. Malware often uses registry for persistence.</li>
+      <li><b>Network Connection Monitoring:</b> Tracks all network connections made by the host. Alert: a normally isolated database server making outbound connections to the internet = data exfiltration attempt.</li>
+    </ul>
+    <div class="blk">
+      <div class="g2">
+        <div class="gcrd"><div class="gcrd-t" style="color:var(--green)">✅ HIDS Advantages</div>
+          <ul class="pts">
+            <li>Sees inside encrypted traffic (already decrypted at host)</li>
+            <li>Detects insider threats</li>
+            <li>Catches local privilege escalation</li>
+            <li>No network tap needed</li>
+            <li>Works even on isolated hosts</li>
+          </ul>
+        </div>
+        <div class="gcrd"><div class="gcrd-t" style="color:var(--red)">❌ HIDS Limitations</div>
+          <ul class="pts">
+            <li>Only monitors ONE host</li>
+            <li>Agent must be installed on every host</li>
+            <li>Attacker can disable HIDS if they get root</li>
+            <li>High CPU overhead on host</li>
+            <li>Misses network-level attacks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="ex"><div class="lbl">Popular HIDS Tools</div>
+        <p><b>OSSEC:</b> Open-source, most widely deployed HIDS. Real-time log analysis, FIM, rootkit detection, active response. Works on Linux, Windows, macOS.<br>
+        <b>Wazuh:</b> OSSEC fork with modern web GUI (Kibana). Built-in compliance dashboards (PCI-DSS, GDPR, HIPAA). Cloud-native support.<br>
+        <b>Tripwire:</b> Specializes in FIM. Enterprise-grade. Used by banks and government agencies.</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18 "HIDS"</span><span class="rp">NIST SP 800-94</span></div>
+  </div>
+
+  <!-- Topic 5.2 -->
+  <div class="tc">
+    <div class="tc-title">5.2 — Network-Based IDPS (NIDS/NIPS)</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic — 5 Components</div>
+        <div class="mn-t">"SCAN-R — Sensor, Console, Analyser, Network tap, Response engine"</div>
+        <div class="mn-e">5 core components every NIDPS must have</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Definition</div>
+        <p>A Network-Based IDPS monitors and analyses network traffic across an entire network segment. It captures packets from the network, analyses them using signature/anomaly/stateful methods, and generates alerts or blocks attacks. One sensor can protect many hosts simultaneously.</p>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>Sensor / Monitoring Engine:</b> Captures raw network packets using libpcap (Linux) or WinPcap (Windows). Placed at strategic points: internet edge (sees all external traffic), DMZ, internal network segments. In IPS mode: sits inline and can drop packets in real-time.</li>
+      <li><b>Detection Engine:</b> The brain. Performs: signature matching (vs rule database), protocol analysis (validates protocol correctness), stateful tracking (maintains connection state), anomaly detection (statistical baseline comparison). Modern engines (Snort3, Suricata) are multi-threaded.</li>
+      <li><b>Signature / Rule Database:</b> 50,000+ signatures (Snort community). Rules specify: what to look for (content, flags, size), where to look (network, transport, application layer), what to do (alert, drop, log). Updated daily from threat intelligence feeds.</li>
+      <li><b>Management Console:</b> Web-based dashboard for security analysts. Shows: real-time alert stream, geographic attack maps, top attacker IPs, event trends. Allows rule management, tuning, and reporting. Examples: Splunk, ELK Stack (Elastic, Logstash, Kibana), IBM QRadar.</li>
+      <li><b>Response Engine:</b> Automated responses: TCP Reset (sends RST to kill connection), Firewall rule insertion (dynamic IP block), SNMP trap (notify network management), Email/SMS alert, Full packet capture (preserve evidence for forensics).</li>
+    </ul>
+    <div class="blk">
+      <div class="tl"><div class="lbl">Passive (IDS) vs Inline (IPS) Sensor Architecture</div>
+        <p><b>Passive (Promiscuous mode):</b> Gets a COPY of traffic from network SPAN port or tap. CANNOT block in real-time. Zero impact on network latency. No single point of failure. Detection only → IDS mode.<br><br>
+        <b>Inline (Bridge mode):</b> Traffic PASSES THROUGH the sensor. Can DROP malicious packets before they reach destination. Adds latency (2-10ms). Must have fail-open/fail-close bypass for hardware failure. Full prevention → IPS mode.</p>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="cd"><div class="lbl">Inline NIDPS Architecture</div>
+        <pre>
+<span class="g">INTERNET</span>
+    |
+    ▼
+[ Border Router ]
+    |
+    ▼
+┌──────────────────────────────┐
+│  <span class="a">INLINE NIDPS SENSOR</span>         │
+│  [Inbound NIC] → [Detection] │
+│                  [Engine]    │
+│  Signature DB ──────┤        │
+│  Anomaly Model ─────┤        │
+│                     ▼        │
+│            ┌────────────┐    │
+│            │ BLOCK or   │    │
+│            │ ALLOW?     │    │
+│            └────────────┘    │
+│                  │           │
+│            [Outbound NIC]    │
+│  Management Console → SIEM  │
+└──────────────────────────────┘
+    |
+    ▼
+[ Firewall ]
+    |
+    ▼
+<span class="g">INTERNAL NETWORK</span>
+        </pre>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18 "NIDS"</span><span class="rp">NIST SP 800-94</span></div>
+  </div>
+
+  <!-- Topic 5.3 -->
+  <div class="tc">
+    <div class="tc-title">5.3 — Wireless IDPS (WIDS)</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic</div>
+        <div class="mn-t">"WIDS Watches Wireless With Sensors Everywhere"</div>
+        <div class="mn-e">Sensors monitor RF spectrum → detect rogue APs, deauth attacks, WEP use, unauthorized devices</div>
+      </div>
+    </div>
+    <ul class="pts">
+      <li><b>What WIDS detects:</b> Rogue access points (unauthorized APs on corporate network), Evil Twin attacks (duplicate SSID), Deauthentication attacks (frame flood), WEP usage (insecure protocol), Ad-hoc networks (device-to-device bypassing network controls), MAC spoofing.</li>
+      <li><b>Sensor placement:</b> Dedicated WIDS sensors placed throughout the facility to achieve full RF coverage. Overlapping coverage ensures all channels (1-14 for 2.4GHz, 36-165 for 5GHz) are monitored simultaneously.</li>
+      <li><b>Detection methods:</b> RF fingerprinting (each device has unique radio characteristics), MAC address tracking, SSID monitoring, Channel analysis, Signal strength mapping (locate rogue AP physically using triangulation).</li>
+      <li><b>Response capabilities:</b> Automated containment — send deauth frames to clients connected to rogue AP. Alert administrator. Block rogue AP's MAC address on network switches. Generate forensic report.</li>
+      <li><b>Tools:</b> Cisco Adaptive Wireless IPS, Aruba RFProtect, open-source: Kismet (wireless network detector and sniffer). Kismet: detects hidden SSIDs, rogue APs, identifies wireless attack tools in use.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.19 "Wireless Security"</span><span class="rp">NIST SP 800-94</span></div>
+  </div>
+
+  <!-- Topic 5.4 -->
+  <div class="tc">
+    <div class="tc-title">5.4 — Tool Selection and Open-Source IDS Tools</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Mnemonic — 5 Key Tools</div>
+        <div class="mn-t">"SNOSA — Snort, NFR, OSSEC, Suricata, Auditd"</div>
+        <div class="mn-e">The 5 tools most likely asked in exams for CPISE17</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="df"><div class="lbl">Tool Selection Criteria</div>
+        <p>When choosing an IDS tool, evaluate: Detection capability (signature + anomaly), Performance (can it handle your network speed?), False positive rate, Ease of management, Update frequency (signature DB), Integration with existing SIEM, Cost (open-source vs commercial), Community support and documentation.</p>
+      </div>
+    </div>
+    <table class="tb">
+      <tr><th>Tool</th><th>Type</th><th>Key Features</th><th>Limitations</th></tr>
+      <tr>
+        <td>Snort</td>
+        <td>NIDS/NIPS</td>
+        <td>World's most deployed. 50,000+ rules. Real-time traffic analysis, protocol decoding, packet logging. 3 modes: Sniffer, Packet Logger, NIDS. Huge community. Free.</td>
+        <td>Single-threaded (slow on 10Gbps+). No built-in GUI. Cannot inspect TLS. High FP without tuning. Complex rules language.</td>
+      </tr>
+      <tr>
+        <td>Suricata</td>
+        <td>NIDS/NIPS</td>
+        <td>Multi-threaded (much faster than Snort). GPU acceleration. Snort rule compatible. Built-in HTTP/TLS/SMB/DNS protocol parsing. JSON output for SIEM. File extraction. Lua scripting.</td>
+        <td>Higher RAM usage. Smaller community. Some Snort rules don't port perfectly. More complex config.</td>
+      </tr>
+      <tr>
+        <td>OSSEC/Wazuh</td>
+        <td>HIDS</td>
+        <td>Real-time log analysis. FIM. Rootkit detection. Active response (auto-block). Linux + Windows + macOS. Agent-based. Wazuh adds: Kibana GUI, compliance dashboards, cloud support.</td>
+        <td>HIDS only — no network traffic analysis. Agent on every host. Complex setup. High server resource needs (Wazuh).</td>
+      </tr>
+      <tr>
+        <td>Zeek (Bro)</td>
+        <td>Network Monitor</td>
+        <td>Deep protocol analysis + structured logging. Rich logs: HTTP, DNS, FTP, SSL, SMB. Zeek scripting for custom detection. Excellent for forensics and threat hunting.</td>
+        <td>Not a traditional IDS — no real-time alerts by default. Very steep learning curve. Requires SIEM integration. Complex scripting language.</td>
+      </tr>
+      <tr>
+        <td>NFR Security</td>
+        <td>NIDS</td>
+        <td>N-code scripting language (flexible detection). Full packet capture. Policy-based specification detection. Good for compliance monitoring. Enterprise sensor management.</td>
+        <td>Primarily commercial. Less active open-source version. Smaller community. Dated compared to Suricata. Vendor updates required.</td>
+      </tr>
+    </table>
+    <div class="blk">
+      <div class="tl"><div class="lbl">Snort Architecture — 3 Modes</div>
+        <p><b>Mode 1 — Sniffer:</b> Simply reads and prints packets to screen. <code>snort -v</code><br>
+        <b>Mode 2 — Packet Logger:</b> Captures packets to disk for later analysis. <code>snort -l /var/log/snort</code><br>
+        <b>Mode 3 — NIDS:</b> Full detection mode using rules. <code>snort -c /etc/snort/snort.conf -A console</code><br><br>
+        Snort processes packets through: <b>Preprocessors</b> (defrag, stream reassembly, HTTP decode) → <b>Detection Engine</b> (rule matching) → <b>Alert/Log</b> (output plugins).</p>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="pk"><div class="lbl">NFR (Network Flight Recorder) Security — Exam Focus</div>
+        <p>NFR was one of the earliest commercial NIDS (founded 1995 by Marcus Ranum). Key concepts for exam:<br>
+        • Uses <b>N-code language</b> for writing custom detection rules (more powerful than Snort rules)<br>
+        • Supports <b>specification-based detection</b> (define what IS normal, not just what is bad)<br>
+        • <b>Full packet capture</b> with indexing for fast forensic retrieval<br>
+        • <b>Probe/Recorder/Console</b> architecture: Probes capture traffic → Recorders store/analyse → Console manages all<br>
+        • Acquired by McAfee/Network Associates — now part of larger security suite</p>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="ex"><div class="lbl">Recommended Modern SOC Architecture</div>
+        <p><b>Layer 1 (Network):</b> Suricata inline IPS at internet edge → blocks known attacks in real-time<br>
+        <b>Layer 2 (Host):</b> Wazuh agents on all servers → FIM, log analysis, rootkit detection<br>
+        <b>Layer 3 (Protocol):</b> Zeek for deep traffic logging → forensics and threat hunting<br>
+        <b>Layer 4 (Management):</b> Elastic SIEM — correlates all events → unified alert dashboard → SOC analysts<br>
+        This architecture covers: network attacks + host compromises + protocol anomalies + historical forensics. Defense in Depth!</p>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="nt"><div class="lbl">OS-Level IDS — Exam Points</div>
+        <p>OS-level IDS (HIDS at OS level) specifically monitors at the operating system kernel:<br>
+        • <b>System call interception:</b> Every app-to-kernel interaction monitored (auditd, Linux Audit Framework)<br>
+        • <b>Kernel module IDS:</b> Loaded as kernel module — cannot be killed by user-space attacker without root+skill<br>
+        • <b>LKM rootkit detection:</b> Detects malicious kernel modules loaded to hide processes/files<br>
+        • <b>Windows:</b> ETW (Event Tracing for Windows) — high-performance OS-level event logging used by all modern HIDS<br>
+        • Advantage: Cannot be bypassed by any user-level attack — kernel sees everything</p>
+      </div>
+    </div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.18 "IDS Tools"</span><span class="rp">NIST SP 800-94</span><span class="rp">Unit V Syllabus</span></div>
+  </div>
+
+  <!-- Topic 5.5 — Quick Revision -->
+  <div class="tc">
+    <div class="tc-title">5.5 — Quick Revision: All Key Mnemonics at a Glance</div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit I</div>
+        <div class="mn-t">"IDS = Intelligent Door Security"</div>
+        <div class="mn-e">Monitors → Analyses → Alerts (IPS also Blocks)</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit I — 4 IDS types</div>
+        <div class="mn-t">"SASH — Signature, Anomaly, Specification, Hybrid"</div>
+        <div class="mn-e">Know which detects zero-days (Anomaly, Spec, Hybrid) and which has lowest false positives (Signature)</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit II — IW Taxonomy</div>
+        <div class="mn-t">"CHIN-EPI = Command, Hacker, Intelligence, Network, Economic, Psychological, Information"</div>
+        <div class="mn-e">7 types of Information Warfare</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit II — Attack Phases</div>
+        <div class="mn-t">"RS·SEETC = Recon, Scan, Enumerate, Exploit, Escalate, Track-cover"</div>
+        <div class="mn-e">6 phases of a complete cyber attack</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit III — DoS Types</div>
+        <div class="mn-t">"SYN-PUS = SYN flood, Ping of death, UDP flood, Smurf"</div>
+        <div class="mn-e">4 classic DoS attacks + HTTP flood + Amplification for modern attacks</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit III — Malware</div>
+        <div class="mn-t">"Trojan PRETENDS, Virus ATTACHES, Worm TRAVELS ALONE"</div>
+        <div class="mn-e">Key differentiator: does it self-replicate? Does it need a host file?</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit IV — Authentication Factors</div>
+        <div class="mn-t">"KHA — Know, Have, Are"</div>
+        <div class="mn-e">Password · Token/Card · Biometric</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit IV — Firewalls</div>
+        <div class="mn-t">"PASTA — Packet, Application, Stateful, Transparent, App-aware(NGFW)"</div>
+        <div class="mn-e">5 generations of firewall technology — each more intelligent</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit V — NIDPS Components</div>
+        <div class="mn-t">"SCAN-R — Sensor, Console, Analyser, Network tap, Response"</div>
+        <div class="mn-e">5 core components of any NIDPS</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="mn"><div class="lbl">Unit V — IDS Tools</div>
+        <div class="mn-t">"SNOSA — Snort, NFR, OSSEC, Suricata, Auditd"</div>
+        <div class="mn-e">5 most exam-relevant IDS tools for CPISE17</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="tl"><div class="lbl">Most Important Topics for Each Question</div>
+        <p><b>Q1 (must know):</b> Anomaly vs Signature table · 6 limitations of anomaly IDS (HITFAC) · Snort rule syntax<br>
+        <b>Q2 (must know):</b> 7 IW taxonomy types (CHIN-EPI) · Evil Twin attack flow · 6 attack phases<br>
+        <b>Q3 (must know):</b> SYN flood mechanism · Buffer overflow stack diagram · Session hijacking flow<br>
+        <b>Q4 (must know):</b> Stateful vs Transparent firewall · 3 auth factors · Positive vs Negative filtering table<br>
+        <b>Q5 (must know):</b> HIDS vs NIDS comparison · Inline architecture diagram · Snort 3 modes · NFR N-code concept</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content -->
+</div><!-- end wrap -->
+
+<div class="footer">
+  CPISE17 · Intrusion Detection &amp; Information Warfare · M.Tech (IS) 2nd Semester · End-Sem 2025<br>
+  Reference: Stallings "Cryptography and Network Security" · "Network Security Essentials" · NIST SP 800-94 (IDPS Guide) · Lockheed Martin Cyber Kill Chain
+</div>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.side-btn,.mob-nav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  // highlight all buttons with same target
+  document.querySelectorAll('[onclick="go(\''+id+'\',this)"]').forEach(b=>b.classList.add('on'));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
