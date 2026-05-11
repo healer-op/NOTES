@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPISC03 — Wireless Security | Complete Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080A10;--s1:#0E1118;--s2:#141820;--s3:#1A2030;--s4:#202535;
+  --b1:#252D42;--b2:#303A55;
+  --tx:#E2E8F8;--tx2:#8896BB;--tx3:#465070;
+  --vi:#8B5CF6;--vi2:#A78BFA;
+  --em:#10B981;--em2:#34D399;
+  --am:#F59E0B;--am2:#FCD34D;
+  --re:#EF4444;--re2:#FCA5A5;
+  --cy:#06B6D4;--cy2:#67E8F9;
+  --ro:#F43F5E;--ro2:#FDA4AF;
+  --in:#6366F1;
+  --body:'DM Sans',sans-serif;
+  --serif:'Fraunces',serif;
+  --mono:'Fira Code',monospace;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--tx);line-height:1.75;font-size:15px}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#050709 0%,#0A0D18 50%,#08111A 100%);border-bottom:1px solid var(--b1);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.hdr-mesh{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(139,92,246,0.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(6,182,212,0.06) 0%,transparent 50%)}
+.hdr-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(139,92,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,0.04) 1px,transparent 1px);background-size:60px 60px}
+.hdr-in{max-width:1080px;margin:0 auto;position:relative}
+.htag{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--cy);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.htag::before{content:'';width:28px;height:1.5px;background:linear-gradient(90deg,var(--cy),var(--vi))}
+.hdr h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.15;color:#fff;margin-bottom:.5rem}
+.hdr h1 span{background:linear-gradient(135deg,var(--vi2),var(--cy2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hsub{font-size:13px;color:var(--tx3);margin-top:.5rem}
+.hpills{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem}
+.hpill{font-size:11px;font-weight:600;padding:5px 14px;border-radius:100px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);color:var(--vi2)}
+.hpill.c{background:rgba(6,182,212,.08);border-color:rgba(6,182,212,.2);color:var(--cy2)}
+.hpill.g{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2);color:var(--em2)}
+
+/* LAYOUT */
+.wrap{max-width:1080px;margin:0 auto;padding:2rem 1.5rem 5rem;display:grid;grid-template-columns:210px 1fr;gap:2rem;align-items:start}
+@media(max-width:750px){.wrap{grid-template-columns:1fr}}
+
+/* SIDEBAR */
+.sbar{position:sticky;top:1rem}
+.sbar-hd{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:.75rem;padding-left:4px}
+.sbu{margin-bottom:3px}
+.sbtn{display:block;width:100%;text-align:left;padding:9px 12px;font-size:12.5px;font-family:var(--body);font-weight:500;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--tx2);cursor:pointer;transition:all .18s;line-height:1.4}
+.sbtn:hover{background:var(--s2);color:var(--tx);border-color:var(--b1)}
+.sbtn.on{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.28);color:var(--vi2)}
+.sbtn span{display:block;font-size:10.5px;color:var(--tx3);margin-top:1px}
+@media(max-width:750px){.sbar{display:none}}
+
+/* MOBILE NAV */
+.mnav{display:none;gap:5px;flex-wrap:wrap;padding:.75rem 1rem;background:rgba(8,10,16,.96);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--b1)}
+@media(max-width:750px){.mnav{display:flex}}
+.mnav button{padding:6px 12px;font-size:11.5px;font-family:var(--body);font-weight:600;border:1px solid var(--b1);border-radius:100px;background:var(--s1);color:var(--tx2);cursor:pointer}
+.mnav button.on{background:var(--vi);color:#fff;border-color:var(--vi)}
+
+/* PAGE */
+.pg{display:none}.pg.on{display:block}
+
+/* UNIT HEAD */
+.uhd{margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1px solid var(--b1)}
+.uhd h2{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:4px}
+.uhd p{font-size:13px;color:var(--tx3);line-height:1.6}
+.utags{display:flex;flex-wrap:wrap;gap:6px;margin-top:.75rem}
+.utag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:var(--em2)}
+
+/* TOPIC CARD */
+.tc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.tc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--vi),var(--cy))}
+.tc:hover{border-color:var(--b2);box-shadow:0 6px 30px rgba(0,0,0,.4)}
+.tc-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:#fff;font-style:italic;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:10px;line-height:1.35}
+.tcn{font-family:var(--mono);font-size:10.5px;padding:2px 9px;border-radius:6px;background:rgba(139,92,246,.12);color:var(--vi2);font-style:normal;white-space:nowrap}
+
+/* BLOCKS */
+.blk{margin-bottom:1rem}
+.lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.45rem;display:flex;align-items:center;gap:8px}
+.lbl::after{content:'';flex:1;height:1px;background:currentColor;opacity:.12}
+
+.mn{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.18);border-radius:10px;padding:1rem 1.2rem}
+.mn .lbl{color:var(--am)}.mn-t{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--am);font-style:italic;margin-bottom:4px;line-height:1.4}.mn-e{font-size:13px;color:#B45309;line-height:1.7}
+
+.df{background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.18);border-radius:10px;padding:1rem 1.2rem}
+.df .lbl{color:var(--in)}.df p{font-size:14px;color:#A5B4FC;line-height:1.8}
+
+.ex{background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:1rem 1.2rem}
+.ex .lbl{color:var(--em)}.ex p{font-size:14px;color:#6EE7B7;line-height:1.8}
+
+.nt{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.18);border-radius:10px;padding:1rem 1.2rem}
+.nt .lbl{color:var(--vi)}.nt p{font-size:14px;color:#C4B5FD;line-height:1.8}
+
+.wn{background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:1rem 1.2rem}
+.wn .lbl{color:var(--re)}.wn p{font-size:14px;color:#FCA5A5;line-height:1.8}
+
+.tl{background:rgba(6,182,212,.05);border:1px solid rgba(6,182,212,.15);border-radius:10px;padding:1rem 1.2rem}
+.tl .lbl{color:var(--cy)}.tl p{font-size:14px;color:#A5F3FC;line-height:1.8}
+
+.ro{background:rgba(244,63,94,.05);border:1px solid rgba(244,63,94,.15);border-radius:10px;padding:1rem 1.2rem}
+.ro .lbl{color:var(--ro)}.ro p{font-size:14px;color:#FDA4AF;line-height:1.8}
+
+.cd{background:#050709;border:1px solid var(--b1);border-radius:10px;padding:1.25rem 1.5rem;overflow-x:auto}
+.cd .lbl{color:var(--em)}
+.cd pre{font-family:var(--mono);font-size:12px;color:#CBD5E1;line-height:2;white-space:pre-wrap}
+.g{color:#34D399}.a{color:#FCD34D}.b{color:#93C5FD}.p{color:#F9A8D4}.t{color:#67E8F9}.v{color:#C4B5FD}
+
+.pts{list-style:none;padding:0}
+.pts li{font-size:14px;color:var(--tx2);padding:.6rem 0 .6rem 1.6rem;position:relative;line-height:1.65;border-bottom:1px solid var(--b1)}
+.pts li:last-child{border-bottom:none}
+.pts li::before{content:'';position:absolute;left:3px;top:1.05rem;width:6px;height:6px;border-radius:50%;background:var(--vi)}
+.pts li b,.pts li strong{color:var(--tx);font-weight:600}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:1rem}
+@media(max-width:560px){.g2{grid-template-columns:1fr}}
+.gcrd{background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:1rem}
+.gcrd-t{font-size:13px;font-weight:700;margin-bottom:.7rem;padding-bottom:.5rem;border-bottom:1px solid var(--b1)}
+
+.tb{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:1rem;overflow:hidden;border-radius:10px}
+.tb th{background:var(--s3);color:var(--tx);padding:9px 12px;text-align:left;font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+.tb td{padding:9px 12px;border-bottom:1px solid var(--b1);color:var(--tx2);vertical-align:top;line-height:1.5}
+.tb tr:last-child td{border-bottom:none}
+.tb tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+.tb td:first-child{color:var(--tx);font-weight:600}
+
+.ref{font-size:11px;color:var(--tx3);margin-top:1rem;padding-top:.7rem;border-top:1px dashed var(--b1);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ref strong{color:var(--tx2)}
+.rp{background:var(--s2);border:1px solid var(--b1);border-radius:100px;padding:2px 10px;font-size:11px;color:var(--tx3)}
+.dv{height:1px;background:linear-gradient(90deg,transparent,var(--b1),transparent);margin:1.25rem 0}
+
+/* ── YOUTUBE SECTION ── */
+.yt-section{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.yt-section::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#FF0000,#FF4444)}
+.yt-header{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--b1)}
+.yt-icon{width:36px;height:36px;background:#FF0000;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.yt-icon svg{width:18px;height:18px;fill:#fff}
+.yt-header h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:#fff;font-style:italic}
+.yt-header p{font-size:12px;color:var(--tx3)}
+.yt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+.yt-card{background:var(--s2);border:1px solid var(--b1);border-radius:10px;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;cursor:pointer}
+.yt-card:hover{border-color:var(--b2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.yt-thumb{position:relative;width:100%;padding-top:56.25%;background:var(--s3);overflow:hidden}
+.yt-thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.yt-thumb .yt-overlay{position:absolute;inset:0;background:linear-gradient(135deg,var(--s3),var(--s4));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;transition:opacity .2s}
+.yt-overlay.hidden{opacity:0;pointer-events:none}
+.play-btn{width:52px;height:52px;background:rgba(255,0,0,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.yt-card:hover .play-btn{transform:scale(1.1)}
+.play-btn svg{width:20px;height:20px;fill:#fff;margin-left:4px}
+.yt-thumb-label{font-size:11px;font-weight:600;color:var(--tx2);text-align:center;padding:0 1rem;line-height:1.4}
+.yt-info{padding:.85rem 1rem}
+.yt-unit-tag{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--vi2);margin-bottom:4px}
+.yt-title{font-size:13px;font-weight:600;color:var(--tx);line-height:1.45;margin-bottom:4px}
+.yt-channel{font-size:11.5px;color:var(--tx3)}
+.yt-note{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:8px;padding:.75rem 1rem;font-size:12.5px;color:#D97706;margin-top:1rem;line-height:1.6}
+
+/* FORMULA BOX */
+.fml{background:#050709;border:1px solid rgba(139,92,246,.2);border-radius:10px;padding:1rem 1.2rem;font-family:var(--mono);font-size:13px;color:#C4B5FD;line-height:1.8;margin-bottom:1rem}
+.fml .fml-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--vi);margin-bottom:.5rem;display:block}
+
+.ftr{text-align:center;padding:2rem;font-size:12px;color:var(--tx3);border-top:1px solid var(--b1);margin-top:3rem}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-mesh"></div><div class="hdr-lines"></div>
+  <div class="hdr-in">
+    <div class="htag">Complete Notes — M.Tech IS / Ph.D. CSE · CPISC03</div>
+    <h1>Wireless <span>Security</span></h1>
+    <div class="hsub">Course Code: CPISC03 · L-T-P: 3-0-2 · Max Marks: 40 · Duration: 3 Hours · All 5 Units</div>
+    <div class="hpills">
+      <span class="hpill">Unit I — Wireless Infrastructure &amp; Routing</span>
+      <span class="hpill c">Unit II — WLAN / MANET Security</span>
+      <span class="hpill g">Unit III — Privacy, IDS &amp; Geo-Security</span>
+      <span class="hpill">Unit IV — Blockchain &amp; Zero Trust</span>
+      <span class="hpill c">Unit V — IoT Security</span>
+    </div>
+  </div>
+</div>
+
+<div class="mnav">
+  <button class="on" onclick="go('u1',this)">Unit I</button>
+  <button onclick="go('u2',this)">Unit II</button>
+  <button onclick="go('u3',this)">Unit III</button>
+  <button onclick="go('u4',this)">Unit IV</button>
+  <button onclick="go('u5',this)">Unit V</button>
+  <button onclick="go('yt',this)">📺 Videos</button>
+  <button onclick="go('sp',this)">📝 Solved Paper</button>
+</div>
+
+<div class="wrap">
+<aside class="sbar">
+  <div class="sbar-hd">Course Units</div>
+  <div class="sbu"><button class="sbtn on" onclick="go('u1',this)">Unit I<span>Wireless Infrastructure &amp; Routing</span></button></div>
+  <div class="sbu"><button class="sbtn" onclick="go('u2',this)">Unit II<span>WLAN / MANET Security</span></button></div>
+  <div class="sbu"><button class="sbtn" onclick="go('u3',this)">Unit III<span>Privacy, IDS &amp; Geo-Security</span></button></div>
+  <div class="sbu"><button class="sbtn" onclick="go('u4',this)">Unit IV<span>Blockchain &amp; Zero Trust</span></button></div>
+  <div class="sbu"><button class="sbtn" onclick="go('u5',this)">Unit V<span>IoT Security</span></button></div>
+  <div class="sbu"><button class="sbtn" onclick="go('yt',this)">📺 YouTube Videos<span>Curated topic videos</span></button></div>
+  <div class="sbu"><button class="sbtn" onclick="go('sp',this)">📝 Solved Paper<span>Apr-May 2025 — All Q&amp;A</span></button></div>
+</aside>
+
+<div>
+
+<!-- ══════════ UNIT I ══════════ -->
+<div id="u1" class="pg on">
+  <div class="uhd">
+    <h2>Unit I — Wireless Infrastructure &amp; Routing Security</h2>
+    <p>Secure Infrastructure-based &amp; Infrastructure-less Networks · 802.11 Security · WEP · WPA2 · WPA3 · Jamming · Routing Attacks · Secure Routing</p>
+    <div class="utags"><span class="utag">CO1 — Fundamental wireless security concepts</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">1.1</span>Role of Access Points in Securing Infrastructure-Based Wireless Networks</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic</div>
+      <div class="mn-t">"AP = Gatekeeper + Enforcer + Logger"</div>
+      <div class="mn-e">Access Point controls WHO joins, WHAT they can do, and RECORDS everything — 3 security roles</div>
+    </div></div>
+    <div class="blk"><div class="df"><div class="lbl">Definition</div>
+      <p>An Access Point (AP) is the central hardware device in an infrastructure-based wireless network (BSS — Basic Service Set) that acts as the bridge between wireless clients and the wired network. Unlike infrastructure-less (ad hoc) networks, ALL wireless communication passes through the AP, making it the primary security enforcement point.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Role 1 — Authentication Enforcement:</b> AP acts as the authenticator in IEEE 802.1X framework. Clients must authenticate before gaining network access. Authentication methods: Open (no auth — insecure), WPA2-Personal (PSK — Pre-Shared Key), WPA2/WPA3-Enterprise (802.1X + RADIUS server — per-user credentials). AP blocks all traffic from unauthenticated clients.</li>
+      <li><b>Role 2 — Encryption Gateway:</b> AP encrypts/decrypts all wireless traffic between clients and the wired network. WPA2 uses AES-CCMP (Counter Mode with CBC-MAC Protocol) for encryption. WPA3 uses SAE (Simultaneous Authentication of Equals) + AES-GCMP-256 for stronger protection. Each client gets a unique PTK (Pairwise Transient Key) derived during 4-way handshake.</li>
+      <li><b>Role 3 — Rogue AP Detection:</b> Enterprise APs (with WIDS capability) scan for unauthorized APs broadcasting the same SSID (Evil Twin attacks). Can automatically contain rogue APs by sending deauthentication frames to clients connecting to them.</li>
+      <li><b>Role 4 — SSID Management:</b> SSID can be hidden (not broadcast in beacon frames) — minor security-through-obscurity. More important: separate SSIDs for different security zones (corporate SSID on VLAN 10, guest SSID on isolated VLAN 20, IoT devices on VLAN 30).</li>
+      <li><b>Role 5 — Traffic Filtering &amp; QoS:</b> AP can apply MAC address filtering (weak — MAC can be spoofed), firewall rules, and rate limiting per client. Prevents one client from consuming all bandwidth (DoS against other users).</li>
+      <li><b>Role 6 — Centralized Management (WLC):</b> Enterprise deployments use Wireless LAN Controller (WLC) to manage hundreds of APs centrally — push security policies, monitor for threats, enforce consistent configuration. Cisco WLC, Aruba Central, Ubiquiti UniFi.</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Real-World Deployment</div>
+      <p>A university network: AP enforces WPA2-Enterprise (students authenticate with university credentials via RADIUS). AP assigns student traffic to VLAN 100 (internet only) and staff to VLAN 10 (full network access). WIDS monitors for rogue APs. Guest SSID is isolated — cannot reach internal resources. WLC pushes uniform security policy to 500 APs campus-wide.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings "Cryptography &amp; Network Security" Ch.19</span><span class="rp">Earle "Wireless Security Handbook" Ch.3</span><span class="rp">IEEE 802.11i</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">1.2</span>Wireless Encryption Standards: WEP vs WPA2 vs WPA3</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Evolution of Wireless Security</div>
+      <div class="mn-t">"WEP Went, WPA2 Won, WPA3 Wins now"</div>
+      <div class="mn-e">WEP = Broken (RC4+weak IV) · WPA2 = Secure (AES-CCMP) · WPA3 = Best (SAE+GCMP-256)</div>
+    </div></div>
+    <table class="tb">
+      <tr><th>Feature</th><th>WEP (1997)</th><th>WPA2 (2004)</th><th>WPA3 (2018)</th></tr>
+      <tr><td>Encryption</td><td>RC4 (stream cipher)</td><td>AES-CCMP (128-bit)</td><td>AES-GCMP-256</td></tr>
+      <tr><td>Key exchange</td><td>Static shared key</td><td>4-way handshake (PSK or 802.1X)</td><td>SAE (Dragonfly handshake)</td></tr>
+      <tr><td>IV length</td><td>24-bit (reuses quickly!)</td><td>48-bit (PN counter)</td><td>N/A (SAE-based)</td></tr>
+      <tr><td>Authentication</td><td>Open / Shared Key</td><td>PSK or 802.1X/EAP</td><td>SAE or 802.1X/EAP</td></tr>
+      <tr><td>Forward Secrecy</td><td>❌ No</td><td>❌ No (PSK mode)</td><td>✅ Yes (always)</td></tr>
+      <tr><td>KRACK vulnerable?</td><td>N/A (already broken)</td><td>✅ Yes (patched)</td><td>❌ Immune</td></tr>
+      <tr><td>Offline dict attack</td><td>N/A</td><td>✅ Vulnerable</td><td>❌ Immune (SAE)</td></tr>
+      <tr><td>Status</td><td>❌ BROKEN (deprecated)</td><td>⚠️ Acceptable</td><td>✅ Recommended</td></tr>
+    </table>
+    <ul class="pts">
+      <li><b>WEP Weakness — IV Reuse:</b> WEP uses 24-bit Initialization Vector (IV) with RC4. Only 2^24 = 16.7 million unique IVs. On a busy network, IVs repeat within hours. Statistical analysis of repeated IVs (FMS attack, ARP injection) reveals the WEP key in minutes. Aircrack-ng can crack WEP with 50,000 packets captured. <em>WEP is completely useless for security.</em></li>
+      <li><b>WPA2 Weakness — PMKID Attack:</b> WPA2-PSK 4-way handshake can be captured (or PMKID extracted without a client present) and subjected to offline dictionary/brute-force attack. Weak passwords crackable with GPU (hashcat at 1 billion passwords/second). WPA2-Enterprise (802.1X) is NOT vulnerable to this.</li>
+      <li><b>WPA2 Weakness — KRACK (Key Reinstallation Attack, 2017):</b> Mathy Vanhoef discovered that WPA2's 4-way handshake can be manipulated to reinstall an already-in-use key. This resets nonce counters → allows replay, decryption, and injection of traffic. All WPA2 implementations were vulnerable. Patched by software updates.</li>
+      <li><b>WPA3 — SAE (Simultaneous Authentication of Equals):</b> Replaces PSK with Dragonfly key exchange (based on Diffie-Hellman). Even if attacker captures the entire handshake AND knows the password — they CANNOT decrypt past traffic (Perfect Forward Secrecy). Also immune to offline dictionary attacks — each authentication attempt requires active online interaction.</li>
+      <li><b>WPA3-Enhanced Open (OWE):</b> Encrypts open networks (coffee shops, airports) without requiring a password. Provides opportunistic encryption — better than nothing, protects against passive eavesdroppers.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.19 "Wireless Network Security"</span><span class="rp">IEEE 802.11i</span><span class="rp">Wi-Fi Alliance WPA3 Specification</span><span class="rp">KRACK paper — Vanhoef 2017</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">1.3</span>Jamming Attacks and Defense Mechanisms</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Jamming Types</div>
+      <div class="mn-t">"CDRS — Constant, Deceptive, Random, Selective"</div>
+      <div class="mn-e">4 RF jamming attack types — each with different energy/detectability tradeoff</div>
+    </div></div>
+    <div class="blk"><div class="df"><div class="lbl">Definition</div>
+      <p>Jamming is a physical-layer Denial of Service attack that intentionally transmits radio frequency (RF) signals to disrupt legitimate wireless communication. Unlike most attacks, jamming requires physical proximity and RF hardware — but can be performed with cheap SDR (Software Defined Radio) equipment costing $25.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Type 1 — Constant Jammer:</b> Continuously transmits RF noise on the target channel at full power. Completely destroys all communication. Easy to detect (channel always busy). High energy consumption — battery-powered jammer depleted quickly. Detection: carrier-sense consistently shows channel busy + no legitimate packets.</li>
+      <li><b>Type 2 — Deceptive Jammer:</b> Transmits valid-looking 802.11 packets to keep channel busy. Other nodes respect carrier-sense and defer transmission. Harder to detect — channel appears legitimately busy. Lower power than constant jammer.</li>
+      <li><b>Type 3 — Random Jammer:</b> Alternates between jamming and sleeping. Conserves energy for longer attacks. When sleeping — legitimate communication briefly possible. PDR (Packet Delivery Ratio) degrades significantly.</li>
+      <li><b>Type 4 — Reactive Jammer:</b> Monitors channel and jams ONLY when it detects a legitimate transmission starting. Very energy-efficient. Extremely effective — corrupts packets just enough to cause CRC failures. Hardest to detect because channel appears normal when idle.</li>
+      <li><b>Type 5 — Selective Jammer:</b> Targets specific packet types (e.g., only ACKs, or only control frames). Causes TCP to throttle back. Very intelligent — requires real-time packet decoding and targeted jamming within packet reception window.</li>
+    </ul>
+    <div class="blk"><div class="tl"><div class="lbl">Defense Mechanisms Against Jamming</div>
+      <p><b>1. FHSS (Frequency Hopping Spread Spectrum):</b> Both sender and receiver rapidly switch frequencies in a synchronized pseudo-random pattern known only to them. Jammer must cover all frequencies simultaneously — requires massive power. Used in Bluetooth (79 channels, 1600 hops/second).<br>
+      <b>2. DSSS (Direct Sequence Spread Spectrum):</b> Signal spread across wide bandwidth using a chipping code. Jammer must jam the entire spread bandwidth (much higher power needed). Narrowband jammer drowns in background noise. Used in 802.11b, GPS.<br>
+      <b>3. OFDM with Dynamic Channel Selection:</b> 802.11h allows APs to automatically switch channels when interference detected. Multiple non-overlapping channels available (1, 6, 11 in 2.4GHz; many more in 5GHz).<br>
+      <b>4. Directional Antennas:</b> Focus transmission in a specific direction. Harder to jam from other directions. Also reduces eavesdropping exposure.<br>
+      <b>5. Jamming Detection via PDR monitoring:</b> Track Packet Delivery Ratio + signal strength. Sudden drop in PDR with normal signal strength → likely jamming rather than range issue. Trigger alert and switch channels.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Earle "Wireless Security Handbook"</span><span class="rp">Xu et al. "Channel Surfing and Spatial Retreats: Defenses against Wireless Denial of Service"</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">1.4</span>Routing Attacks in Wireless Networks &amp; Secure Routing</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Routing Attacks</div>
+      <div class="mn-t">"BWHS — Black hole, Worm hole, Hello flood, Sybil"</div>
+      <div class="mn-e">4 most critical routing attacks in ad hoc/wireless networks — all exam-relevant</div>
+    </div></div>
+    <ul class="pts">
+      <li><b>Black Hole Attack:</b> Malicious node claims the shortest path to every destination and advertises false routing info. All traffic routed through it → attacker simply drops all packets (black hole) or selectively forwards some (grey hole). Network: packets disappear. Solution: multipath routing — use multiple disjoint paths; packets arriving via all paths confirms legitimacy.</li>
+      <li><b>Wormhole Attack:</b> Two colluding attackers connected by a private high-speed link (the "wormhole" tunnel). Attacker A records packets near source and tunnels them to Attacker B near destination. Packets appear to arrive via a very short path. Disrupts distance-based routing entirely. Solution: packet leashes — geographic leash (location + distance bound) or temporal leash (tight timestamp + max propagation time).</li>
+      <li><b>Sybil Attack:</b> Single malicious node creates multiple fake identities (Sybil nodes). Appears to be many different nodes. Can dominate voting/reputation systems, take over distributed storage, create phantom routes. Solution: resource-based Sybil resistance (each identity must prove computational or stake resource — like PoW/PoS in blockchain).</li>
+      <li><b>Hello Flood Attack:</b> In routing protocols, nodes broadcast HELLO messages to discover neighbors. Attacker broadcasts HELLO with high power → ALL nodes think attacker is a neighbor. Attacker then becomes preferred route for everyone → massive traffic concentration. Solution: mutual authentication of HELLO messages + bidirectionality check before accepting neighbor.</li>
+      <li><b>Rushing Attack:</b> Against on-demand routing protocols (AODV, DSR). Attacker floods the network with ROUTE REQUEST packets before legitimate RREQ packets arrive → its route is selected. Solution: randomized forwarding delay so legitimate RREQ not always slower.</li>
+    </ul>
+    <div class="blk"><div class="df"><div class="lbl">Secure Routing Protocols</div>
+      <p><b>SAODV (Secure AODV):</b> Adds digital signatures (ECDSA) to AODV route request/reply messages. Hop count field protected by hash chains — each hop adds one hash, receiver verifies chain. Prevents route tampering.<br>
+      <b>SEAD (Secure Efficient Ad hoc Distance vector):</b> Uses one-way hash chains to authenticate routing metric. Attacker cannot claim lower hop count than truth (hash chain would be broken).<br>
+      <b>Ariadne:</b> Source-authenticated route discovery using HMAC. Nodes authenticate each other in RREQ/RREP. Uses TESLA (Timed Efficient Stream Loss-tolerant Authentication) for broadcast authentication.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Murthy "Ad Hoc Wireless Networks" Ch.9</span><span class="rp">Stallings Ch.19</span><span class="rp">RFC 4728 — DSR Secure</span></div>
+  </div>
+</div>
+
+<!-- ══════════ UNIT II ══════════ -->
+<div id="u2" class="pg">
+  <div class="uhd">
+    <h2>Unit II — WLAN / MANET Security</h2>
+    <p>Security Goals · WLAN/PAN Security · Ad Hoc Networks · Key Management · MANETs Cooperation · Security Challenges</p>
+    <div class="utags"><span class="utag">CO2 — Security challenges in wireless &amp; mobile networks</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">2.1</span>Security Goals and Challenges in Wireless Networks</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Wireless Security Goals</div>
+      <div class="mn-t">"CIANA + FT — CIA, Non-repudiation, Availability + Freshness, Trust"</div>
+      <div class="mn-e">Standard CIA goals + two wireless-specific additions: message freshness (anti-replay) and trust establishment without infrastructure</div>
+    </div></div>
+    <ul class="pts">
+      <li><b>Confidentiality:</b> Wireless signals broadcast in all directions — anyone in range can receive. Encryption (WPA3/AES-256) is the primary defence. Challenge: many IoT devices lack processing power for strong encryption.</li>
+      <li><b>Integrity:</b> Ensure packets not tampered in transit. MIC (Message Integrity Code) in WPA2/WPA3 detects modification. Challenge: reactive jammers can corrupt specific bits without being detected as an attacker.</li>
+      <li><b>Authentication:</b> Verify identity of communicating parties. Challenge: in MANETs there is NO central authentication server — must use distributed authentication. In WLANs: 802.1X + RADIUS server.</li>
+      <li><b>Availability:</b> Network must be accessible when needed. Primary threat: DoS/jamming/flooding. Challenge: wireless medium is inherently shared — DoS trivial to launch.</li>
+      <li><b>Freshness:</b> Ensure messages are current — not replays of old messages. Use timestamps + sequence numbers. Challenge: nodes may have unsynchronized clocks in MANETs.</li>
+      <li><b>Why Wireless is Harder to Secure than Wired:</b> No physical perimeter (anyone in range can receive). No centralized control (especially in ad hoc). Dynamic topology (nodes join/leave constantly). Resource constraints (battery, CPU, memory). Open shared medium (broadcast nature).</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.19</span><span class="rp">Zhang "Handbook of Research on Wireless Security"</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">2.2</span>Impact of Mobility on Security in MANETs</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic</div>
+      <div class="mn-t">"MANET = Moving nodes, Absent infrastructure, No trust centre, Exposed medium, Topology changes"</div>
+      <div class="mn-e">5 properties of MANETs that each create unique security challenges</div>
+    </div></div>
+    <div class="blk"><div class="df"><div class="lbl">Definition — MANET</div>
+      <p>A Mobile Ad hoc NETwork (MANET) is a self-organizing, infrastructure-less network of mobile nodes. Each node acts as both a host and a router. No fixed topology — nodes move freely. Used in: military battlefield communications, disaster relief, vehicle-to-vehicle (V2V) networks.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Challenge 1 — Dynamic Topology:</b> Nodes move → links appear and disappear. A trusted route at time T may be compromised at T+5min (malicious node inserted). Security protocols must adapt to topology changes without requiring complete re-authentication every time a route changes.</li>
+      <li><b>Challenge 2 — No Central Authority:</b> Traditional security relies on CA, RADIUS, or KDC. In MANET, these may not exist or be reachable. Solution: distributed trust and key management — threshold cryptography (require k-of-n nodes to cooperate for key operations).</li>
+      <li><b>Challenge 3 — Resource Constraints:</b> Mobile nodes have limited battery (cryptographic operations drain power), CPU (complex protocols slow routing), memory (large certificate chains impractical). Solution: lightweight cryptography (ECC over RSA, symmetric-key-based protocols).</li>
+      <li><b>Challenge 4 — Physical Vulnerability:</b> Nodes are mobile and physically exposed. A captured node reveals its keys → compromises all communications that used those keys. Solution: key refreshing, perfect forward secrecy, node revocation.</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Practical Example — Military MANET</div>
+      <p>Soldiers in a battlefield form a MANET. Mobility challenge: a soldier moves to a different unit → old trust relationships no longer valid → need rapid re-keying. Attack scenario: enemy captures one soldier's radio → extracts session keys → decrypts past communications. Solution: TESLA-based broadcast authentication with short-lived keys, so captured keys cannot decrypt past traffic.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Murthy "Ad Hoc Wireless Networks" Ch.8</span><span class="rp">Agarwal "Security in Mobile Ad-Hoc Networks"</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">2.3</span>Route Maintenance Exploits in Ad Hoc Networks</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Route Exploit Types</div>
+      <div class="mn-t">"BSWR — Black hole, Sybil, Wormhole, Route poisoning"</div>
+      <div class="mn-e">4 main ways attackers exploit route maintenance — all involve manipulating routing tables</div>
+    </div></div>
+    <ul class="pts">
+      <li><b>Route Poisoning via Forged RREP:</b> In AODV, attacker sends forged Route Reply (RREP) with sequence number higher than legitimate RREP → all nodes update routing table to route through attacker. Attacker silently drops traffic.</li>
+      <li><b>Mitigation — Cryptographic Route Authentication:</b> SAODV signs RREP with source node's private key. Intermediate nodes cannot forge RREP. Receiving node verifies signature before accepting route.</li>
+      <li><b>Selfish Node Behaviour:</b> Node participates in route discovery (to use others' routes) but refuses to forward packets for others (saves battery). This is a Denial of Service without active attack. Mitigation: reputation systems (Watchdog monitors forwarding, Pathrater adjusts route selection based on reliability history).</li>
+      <li><b>Route Cache Poisoning (in DSR):</b> DSR nodes promiscuously update their route caches from overheard packets. Attacker broadcasts fake routing info → poisons route caches of nearby nodes. Mitigation: only accept route info that is cryptographically signed by originator.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Murthy Ch.9</span><span class="rp">Marti et al. "Mitigating Routing Misbehavior" (MobiCom 2000)</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">2.4</span>Key Management in MANETs + Cluster-Based Security in PANs</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Key Management Approaches</div>
+      <div class="mn-t">"TDPC — Threshold crypto, Distributed CA, Pre-shared keys, Certificate chains"</div>
+      <div class="mn-e">4 approaches to key management without a central authority</div>
+    </div></div>
+    <ul class="pts">
+      <li><b>Threshold Cryptography (t-of-n):</b> Distribute the CA's private key among n nodes. Any t nodes must cooperate to sign a certificate. Attacker must compromise at least t nodes to forge certificates. Most secure but complex. Used in: military MANETs, critical infrastructure.</li>
+      <li><b>Self-Organized Key Management (PGP-like Web of Trust):</b> Nodes directly certify each other's public keys based on trust relationships. No CA needed. Certificate chains: "I trust Alice → Alice trusts Bob → therefore I can trust Bob." Works well in small, stable networks.</li>
+      <li><b>Identity-Based Cryptography (IBC):</b> Node's identity (IP address, GPS coordinates, role) IS its public key. Private key derived by trusted PKG (Private Key Generator) at setup time. No certificate distribution needed — know identity = know public key. Limitation: PKG must be trusted and present at setup.</li>
+    </ul>
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Cluster-Based Security in PANs (Personal Area Networks)</div>
+      <p>PANs (Bluetooth, Zigbee, NFC, UWB) use cluster-based architecture where one node is the Cluster Head (CH). Security approach: CH acts as local trust authority for its cluster. Real-world use case: hospital body sensor network — patient wears 5-10 medical sensors (heart rate, glucose, temperature). One sensor or smartphone acts as CH. CH aggregates and relays data securely to hospital server. CH-to-sensor links: lightweight symmetric crypto (AES-128). CH-to-server link: full TLS. <b>Advantage:</b> Full security stack not needed on every tiny sensor.</p>
+    </div></div>
+    <div class="blk"><div class="ex"><div class="lbl">Real-World PAN Use Case — Smart Healthcare</div>
+      <p>Patient with ECG sensor, glucose monitor, and pulse oximeter. All connect to patient's smartphone via Bluetooth LE (BLE) with pairing + AES-128 encryption. Smartphone (Cluster Head) validates data integrity, compresses readings, and forwards to hospital server via TLS 1.3. If smartphone compromised → sensors still individually authenticated via pairing keys. Cluster Head compromise = worst case, limited to one patient's data.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Zhou &amp; Haas "Securing Ad Hoc Networks" IEEE Network 1999</span><span class="rp">Bluetooth Core Specification 5.3</span></div>
+  </div>
+</div>
+
+<!-- ══════════ UNIT III ══════════ -->
+<div id="u3" class="pg">
+  <div class="uhd">
+    <h2>Unit III — Privacy, IDS &amp; Geo-Security</h2>
+    <p>Privacy/Anonymity in MANETs · Intrusion Detection · Mobile Broadband Security · GPS Security · Wired-Wireless Integration</p>
+    <div class="utags"><span class="utag">CO3 — Apply security mechanisms to wireless systems</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">3.1</span>Privacy and Anonymity in MANETs — Military &amp; Disaster Recovery</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Privacy Threats</div>
+      <div class="mn-t">"LIFT — Location, Identity, Flow, Timing analysis"</div>
+      <div class="mn-e">4 types of privacy attacks in MANETs — an attacker can learn a lot just from observing traffic patterns</div>
+    </div></div>
+    <div class="blk"><div class="df"><div class="lbl">Why Privacy is Critical in MANETs</div>
+      <p>In a MANET, routing packets carry node addresses in headers. An eavesdropper can track node movements, infer social relationships (who communicates with whom), and identify important nodes (those that route most traffic = commanders in military). This is critical because: military — exposing a general's location = physical threat; disaster recovery — exposing aid worker locations to armed groups = safety risk.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Threat 1 — Identity Exposure:</b> IP/MAC addresses in packet headers directly identify nodes. Countermeasure: pseudonym systems — nodes regularly change their identifiers (pseudonyms) to prevent long-term tracking. Challenge: must change pseudonyms simultaneously in groups to prevent correlation.</li>
+      <li><b>Threat 2 — Location Tracking:</b> Even with encrypted content, traffic analysis reveals node location (triangulation of signal strength from multiple eavesdroppers). Countermeasure: mix networks — route packets through multiple hops with dummy traffic to obscure origin. ANODR (ANonymous On Demand Routing) hides route info using onion-like encryption layers.</li>
+      <li><b>Threat 3 — Traffic Analysis:</b> Even without decrypting content — who talks to whom, when, how much — reveals organizational structure. In military MANET, nodes with highest traffic = commanders. Countermeasure: traffic padding (inject fake traffic to normalize patterns), variable transmission schedules.</li>
+      <li><b>Threat 4 — Route Exposure:</b> Standard routing protocols (AODV, DSR) include full route in packet headers → reveals network topology to eavesdroppers. Countermeasure: SDAR (Secure and Distributed Anonymous Routing) uses nested encryption so each hop only knows next hop, not full path (similar to Tor onion routing).</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Military Scenario — Privacy Critical</div>
+      <p>A battalion uses MANET for secure communications. Enemy deploys passive eavesdroppers. Without privacy protection: enemy identifies battalion commander (highest-traffic node), forward operating base location (most connected node), attack timing (increased traffic before operations). With privacy: pseudonym rotation hides identities, onion routing hides topology, traffic padding hides timing. Enemy gets encrypted gibberish with no exploitable metadata.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Zhang "Handbook of Research on Wireless Security" Ch.18</span><span class="rp">Jiang &amp; Baras "Ant-Based Adaptive Routing"</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">3.2</span>Signature-Based vs Anomaly-Based IDS in Wireless Environments</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic</div>
+      <div class="mn-t">"Signature SPOTS the known · Anomaly SPOTS the weird"</div>
+      <div class="mn-e">Signature = match against known attack DB · Anomaly = detect deviation from normal baseline</div>
+    </div></div>
+    <table class="tb">
+      <tr><th>Feature</th><th>Signature-Based IDS (Wireless)</th><th>Anomaly-Based IDS (Wireless)</th></tr>
+      <tr><td>Detection method</td><td>Match traffic against known attack signatures</td><td>Detect deviations from normal baseline</td></tr>
+      <tr><td>Zero-day detection</td><td>❌ Cannot detect unknown attacks</td><td>✅ Can detect novel attacks</td></tr>
+      <tr><td>False positives</td><td>Low (exact match required)</td><td>High (normal variations trigger alerts)</td></tr>
+      <tr><td>Wireless challenges</td><td>Signal noise causes CRC errors → false negatives</td><td>Normal mobility causes constant baseline shifts</td></tr>
+      <tr><td>Energy efficiency</td><td>Simple matching — low CPU</td><td>Statistical computation — higher CPU</td></tr>
+      <tr><td>Wireless-specific</td><td>Detects known: deauth floods, WEP cracking patterns</td><td>Detects: unusual traffic volume, new APs, routing anomalies</td></tr>
+      <tr><td>Example tool</td><td>Snort with wireless rules</td><td>LERAD, Kismet anomaly mode</td></tr>
+    </table>
+    <div class="blk"><div class="tl"><div class="lbl">Distributed IDS for MANETs — Intelligent IDS</div>
+      <p>Traditional IDS requires a central server — impossible in MANET. Solution: Distributed Cooperative IDS. Each node runs a local IDS agent monitoring its own traffic and neighbours' forwarding behaviour (promiscuous monitoring). Local anomalies → share with neighbours → global view built cooperatively. Voting system: if K neighbours agree a node is malicious → isolate it. Challenges: energy overhead of constant monitoring, Byzantine nodes giving false votes, collusion between attacker nodes.</p>
+    </div></div>
+    <div class="blk"><div class="ex"><div class="lbl">Machine Learning IDS for Wireless (Modern Approach)</div>
+      <p>Modern wireless IDS uses ML: Random Forest trained on features (packet inter-arrival time, payload size distribution, protocol flags, channel utilization). Achieves 97%+ detection rate on wireless attack datasets (NSL-KDD, UNSW-NB15, AWID dataset for WiFi). Challenge: concept drift — attacker adapts to evade trained model → needs continuous retraining. Federated learning allows MANET nodes to collectively train shared IDS model without sharing raw traffic data.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Zhang "Handbook of Research on Wireless Security" Ch.15</span><span class="rp">NIST SP 800-94</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">3.3</span>GPS/Geo-Location Security Issues + Mobile Edge Computing Security</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — GPS Attacks</div>
+      <div class="mn-t">"SJRM — Spoofing, Jamming, Replay, Meaconing"</div>
+      <div class="mn-e">4 GPS attack types — Spoofing (fake signal) is most dangerous for wireless location-based security</div>
+    </div></div>
+    <ul class="pts">
+      <li><b>GPS Spoofing:</b> Attacker transmits fake GPS signals stronger than real satellite signals. Receiver accepts fake coordinates. Impact on wireless networks: location-based authentication fails (node appears to be somewhere it is not), geographic routing misroutes packets, VANET applications (collision avoidance) malfunction dangerously. Famous example: 2017 Black Sea GPS spoofing — dozens of ships showed false positions near Russian airport. Countermeasure: multi-constellation GNSS (GPS+GLONASS+Galileo), receiver autonomous integrity monitoring (RAIM), cryptographic authentication of GPS signals (GPS III's civil navigation message authentication — CNAV).</li>
+      <li><b>GPS Jamming:</b> Broadcast wideband noise in GPS frequency band (L1: 1575.42 MHz, L2: 1227.60 MHz). Receivers lose lock → cannot determine position. Simple and cheap — $10 jammers sold online (illegal in most countries). Countermeasure: inertial navigation system (INS) as backup, anti-jam antennas, rapid GPS signal acquisition algorithms.</li>
+      <li><b>Location Privacy:</b> Many wireless protocols embed GPS coordinates in packets (VANETs, 802.11p). Eavesdropper builds movement profile. Solution: pseudonym-based location privacy — change MAC address and pseudonym simultaneously at low-speed or stopped (to avoid linking old and new pseudonym by movement correlation).</li>
+    </ul>
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Mobile Edge Computing (MEC) Security in Hybrid Wireless-Wired Networks</div>
+      <p>MEC brings computation closer to the wireless edge (at base stations or Wi-Fi APs) instead of in a distant cloud. Security enhancement: (1) Data stays local — less exposure in transit. (2) Real-time threat detection at the edge before traffic reaches core network. (3) Offload security computations (encryption, signature verification) to powerful edge server — relieves constrained IoT/mobile devices. Threats: edge server compromise → larger attack radius than single device; lateral movement from edge to core network.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">ETSI MEC Security Framework</span><span class="rp">Humphreys et al. "Assessing GPS Vulnerability" 2012</span></div>
+  </div>
+</div>
+
+<!-- ══════════ UNIT IV ══════════ -->
+<div id="u4" class="pg">
+  <div class="uhd">
+    <h2>Unit IV — Blockchain, Zero Trust &amp; Trust Management</h2>
+    <p>Blockchain Overview · Blockchain Security · Zero Trust Security · Trust Factor &amp; Value Calculation · VANET Trust · Trusted Applications</p>
+    <div class="utags"><span class="utag">CO4 — Security provisioning for wireless systems</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">4.1</span>Blockchain Overview, Security &amp; Wireless Network Applications</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Blockchain Core Properties</div>
+      <div class="mn-t">"DICAT — Decentralized, Immutable, Consensus, Append-only, Transparent"</div>
+      <div class="mn-e">5 properties that make blockchain useful for wireless security applications</div>
+    </div></div>
+    <div class="blk"><div class="df"><div class="lbl">Definition (Stallings + Context)</div>
+      <p>A blockchain is a distributed, append-only ledger where data is organized in cryptographically linked blocks. Each block contains: transaction data, timestamp, nonce, and the hash of the previous block. No single entity controls it. Once written, data cannot be changed without invalidating all subsequent blocks — detected by all honest nodes.</p>
+    </div></div>
+    <div class="blk"><div class="cd"><div class="lbl">Block Structure</div><pre>
+<span class="g">Block N:</span>
+┌─────────────────────────────────────────────┐
+│ Block Header:                               │
+│   Previous Block Hash: SHA256(Block N-1)    │ ← Chains blocks
+│   Merkle Root: SHA256(all transactions)     │ ← Integrity of all txns
+│   Timestamp: Unix epoch                     │
+│   Nonce: 32-bit value found by miner        │ ← Proof of Work
+│   Difficulty target                         │
+│                                             │
+│ Block Body (Transactions):                  │
+│   Tx1: Node_A → certifies Node_B's key     │
+│   Tx2: Node_C revoked (misbehaviour)        │
+│   Tx3: Trust score update for Node_D        │
+└─────────────────────────────────────────────┘
+
+<span class="a">Merkle Tree:</span>
+        Root = H(H12 + H34)
+       /                   \
+  H12=H(H1+H2)        H34=H(H3+H4)
+   /      \              /      \
+ H1=H(Tx1) H2=H(Tx2) H3=H(Tx3) H4=H(Tx4)
+
+<span class="t">Verify one transaction:</span> Need only log2(n) hashes, not all transactions
+</pre></div></div>
+    <ul class="pts">
+      <li><b>Blockchain for Wireless Access Control:</b> Replace centralized RADIUS/AAA server with blockchain-based access control. Node's access rights stored on blockchain — verifiable by any AP without querying central server. Benefits: no single point of failure, auditable access log, automatic revocation when credential written to chain.</li>
+      <li><b>Blockchain for Key Management in MANETs:</b> Public keys stored on blockchain. Node announces its public key in a blockchain transaction. Other nodes look up public key from blockchain instead of relying on vulnerable PKI. Revocation: simply write "key revoked" transaction — visible to all nodes.</li>
+      <li><b>Blockchain Immutability and Auditability:</b> All events (authentications, route changes, misbehaviour reports) recorded on chain. Immutable audit trail — even compromised nodes cannot alter historical records. Example: in drone delivery network, every drone's location, authentication event, and delivery confirmation recorded on blockchain — fully auditable, tamper-evident log.</li>
+      <li><b>Smart Contracts for Wireless Security Automation:</b> If node X is reported as malicious by 3 or more trusted nodes → smart contract automatically revokes node X's access certificate. No human intervention needed. Immediate, deterministic response to detected attacks.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Stallings Ch.24 "Blockchain"</span><span class="rp">Satoshi Nakamoto "Bitcoin" whitepaper 2008</span><span class="rp">Ethereum Yellow Paper</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">4.2</span>Zero Trust Security for Wireless Networks</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Zero Trust Principles</div>
+      <div class="mn-t">"Never Trust, Always Verify, Least Privilege, Assume Breach"</div>
+      <div class="mn-e">4 core Zero Trust principles — apply to EVERY request, EVERY time, from ANYWHERE</div>
+    </div></div>
+    <div class="blk"><div class="df"><div class="lbl">Definition</div>
+      <p>Zero Trust is a security model based on the principle: <em>"Never trust, always verify."</em> Unlike traditional perimeter security (trust everything inside the network), Zero Trust treats ALL network traffic as potentially hostile — including traffic from inside the corporate network. Every access request must be authenticated, authorized, and continuously validated regardless of network location.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Why Zero Trust for Wireless:</b> Traditional perimeter model assumes: if you're on the corporate Wi-Fi = trusted. Problem: (a) attacker compromises one wireless device → gets inside perimeter → lateral movement. (b) BYOD — personal phones on corporate Wi-Fi may be infected. (c) Rogue AP inside perimeter bypasses all perimeter defences. Zero Trust: wireless = untrusted always.</li>
+      <li><b>Principle 1 — Verify Explicitly:</b> Authenticate and authorize based on ALL available signals: user identity (MFA), device health (is OS patched? EDR running?), location (is GPS location expected?), service/application (what are they trying to access?), data classification (is this request appropriate for this data?). Never rely on network location alone.</li>
+      <li><b>Principle 2 — Least Privilege Access:</b> Grant minimum necessary access for minimum necessary time. Just-in-time (JIT) access provisioning — access expires automatically. Just-enough-access (JEA) — only specific resources, not entire network. Privilege escalation requires additional verification.</li>
+      <li><b>Principle 3 — Assume Breach:</b> Design assuming an attacker is already inside. Segment the network into micro-perimeters (microsegmentation). Each microperimeter requires authentication. Even a compromised device can only reach its authorized microperimeter. Minimizes blast radius of any breach.</li>
+      <li><b>Zero Trust + Blockchain Integration:</b> Blockchain provides immutable log of all Zero Trust policy decisions (access granted, access denied, policy changes). Smart contracts enforce dynamic policy: if trust score drops below threshold → automatically revoke access without manual intervention.</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Example — Enterprise Wireless with Zero Trust</div>
+      <p>Employee connects to corporate Wi-Fi on laptop. Zero Trust flow: (1) Network grants only internet access initially. (2) Employee opens CRM app → Zero Trust Policy Engine evaluates: ✅ MFA verified, ✅ device health OK, ✅ GPS in office, ✅ appropriate data level → grants CRM access for 8 hours. (3) Employee connects from coffee shop Wi-Fi: ⚠️ unknown network → requires stronger MFA, limited CRM access (read-only), shorter session (2 hours). (4) Compromised device detected by EDR → policy engine immediately revokes ALL access.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">NIST SP 800-207 "Zero Trust Architecture"</span><span class="rp">Rose et al. "Zero Trust Networks" O'Reilly</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">4.3</span>Trust Factor, Trust Value Calculation &amp; VANET Trustworthiness</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Trust Components</div>
+      <div class="mn-t">"MILB = Message Integrity, Location accuracy, behaviour consistency, Battery/resource"</div>
+      <div class="mn-e">Key trust metrics in wireless trust management systems</div>
+    </div></div>
+    <div class="blk"><div class="df"><div class="lbl">Trust Value Calculation</div>
+      <p>In wireless trust management, each node is assigned a <b>Trust Value (TV)</b> computed as a weighted sum of trust factors. General formula:<br>
+      <strong>TV = Σ (weight_i × metric_value_i)</strong> for all trust factors i.<br>
+      Each metric is normalized to [0, 1]. Higher TV = more trusted.</p>
+    </div></div>
+
+    <div class="blk">
+      <div class="fml">
+        <span class="fml-label">Q4c — Exam Calculation (Exact from Question Paper)</span>
+        Given metrics for a VANET node:
+        • Message Integrity   : weight = 0.4,  value = 0.95
+        • Location Accuracy  : weight = 0.3,  value = 0.85
+        • Behaviour Consistency: weight = 0.3, value = 0.90
+
+        Aggregated Trust Value (TV):
+        TV = (0.4 × 0.95) + (0.3 × 0.85) + (0.3 × 0.90)
+           = 0.380 + 0.255 + 0.270
+           = <strong>0.905</strong>
+
+        Interpretation: TV = 0.905 → Highly trusted node
+        Threshold typically: TV ≥ 0.7 = trusted, TV &lt; 0.4 = isolated
+      </div>
+    </div>
+
+    <ul class="pts">
+      <li><b>Message Integrity Trust Factor:</b> Has the node been transmitting uncorrupted, legitimate messages? Checked via cryptographic verification. High weight (0.4) because it directly measures security behaviour.</li>
+      <li><b>Location Accuracy Trust Factor:</b> Does the node report consistent, plausible GPS coordinates? Cross-checked using distance constraints (if two nodes claim to be 1km apart but communicate with -30dBm signal → physical proximity inconsistency → suspicious). Weight 0.3.</li>
+      <li><b>Behaviour Consistency:</b> Is the node's behaviour over time consistent with expected patterns? Sudden changes (suddenly forwarding all packets vs selectively dropping) indicate compromise or misbehaviour. Weight 0.3.</li>
+      <li><b>Trust Propagation:</b> Direct trust (from own observations) + Indirect/Recommended trust (from other trusted nodes' observations). Final trust = weighted combination. Prevents single-node manipulation.</li>
+      <li><b>Trust Decay:</b> Trust values decay over time if node not recently observed. Ensures stale observations don't keep a node trusted. Exponential decay: TV(t) = TV(0) × e^(-λt) where λ is the decay rate.</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Distributed Trust in Drone Delivery Networks</div>
+      <p>Drones in a delivery network evaluate each other's trust. Drone A observes Drone B: successfully delivered 50 packages (high behaviour score), GPS consistent with expected route (high location score), all messages verified cryptographically (high integrity score). A's trust value for B = 0.91. If B's drone is hijacked → GPS readings become inconsistent with expected delivery route → location trust drops → TV drops below threshold → other drones stop cooperating → hijacked drone isolated.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">Khalil et al. "UNMASK: Trust Management in VANETs"</span><span class="rp">Stallings Ch.24</span></div>
+  </div>
+</div>
+
+<!-- ══════════ UNIT V ══════════ -->
+<div id="u5" class="pg">
+  <div class="uhd">
+    <h2>Unit V — IoT Security</h2>
+    <p>IoT Architecture · Security Requirements · Vulnerability Threats · IoT Protocols · Attack Types · Securing IoT · Cyber-Physical Security</p>
+    <div class="utags"><span class="utag">CO5 — IoT security, threats, protocols and challenges</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">5.1</span>IoT General Architecture &amp; Key Components</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — IoT Architecture Layers</div>
+      <div class="mn-t">"PAT — Perception, Application, Transport (with a Cloud in the middle)"</div>
+      <div class="mn-e">3-layer IoT architecture: Perception (sensors) → Transport/Network → Application (services)</div>
+    </div></div>
+    <div class="blk"><div class="cd"><div class="lbl">IoT 4-Layer Architecture (Extended Model)</div><pre>
+<span class="g">Layer 4 — Application Layer</span>
+  Smart home apps, healthcare dashboards, industrial control
+  Security: access control, secure APIs, data privacy, user auth
+
+<span class="b">Layer 3 — Service/Middleware Layer (Cloud)</span>
+  Cloud platform: AWS IoT, Azure IoT Hub, Google IoT Core
+  Functions: data storage, analytics, device management
+  Security: API security, encryption at rest, identity mgmt
+
+<span class="a">Layer 2 — Network/Transport Layer</span>
+  Protocols: MQTT, CoAP, HTTP/HTTPS, AMQP, LWM2M
+  Transport: Wi-Fi, Cellular (4G/5G), LoRaWAN, Zigbee, Z-Wave
+  Security: TLS/DTLS, VPN, network segmentation
+
+<span class="p">Layer 1 — Perception/Device Layer (Edge)</span>
+  Physical sensors: temperature, GPS, camera, accelerometer
+  Actuators: motors, valves, switches
+  Microcontrollers: ARM Cortex-M, ESP32, Arduino
+  Security: hardware security module (HSM), secure boot,
+            device authentication, firmware integrity
+</pre></div></div>
+    <ul class="pts">
+      <li><b>Constrained Devices (RFC 7228 Classification):</b> Class 0: &lt;10KB RAM, &lt;100KB flash — no TLS possible. Class 1: ~10KB RAM, ~100KB flash — limited TLS. Class 2: ~50KB RAM, ~250KB flash — full TLS possible. Most IoT edge devices are Class 0-1 → cannot run standard security protocols → need lightweight alternatives (DTLS, OSCORE).</li>
+      <li><b>Key IoT Components:</b> (1) Sensors/Actuators — interface with physical world. (2) Embedded MCU — processes data, runs firmware. (3) Communication module — Wi-Fi/BLE/LoRa/4G chip. (4) Local gateway — aggregates data from nearby devices, pre-processes, forwards to cloud. (5) Cloud platform — stores, analyses, sends commands back. (6) Application — user-facing dashboard/API.</li>
+      <li><b>Security Significance of Each Component:</b> MCU firmware vulnerabilities → code execution. Communication module → eavesdropping, injection. Gateway → single point of failure, attack pivot. Cloud → massive data breach if compromised. Application → SQL injection, API abuse.</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">NIST IR 8259 "Foundational Cybersecurity Activities for IoT"</span><span class="rp">Stallings Ch.20</span><span class="rp">RFC 7228 "Terminology for Constrained IoT"</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">5.2</span>IoT Security Requirements — Especially in Healthcare</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — Healthcare IoT Security Requirements</div>
+      <div class="mn-t">"DIAPER — Data privacy, Integrity, Auth, Patient safety, End-to-end security, Resilience"</div>
+      <div class="mn-e">6 critical security requirements for healthcare IoT — patient lives depend on all 6</div>
+    </div></div>
+    <ul class="pts">
+      <li><b>1. Data Privacy (HIPAA/GDPR Compliance):</b> Patient medical data is highly sensitive. Must be encrypted at rest (AES-256 on device storage) and in transit (TLS 1.3 or DTLS 1.3). Access strictly controlled — minimum necessary information. Healthcare IoT breach average cost: $10.9M per incident (IBM 2023 report) — highest of any industry.</li>
+      <li><b>2. Data Integrity:</b> Medical sensor data must not be tampered. A malicious actor modifying insulin pump dosage data could be lethal. Cryptographic MACs on all sensor readings. Anomaly detection to flag physiologically impossible readings (heart rate = 300 bpm → likely sensor error or tampering).</li>
+      <li><b>3. Device Authentication:</b> Medical devices must prove their identity before being trusted. Mutual TLS (both device and server authenticate). Hardware-bound device certificates (Trusted Platform Module — TPM or eSIM). Prevents rogue device injection into patient monitoring network.</li>
+      <li><b>4. Patient Safety — Availability:</b> Unlike IT systems where downtime = inconvenience, medical IoT downtime = patient risk. Infusion pumps, ventilators, pacemaker monitors must maintain availability even under attack. Requirement: fail-safe mode (continue last safe operation if network lost).</li>
+      <li><b>5. Audit Logging:</b> Every access to patient data, every device command must be logged immutably. Required by HIPAA for accountability and forensic investigation. Blockchain-based audit logs provide tamper-proof records.</li>
+      <li><b>6. Secure Software Updates (OTA):</b> Medical devices require security patches but cannot be easily recalled. Over-The-Air (OTA) updates must be: signed by manufacturer (firmware signature verification), encrypted in transit, atomic (complete or not at all — no partial updates that brick device), tested thoroughly (cannot push untested patch to cardiac monitors).</li>
+    </ul>
+    <div class="ref"><strong>Ref:</strong><span class="rp">NIST IR 8259A "IoT Device Cybersecurity Capabilities"</span><span class="rp">FDA "Medical Device Cybersecurity"</span><span class="rp">HIPAA Security Rule</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">5.3</span>IoT Attack Types with Real-World Examples &amp; Cyber-Physical Protection</div>
+    <div class="blk"><div class="mn"><div class="lbl">Mnemonic — IoT Attack Categories</div>
+      <div class="mn-t">"FREED — Firmware, Replication(botnet), Eavesdropping, Exhaustion(DoS), Data injection"</div>
+      <div class="mn-e">5 primary IoT attack categories — all exam-relevant with specific real-world examples</div>
+    </div></div>
+    <ul class="pts">
+      <li><b>Attack 1 — Firmware/Software Attacks:</b> IoT devices often run outdated, unpatched firmware with known vulnerabilities. Attacker dumps firmware from device (JTAG/UART interface), reverse engineers it, finds vulnerabilities, uploads malicious firmware. Real example: Ring doorbell cameras (2019) — vulnerability allowed remote code execution. Countermeasure: secure boot (verify firmware signature before execution), code signing, hardened OS.</li>
+      <li><b>Attack 2 — Botnet/Mirai-style Attacks:</b> Scan for IoT devices with default credentials (admin/admin, root/root). Automated infection spreads to millions of devices. Build massive DDoS botnet. Real example: Mirai botnet (2016) — compromised 600,000 IoT cameras/routers using default passwords → 1.2 Tbps DDoS → took down Dyn DNS → Twitter, Netflix, Reddit unreachable. Countermeasure: mandatory unique passwords at manufacture, ISP-level blocking of C2 traffic, network quarantine of infected devices.</li>
+      <li><b>Attack 3 — Eavesdropping/Interception:</b> Unencrypted IoT communication (many IoT devices still use HTTP, Telnet, CoAP without DTLS). Attacker captures sensitive data: home occupancy patterns (burglary planning), medical readings, industrial sensor data. Real example: smart meter data revealed precise household activity patterns. Countermeasure: DTLS (Datagram TLS) for UDP-based IoT protocols, CoAPS (CoAP + DTLS).</li>
+      <li><b>Attack 4 — Resource Exhaustion/DoS:</b> IoT devices have tiny resources. Flooding with requests → CPU 100% → device hangs → actuator stops responding. Critical for: smart locks (jammed = cannot open door), medical pumps (jammed = cannot deliver medication). Countermeasure: rate limiting at gateway, watchdog timers (reboot device if unresponsive), redundant communication paths.</li>
+      <li><b>Attack 5 — False Data Injection (FDI):</b> In Cyber-Physical Systems, sensors feed data to control systems. Attacker injects false sensor readings → control system makes wrong decisions. Real example: GPS spoofing of autonomous vehicles → causes them to take wrong route. Stuxnet → false PLC sensor readings → nuclear centrifuges spin at wrong speed → physical damage. Countermeasure: sensor fusion (cross-validate readings from multiple independent sensors), physics-based anomaly detection (readings must be physically plausible).</li>
+    </ul>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Cyber-Physical Protection Strategy</div>
+      <p>A comprehensive strategy covering BOTH data-level AND device-level safeguards:</p>
+    </div></div>
+    <div class="g2">
+      <div class="gcrd"><div class="gcrd-t" style="color:var(--cy)">Data-Level Safeguards</div>
+        <ul class="pts">
+          <li><b>Encryption at rest:</b> AES-256 on device storage</li>
+          <li><b>Encryption in transit:</b> TLS 1.3 / DTLS 1.3 for all communication</li>
+          <li><b>Data integrity:</b> HMAC-SHA256 on all sensor readings</li>
+          <li><b>Access control:</b> RBAC — only authorized apps read sensor data</li>
+          <li><b>Data minimization:</b> Only collect what is necessary</li>
+          <li><b>Secure erasure:</b> Wipe sensitive data when device decommissioned</li>
+        </ul>
+      </div>
+      <div class="gcrd"><div class="gcrd-t" style="color:var(--vi2)">Device-Level Safeguards</div>
+        <ul class="pts">
+          <li><b>Secure boot:</b> Verify firmware signature before boot</li>
+          <li><b>Hardware security:</b> TPM/eSE for key storage</li>
+          <li><b>Unique credentials:</b> No default passwords — unique per device</li>
+          <li><b>Physical tamper detection:</b> Zeroize keys if tampered</li>
+          <li><b>Network segmentation:</b> IoT on isolated VLAN</li>
+          <li><b>OTA updates:</b> Signed, encrypted, verified firmware updates</li>
+        </ul>
+      </div>
+    </div>
+    <div class="blk"><div class="tl"><div class="lbl">IoT Security Protocols Summary</div>
+      <p><b>MQTT + TLS:</b> Publish-subscribe messaging for IoT. TCP-based. Used in smart homes, industrial IoT. TLS provides security layer. Broker (server) must be secured.<br>
+      <b>CoAP + DTLS:</b> Constrained Application Protocol for Class 0-1 devices. UDP-based (lower overhead than TCP). DTLS (Datagram TLS) provides security. Used in smart meters, wearables.<br>
+      <b>AMQP:</b> Advanced Message Queuing Protocol. Enterprise-grade IoT messaging. Full TLS support. Used in banking IoT, industrial control.<br>
+      <b>LWM2M (Lightweight M2M):</b> OMA standard for IoT device management. Uses CoAP + DTLS. Supports OTA updates, remote configuration, monitoring. Designed for constrained devices.<br>
+      <b>LoRaWAN Security:</b> Long-range low-power WAN for IoT. Two layers of AES-128 encryption: network session key (NwkSKey) + application session key (AppSKey). Device-unique keys provisioned at manufacture.</p>
+    </div></div>
+    <div class="ref"><strong>Ref:</strong><span class="rp">NIST IR 8259 Series</span><span class="rp">ETSI EN 303 645 "IoT Security"</span><span class="rp">OWASP IoT Top 10</span><span class="rp">Stallings Ch.20</span></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">5.4</span>Quick Revision — All Mnemonics &amp; Exam Formulas</div>
+    <div class="blk"><div class="mn"><div class="lbl">Unit I</div>
+      <div class="mn-t">"WEP Went, WPA2 Won, WPA3 Wins" · "BWHS routing attacks" · "CDRS jamming types"</div>
+      <div class="mn-e">WEP=RC4+broken IV · WPA2=AES-CCMP · WPA3=SAE+PFS · Black hole, Wormhole, Hello flood, Sybil</div>
+    </div></div>
+    <div class="blk"><div class="mn"><div class="lbl">Unit II</div>
+      <div class="mn-t">"MANET = Moving, Absent CA, No trust, Exposed, Topology changes"</div>
+      <div class="mn-e">+ "TDPC key management" — Threshold crypto, Distributed CA, Pre-shared, Certificate chains</div>
+    </div></div>
+    <div class="blk"><div class="mn"><div class="lbl">Unit III</div>
+      <div class="mn-t">"LIFT privacy threats — Location, Identity, Flow, Timing" · "SJRM GPS attacks"</div>
+      <div class="mn-e">Signature IDS = known attacks, low FP · Anomaly IDS = zero-day, high FP</div>
+    </div></div>
+    <div class="blk"><div class="mn"><div class="lbl">Unit IV — Trust Calculation (Q4c)</div>
+      <div class="mn-t">TV = Σ(weight × value) = (0.4×0.95)+(0.3×0.85)+(0.3×0.90) = <strong>0.905</strong></div>
+      <div class="mn-e">Zero Trust: "Never Trust, Always Verify, Least Privilege, Assume Breach"</div>
+    </div></div>
+    <div class="blk"><div class="mn"><div class="lbl">Unit V</div>
+      <div class="mn-t">"FREED IoT attacks" · "PAT IoT layers" · "DIAPER healthcare security"</div>
+      <div class="mn-e">Mirai botnet=default creds+DDoS · DTLS for constrained devices · Cyber-physical = data+device safeguards</div>
+    </div></div>
+    <div class="blk"><div class="nt"><div class="lbl">Exam Strategy — Which 2 to Attempt per Question</div>
+      <p><b>Q1:</b> 1b (WEP/WPA2/WPA3 table — high marks for table) + 1c (jamming types + FHSS/DSSS defences)<br>
+      <b>Q2:</b> 2a (MANET mobility — 5 challenges with military example) + 2b (routing exploits — Black hole + Sybil + mitigations)<br>
+      <b>Q3:</b> 3a (MANET privacy — military scenario, 4 LIFT threats) + 3b (signature vs anomaly IDS comparison table)<br>
+      <b>Q4:</b> 4b (Zero Trust — 4 principles + wireless example) + 4c (calculate TV = 0.905, then explain blockchain auditability)<br>
+      <b>Q5:</b> 5a (IoT 4-layer architecture with security at each layer) + 5c (5 attack types + cyber-physical strategy table)</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══════════ YOUTUBE VIDEOS ══════════ -->
+<div id="yt" class="pg">
+  <div class="uhd">
+    <h2>📺 Curated YouTube Video Resources</h2>
+    <p>Topic-specific video lectures, demonstrations, and explanations — click the play button to load and watch each video</p>
+    <div class="utags"><span class="utag">All 5 Units Covered</span><span class="utag">Lectures + Demos + Concepts</span></div>
+  </div>
+
+  <div class="yt-section">
+    <div class="yt-header">
+      <div class="yt-icon"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg></div>
+      <div><h3>Unit I — Wireless Infrastructure, WEP/WPA, Jamming &amp; Routing</h3><p>Click play on any card to load the video player</p></div>
+    </div>
+    <div class="yt-grid">
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-1">
+          <div class="yt-overlay" id="ov-1" onclick="loadYT('1','1rLWVZVWfdY')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">WEP vs WPA2 vs WPA3 Explained — How Wi-Fi Encryption Works</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit I — Encryption Standards</div>
+          <div class="yt-title">WEP, WPA, WPA2, WPA3 — Wi-Fi Security Protocols Explained</div>
+          <div class="yt-channel">PowerCert Animated Videos</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-2">
+          <div class="yt-overlay" id="ov-2" onclick="loadYT('2','mYtvjijATa4')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">WPA2 KRACK Attack Explained — Key Reinstallation Attack</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit I — WPA2 Vulnerability</div>
+          <div class="yt-title">KRACK Attack: Breaking WPA2 — Full Explanation</div>
+          <div class="yt-channel">Computerphile</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-3">
+          <div class="yt-overlay" id="ov-3" onclick="loadYT('3','sHZ5HsLiNjA')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Wireless Security — IEEE 802.11 Security Overview</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit I — 802.11 Security</div>
+          <div class="yt-title">IEEE 802.11 Wireless Security — Access Points &amp; Authentication</div>
+          <div class="yt-channel">Professor Messer</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="yt-section">
+    <div class="yt-header">
+      <div class="yt-icon"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg></div>
+      <div><h3>Unit II — MANET Security &amp; Mobile Networks</h3></div>
+    </div>
+    <div class="yt-grid">
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-4">
+          <div class="yt-overlay" id="ov-4" onclick="loadYT('4','oGgAGDn-YHU')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Mobile Ad Hoc Networks (MANET) — Architecture &amp; Security</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit II — MANET</div>
+          <div class="yt-title">MANET — Mobile Ad Hoc Network Security Challenges</div>
+          <div class="yt-channel">Gate Smashers</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-5">
+          <div class="yt-overlay" id="ov-5" onclick="loadYT('5','rN9yMJvlTFM')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Black Hole Attack in MANET — Routing Attacks Explained</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit I-II — Routing Attacks</div>
+          <div class="yt-title">Black Hole and Wormhole Attacks in Wireless Networks</div>
+          <div class="yt-channel">Neso Academy</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-6">
+          <div class="yt-overlay" id="ov-6" onclick="loadYT('6','5N242XcKAsM')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Kerberos Authentication Explained Simply</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit II — Authentication</div>
+          <div class="yt-title">Kerberos Authentication Protocol — Step by Step</div>
+          <div class="yt-channel">Computerphile</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="yt-section">
+    <div class="yt-header">
+      <div class="yt-icon"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg></div>
+      <div><h3>Unit III — Privacy, IDS &amp; GPS Security</h3></div>
+    </div>
+    <div class="yt-grid">
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-7">
+          <div class="yt-overlay" id="ov-7" onclick="loadYT('7','hEgWPWIuq_s')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Intrusion Detection Systems — IDS Types Explained</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit III — IDS</div>
+          <div class="yt-title">Intrusion Detection Systems — Signature vs Anomaly Based</div>
+          <div class="yt-channel">Professor Messer</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-8">
+          <div class="yt-overlay" id="ov-8" onclick="loadYT('8','izSe74RkgSY')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">GPS Spoofing Attack — How It Works and Defenses</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit III — GPS Security</div>
+          <div class="yt-title">GPS Spoofing Explained — Attacks and Countermeasures</div>
+          <div class="yt-channel">Computerphile</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="yt-section">
+    <div class="yt-header">
+      <div class="yt-icon"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg></div>
+      <div><h3>Unit IV — Blockchain &amp; Zero Trust</h3></div>
+    </div>
+    <div class="yt-grid">
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-9">
+          <div class="yt-overlay" id="ov-9" onclick="loadYT('9','bBC-nXj3Ng4')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Blockchain Explained Simply — How Blockchain Works</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit IV — Blockchain</div>
+          <div class="yt-title">Blockchain Technology Explained — Security and Immutability</div>
+          <div class="yt-channel">3Blue1Brown</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-10">
+          <div class="yt-overlay" id="ov-10" onclick="loadYT('10','yn_stY3HCr8')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Zero Trust Security Architecture Explained</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit IV — Zero Trust</div>
+          <div class="yt-title">Zero Trust Security — Never Trust, Always Verify</div>
+          <div class="yt-channel">IBM Technology</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-11">
+          <div class="yt-overlay" id="ov-11" onclick="loadYT('11','_160oMzblY8')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">How Bitcoin and Blockchain Work — Cryptographic Foundation</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit IV — Blockchain Crypto</div>
+          <div class="yt-title">But How Does Bitcoin Actually Work? — Cryptography Explained</div>
+          <div class="yt-channel">3Blue1Brown</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="yt-section">
+    <div class="yt-header">
+      <div class="yt-icon"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg></div>
+      <div><h3>Unit V — IoT Security</h3></div>
+    </div>
+    <div class="yt-grid">
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-12">
+          <div class="yt-overlay" id="ov-12" onclick="loadYT('12','LiEioiNQXAo')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">IoT Security Threats and How to Defend Against Them</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit V — IoT Security</div>
+          <div class="yt-title">IoT Security — Threats, Attacks and Countermeasures</div>
+          <div class="yt-channel">IBM Technology</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-13">
+          <div class="yt-overlay" id="ov-13" onclick="loadYT('13','GUyJh0IlpDU')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Mirai Botnet — How IoT Devices Were Weaponized</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit V — IoT Attacks</div>
+          <div class="yt-title">Mirai Botnet — The Attack That Broke the Internet</div>
+          <div class="yt-channel">Veritasium</div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumb" id="th-14">
+          <div class="yt-overlay" id="ov-14" onclick="loadYT('14','CS01Touch8OA')">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="yt-thumb-label">Cyber Physical Security — Stuxnet and Critical Infrastructure</div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-unit-tag">Unit V — Cyber-Physical Security</div>
+          <div class="yt-title">Cyber-Physical Attacks — Stuxnet and Industrial Control Security</div>
+          <div class="yt-channel">Computerphile</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="yt-note">
+      ✅ <strong>Updated:</strong> All video links have been refreshed and verified. Click the play button on each card to load the YouTube player directly in the page. Videos open embedded — internet connection required. All videos are publicly available YouTube content covering CPISC03 syllabus topics. If a specific video is unavailable in your region, search the channel name + title on YouTube directly.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SOLVED QUESTION PAPER ══════════ -->
+<div id="sp" class="pg">
+  <div class="uhd">
+    <h2>📝 Solved Question Paper — April-May 2025</h2>
+    <p>END-SEMESTER EXAMINATION · Course: CPISC03 Wireless Security · M.Tech IS / Ph.D. CSE · Max Marks: 40 · Duration: 3 Hours</p>
+    <div class="utags">
+      <span class="utag">Attempt any 2 parts per question</span>
+      <span class="utag">Each part = 4 marks</span>
+      <span class="utag">All 5 questions answered</span>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">Q1</span>Wireless Infrastructure &amp; Encryption — CO1 (Attempt any 2)</div>
+
+    <div class="blk"><div class="df"><div class="lbl">Q1a — Role of Access Points in Securing Infrastructure-Based Wireless Networks [4 Marks]</div>
+      <p>An <strong>Access Point (AP)</strong> is the central hardware device in a BSS (Basic Service Set) — all wireless traffic passes through it, making it the primary security enforcement point. The AP serves 6 key security roles:</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Authentication Enforcement:</b> AP acts as the authenticator in IEEE 802.1X. Methods: WPA2-Personal (PSK), WPA2/WPA3-Enterprise (802.1X + RADIUS). All traffic from unauthenticated clients is blocked.</li>
+      <li><b>Encryption Gateway:</b> Encrypts/decrypts all wireless traffic. WPA2 uses AES-CCMP; WPA3 uses SAE + AES-GCMP-256. Each client gets a unique PTK (Pairwise Transient Key) from the 4-way handshake.</li>
+      <li><b>Rogue AP Detection (WIDS):</b> Enterprise APs scan for unauthorized APs broadcasting the same SSID (Evil Twin). Can auto-contain rogue APs via deauthentication frames.</li>
+      <li><b>SSID/VLAN Segmentation:</b> Separate SSIDs for different zones — corporate SSID on VLAN 10, guest on isolated VLAN 20, IoT on VLAN 30.</li>
+      <li><b>Traffic Filtering:</b> MAC filtering, firewall rules, rate limiting per client to prevent bandwidth DoS.</li>
+      <li><b>Centralized Management (WLC):</b> Wireless LAN Controller manages hundreds of APs — push security policies uniformly. Example: 500 APs in a university all enforcing WPA2-Enterprise via single WLC.</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Example</div>
+      <p>University AP: WPA2-Enterprise (RADIUS), VLAN 100 for students (internet only), VLAN 10 for staff (full access), WIDS active, isolated guest SSID — managed by Cisco WLC.</p>
+    </div></div>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q1b — WEP vs WPA2 vs WPA3: Security Features Comparison [4 Marks]</div>
+      <p></p>
+    </div></div>
+    <table class="tb">
+      <tr><th>Feature</th><th>WEP (1997)</th><th>WPA2 (2004)</th><th>WPA3 (2018)</th></tr>
+      <tr><td>Encryption</td><td>RC4 stream cipher</td><td>AES-CCMP (128-bit)</td><td>AES-GCMP-256</td></tr>
+      <tr><td>Key Exchange</td><td>Static shared key</td><td>4-way handshake (PSK/802.1X)</td><td>SAE (Dragonfly handshake)</td></tr>
+      <tr><td>IV Length</td><td>24-bit (reuses quickly!)</td><td>48-bit PN counter</td><td>N/A — SAE-based</td></tr>
+      <tr><td>Forward Secrecy</td><td>❌ None</td><td>❌ None (PSK mode)</td><td>✅ Always</td></tr>
+      <tr><td>Offline Dict. Attack</td><td>N/A (already broken)</td><td>✅ Vulnerable</td><td>❌ Immune (SAE)</td></tr>
+      <tr><td>Known Vulnerability</td><td>FMS/IV collision attack</td><td>KRACK, PMKID attack</td><td>Dragonblood (patched)</td></tr>
+      <tr><td>Status</td><td>❌ BROKEN — deprecated</td><td>⚠️ Acceptable (Enterprise)</td><td>✅ Recommended</td></tr>
+    </table>
+    <ul class="pts">
+      <li><b>WEP weakness:</b> 24-bit IV with RC4 means only 16.7M unique IVs. IV reuse on busy networks allows FMS/ARP injection attack — Aircrack-ng cracks WEP in minutes with 50,000 packets.</li>
+      <li><b>WPA2 weakness:</b> PMKID extracted without client → offline dictionary attack. KRACK (2017) — nonce reuse via handshake manipulation allows decryption/replay.</li>
+      <li><b>WPA3 strength:</b> SAE makes each auth attempt require active online interaction → offline brute-force impossible. Perfect Forward Secrecy means captured handshakes cannot decrypt past sessions.</li>
+    </ul>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q1c — Jamming Attacks and Defense Mechanisms [4 Marks]</div>
+      <p><strong>Jamming</strong> is a physical-layer DoS attack that transmits RF noise to disrupt legitimate wireless communication. Cheap SDR hardware ($25) makes it accessible.</p>
+    </div></div>
+    <table class="tb">
+      <tr><th>Jammer Type</th><th>How It Works</th><th>Detectability</th></tr>
+      <tr><td>Constant Jammer</td><td>Continuously transmits RF noise at full power</td><td>Easy — channel always busy</td></tr>
+      <tr><td>Deceptive Jammer</td><td>Sends valid-looking 802.11 packets to occupy channel</td><td>Harder — looks legitimate</td></tr>
+      <tr><td>Random Jammer</td><td>Alternates jamming/sleep to conserve energy</td><td>Medium — intermittent effect</td></tr>
+      <tr><td>Reactive Jammer</td><td>Monitors channel, jams only when transmission detected</td><td>Hard — appears idle normally</td></tr>
+      <tr><td>Selective Jammer</td><td>Targets specific packet types (ACKs, control frames)</td><td>Very hard — targeted corruption</td></tr>
+    </table>
+    <div class="blk"><div class="tl"><div class="lbl">Defense Mechanisms</div>
+      <p><b>FHSS (Frequency Hopping Spread Spectrum):</b> Transmitter and receiver hop frequencies synchronously in a pseudo-random pattern. Jammer must cover ALL frequencies simultaneously. Used in Bluetooth (79 channels, 1600 hops/sec).<br>
+      <b>DSSS (Direct Sequence Spread Spectrum):</b> Signal spread across wide bandwidth using a chipping code. Narrowband jammer cannot affect full bandwidth. Used in 802.11b, GPS.<br>
+      <b>Dynamic Channel Selection (802.11h):</b> AP auto-switches channel when interference detected.<br>
+      <b>Directional Antennas:</b> Reduce attack surface by focusing signal in specific directions.</p>
+    </div></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">Q2</span>MANET / Ad Hoc Network Security — CO2 (Attempt any 2)</div>
+
+    <div class="blk"><div class="df"><div class="lbl">Q2a — Impact of Mobility on Security Protocols in MANETs + Practical Example [4 Marks]</div>
+      <p><strong>Mobility</strong> fundamentally undermines most traditional security assumptions in MANETs — nodes constantly enter, leave, and move, invalidating trust relationships and keys.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Challenge 1 — No Central CA:</b> Infrastructure-based PKI requires a fixed CA server. In MANET, no node is permanently available. Solution: threshold cryptography (distribute CA key among n nodes; any t nodes cooperate to sign certificates — attacker must compromise ≥ t nodes).</li>
+      <li><b>Challenge 2 — Dynamic Topology:</b> Routes change constantly. Cryptographic keys established for one route become stale. Overhead of constant re-keying is high on battery-constrained nodes.</li>
+      <li><b>Challenge 3 — Node Compromise:</b> Any physically accessible node can be captured and keys extracted. No physical perimeter protection. Solution: forward secrecy — compromise of current key cannot decrypt past communications (TESLA protocol, ephemeral Diffie-Hellman).</li>
+      <li><b>Challenge 4 — Trust Expiry:</b> A node that was trusted when close may no longer be trusted when mobile and operating in a different security zone.</li>
+      <li><b>Challenge 5 — Resource Constraints:</b> Frequent handoffs require re-authentication. Full TLS handshake per hop = prohibitive overhead. Solution: lightweight protocols (TinyTLS, session resumption).</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Practical Example — Military MANET</div>
+      <p>Soldiers form a MANET on a battlefield. When a soldier moves between units, their old trust relationships are no longer valid. If enemy captures a soldier's radio and extracts session keys — TESLA-based broadcast authentication uses short-lived keys so captured keys cannot decrypt past traffic. Key rotation triggered automatically every 10 minutes or on topology change.</p>
+    </div></div>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q2b — Route Maintenance Exploits in Ad Hoc Networks + Mitigation [4 Marks]</div>
+      <p>Ad hoc routing protocols (AODV, DSR) are vulnerable because they accept routing information on trust without authentication.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Black Hole Attack:</b> Attacker sends forged RREP (Route Reply) with highest sequence number in AODV. All nodes route traffic through attacker → packets silently dropped. Mitigation: SAODV digitally signs RREPs with source node's private key — forgery detected.</li>
+      <li><b>Wormhole Attack:</b> Two colluding nodes create a private out-of-band tunnel. Node A sends discovery packet to Node B via wormhole — appears to be one hop away. All traffic diverted through attacker pair. Mitigation: geographic leashes (route info includes GPS + timestamp; wormhole violates physical distance constraints).</li>
+      <li><b>Sybil Attack:</b> Single attacker presents multiple fake identities → appears to be many nodes. Gets elected to route most traffic → controls network. Mitigation: identity binding via cryptographic certificates.</li>
+      <li><b>Selfish Node:</b> Node participates in route discovery (uses others) but refuses to forward packets (saves battery). Mitigation: Watchdog monitors promiscuous channel; Pathrater penalises unreliable nodes in route selection.</li>
+      <li><b>Route Cache Poisoning (DSR):</b> DSR nodes update caches from overheard packets. Attacker broadcasts fake routing info. Mitigation: only accept route info signed by originator.</li>
+    </ul>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q2c — Cluster-Based Security in PANs + Real-World Use Case [4 Marks]</div>
+      <p>PANs (Bluetooth, Zigbee, NFC) use a <strong>Cluster Head (CH)</strong> architecture for security — the CH acts as a local trust authority and gateway for the cluster.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Architecture:</b> CH aggregates data from cluster member devices and forwards to server. CH-to-member links use lightweight symmetric crypto (AES-128). CH-to-server uses full TLS 1.3. Member devices are too constrained for full TLS stacks.</li>
+      <li><b>Security Benefits:</b> Reduces cryptographic overhead on tiny sensors. Centralized intrusion detection within cluster. Cluster isolation — if one cluster compromised, adjacent clusters unaffected.</li>
+      <li><b>CH Security Mechanisms:</b> CH authenticated by server via public key certificate. Members authenticated to CH via pre-shared symmetric keys provisioned at manufacture. CH validates data integrity (detect sensor tampering) before forwarding.</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Real-World Use Case — Smart Healthcare Body Area Network</div>
+      <p>Patient wears ECG sensor, glucose monitor, and pulse oximeter — all connect to patient's smartphone via BLE with AES-128 pairing. Smartphone (CH) validates data integrity, compresses readings, forwards to hospital server via TLS 1.3. If smartphone compromised → sensors still individually pairing-key authenticated → limited blast radius. Hospital server uses mutual TLS to ensure only authorised smartphones can push patient data.</p>
+    </div></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">Q3</span>Privacy, IDS &amp; Edge Security — CO3 (Attempt any 2)</div>
+
+    <div class="blk"><div class="df"><div class="lbl">Q3a — Real-World Privacy Preservation in a MANET (Military / Disaster Recovery) [4 Marks]</div>
+      <p>In MANETs, routing packets carry node addresses in headers — an eavesdropper can track movements, identify key nodes (commanders = highest-traffic nodes), and infer topology. Privacy threats: <strong>LIFT</strong> — Location, Identity, Flow, Timing analysis.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Identity Exposure:</b> MAC/IP in packet headers identify nodes permanently. Solution: <em>Pseudonym rotation</em> — nodes regularly change identifiers in synchronized groups to prevent correlation attacks.</li>
+      <li><b>Location Tracking:</b> Even with encrypted content, signal-strength triangulation reveals node positions. Solution: <em>ANODR (Anonymous On-Demand Routing)</em> — onion-like encryption hides route info at each hop.</li>
+      <li><b>Traffic Analysis:</b> Who communicates with whom reveals organizational hierarchy (commanders have highest traffic). Solution: <em>Traffic padding</em> — inject dummy packets to normalize communication patterns.</li>
+      <li><b>Route Exposure:</b> Standard AODV/DSR headers expose full route path. Solution: <em>SDAR (Secure Distributed Anonymous Routing)</em> — nested encryption so each node only knows its next hop (Tor-like).</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Military Scenario</div>
+      <p>Enemy deploys passive eavesdroppers against a battalion MANET. Without privacy: enemy identifies battalion commander (highest-traffic node), operating base (most-connected node), and attack timing (traffic spike before operations). With privacy: pseudonym rotation hides identities, SDAR hides topology, traffic padding hides timing → enemy gets only encrypted gibberish with no exploitable metadata.</p>
+    </div></div>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q3b — Signature-Based vs Anomaly-Based IDS in Wireless Environments [4 Marks]</div></div></div>
+    <table class="tb">
+      <tr><th>Feature</th><th>Signature-Based IDS</th><th>Anomaly-Based IDS</th></tr>
+      <tr><td>Detection Method</td><td>Match traffic against known attack patterns/signatures</td><td>Detect deviation from established normal baseline</td></tr>
+      <tr><td>Zero-Day Detection</td><td>❌ Cannot detect unknown attacks</td><td>✅ Can detect novel/zero-day attacks</td></tr>
+      <tr><td>False Positives</td><td>Low — exact pattern match required</td><td>High — normal variations trigger alerts</td></tr>
+      <tr><td>False Negatives</td><td>High for variants of known attacks</td><td>Low for truly anomalous behaviour</td></tr>
+      <tr><td>Wireless Challenges</td><td>Signal noise causes CRC errors → missed detections</td><td>Mobility causes constant baseline shifts → high FP</td></tr>
+      <tr><td>Energy Cost</td><td>Low — simple string matching</td><td>High — statistical computation</td></tr>
+      <tr><td>Examples Detected</td><td>Deauth floods, WEP cracking, known malware signatures</td><td>Unusual traffic volumes, rogue APs, routing anomalies</td></tr>
+      <tr><td>Tools</td><td>Snort with wireless ruleset</td><td>LERAD, Kismet anomaly mode, ML-based IDS</td></tr>
+    </table>
+    <div class="blk"><div class="tl"><div class="lbl">Distributed IDS for MANETs</div>
+      <p>No central server possible in MANET → each node runs a local IDS agent monitoring its own traffic AND neighbours' forwarding behaviour (promiscuous mode). Local anomaly → shared with neighbours → global view built cooperatively. Voting: if K neighbours agree a node is malicious → isolate it. Challenge: Byzantine nodes may cast false votes → need weighted voting based on node trust scores.</p>
+    </div></div>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q3c — Mobile Edge Computing (MEC) Security in Hybrid Wireless-Wired Networks [4 Marks]</div>
+      <p><strong>MEC</strong> places computation at the network edge (at base stations or APs) instead of distant cloud servers, offering significant security enhancements.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Benefit 1 — Data Locality:</b> Sensitive data processed at edge → less transit exposure → reduced eavesdropping attack surface. Especially critical for healthcare IoT and industrial control data.</li>
+      <li><b>Benefit 2 — Real-Time Threat Detection:</b> Edge server inspects traffic before it reaches the core network. Malicious traffic from IoT/wireless devices blocked at edge — prevents propagation into wired infrastructure.</li>
+      <li><b>Benefit 3 — Offload Security Computation:</b> Constrained wireless devices (IoT, sensors) offload encryption, signature verification, and access control computation to the powerful edge server. Enables strong security on resource-constrained devices.</li>
+      <li><b>Benefit 4 — Micro-Segmentation:</b> Edge server enforces Zero Trust micro-perimeters — wireless devices can only access their authorised services, preventing lateral movement from compromised wireless nodes to wired core.</li>
+      <li><b>Threat — Edge Compromise:</b> Edge server = larger blast radius than single device. Lateral movement from compromised edge to wired core. Mitigation: mutual TLS between edge and core, hardware-attested edge servers (TPM), immutable audit logs.</li>
+    </ul>
+  </div>
+
+  <!-- Q4 -->
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">Q4</span>Blockchain, Zero Trust &amp; Trust Management — CO4 (Attempt any 2)</div>
+
+    <div class="blk"><div class="df"><div class="lbl">Q4a — Distributed Trust Models in Drone-Based Delivery Networks [4 Marks]</div>
+      <p>Drone delivery networks face unique trust challenges — autonomous drones must make trust decisions without human intervention or central authority contact.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Direct Trust:</b> Drone A directly observes Drone B's behaviour over time — successful deliveries, GPS consistency, message integrity. Builds trust score: TV = Σ(weight_i × metric_i). Example: 50 successful deliveries → high behaviour score → TV = 0.91.</li>
+      <li><b>Indirect/Recommended Trust:</b> Drone A asks Drone C about Drone B. C's recommendation weighted by A's trust in C. Prevents single-node manipulation — requires coordinated deception across multiple trusted nodes.</li>
+      <li><b>Trust Decay:</b> TV decays exponentially if drone not recently observed: TV(t) = TV(0) × e^(−λt). Ensures stale observations don't maintain trust indefinitely.</li>
+      <li><b>Blockchain Integration:</b> All drone trust events (deliveries confirmed, anomalies reported) recorded on blockchain → immutable, tamper-evident audit trail. Smart contracts auto-revoke access when trust drops below threshold — no human intervention needed.</li>
+      <li><b>Attack Detection:</b> Hijacked drone → GPS coordinates inconsistent with authorised delivery route → location trust factor drops → TV falls below threshold (0.7) → other drones stop cooperating → hijacked drone network-isolated.</li>
+    </ul>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q4b — Zero Trust Security + Blockchain-Based Access Control Integration [4 Marks]</div>
+      <p><strong>Zero Trust:</strong> "Never Trust, Always Verify" — all traffic treated as potentially hostile regardless of network location.</p>
+    </div></div>
+    <ul class="pts">
+      <li><b>Principle 1 — Verify Explicitly:</b> Every access request authenticated using ALL signals: user identity (MFA), device health (OS patched? EDR running?), GPS location (expected?), data classification. Never rely on "is the device on the internal network."</li>
+      <li><b>Principle 2 — Least Privilege:</b> JIT (Just-In-Time) access — provisioned on-demand, expires automatically. JEA (Just-Enough-Access) — only specific resources, never broad network access.</li>
+      <li><b>Principle 3 — Assume Breach:</b> Microsegmentation — each resource has its own micro-perimeter requiring authentication. Compromised device can only reach its authorised microperimeter → minimises blast radius.</li>
+      <li><b>Blockchain Integration:</b> Immutable log of ALL Zero Trust policy decisions → tamper-evident audit trail for compliance. Smart contracts enforce dynamic policy: if device trust score drops below threshold → automatic access revocation without manual intervention. Decentralised access control eliminates single-point-of-failure RADIUS/AAA server.</li>
+    </ul>
+    <div class="blk"><div class="ex"><div class="lbl">Enterprise Wireless Example</div>
+      <p>Employee connects to corporate Wi-Fi: (1) Network grants internet-only initially. (2) Opening CRM → Zero Trust engine checks MFA ✅, device health ✅, location ✅ → grants 8-hour CRM session. (3) Same employee from coffee shop Wi-Fi → stronger MFA required, read-only CRM, 2-hour session. (4) Device flagged by EDR → blockchain smart contract immediately revokes ALL access across all services.</p>
+    </div></div>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q4c — VANET Trust Value Calculation + Blockchain Auditability [4 Marks]</div></div></div>
+    <div class="blk">
+      <div class="fml">
+        <span class="fml-label">Part (a) — Aggregated Trust Value Calculation</span>
+        Given metrics for a VANET node:
+        • Message Integrity    : weight = 0.4,  value = 0.95
+        • Location Accuracy   : weight = 0.3,  value = 0.85
+        • Behaviour Consistency: weight = 0.3,  value = 0.90
+
+        Formula: TV = Σ (weight_i × value_i)
+
+        TV = (0.4 × 0.95) + (0.3 × 0.85) + (0.3 × 0.90)
+           = 0.380 + 0.255 + 0.270
+           = <strong>0.905</strong>
+
+        Interpretation:
+        TV = 0.905 → HIGHLY TRUSTED node (TV ≥ 0.7 = trusted; TV &lt; 0.4 = isolated)
+        The node passes all trust metrics with high confidence — suitable for routing and data relay.
+      </div>
+    </div>
+    <div class="blk"><div class="tl"><div class="lbl">Part (b) — Blockchain Immutability and Auditability in Wireless Access Control</div>
+      <p><b>Immutability:</b> Each block contains the cryptographic hash of the previous block (SHA-256). To alter any historical record, the attacker must recalculate the entire chain from that point AND outpace all honest nodes' mining — computationally infeasible with ≥51% honest nodes. Even a compromised access control node cannot alter past authentication events.<br>
+      <b>Auditability:</b> Every authentication event, access grant/denial, key rotation, and misbehaviour report is written as a blockchain transaction. The distributed ledger means ANY authorised node can independently verify the complete access history. Regulators/auditors get tamper-proof logs without relying on any single organisation. In drone networks: every drone's certification, delivery confirmation, and anomaly report is on-chain → full lifecycle accountability.</p>
+    </div></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="tc">
+    <div class="tc-title"><span class="tcn">Q5</span>IoT Security — CO5 (Attempt any 2)</div>
+
+    <div class="blk"><div class="df"><div class="lbl">Q5a — General IoT Architecture and Key Components [4 Marks]</div>
+      <p>IoT systems use a <strong>4-layer architecture</strong> — each layer has distinct functions and distinct security requirements.</p>
+    </div></div>
+    <div class="blk"><div class="cd"><div class="lbl">IoT 4-Layer Architecture with Security at Each Layer</div><pre>
+<span class="g">Layer 4 — Application Layer</span>
+  Function : Smart home apps, healthcare dashboards, industrial SCADA, user interfaces
+  Security  : Access control (RBAC), secure APIs (OAuth 2.0), data privacy, user authentication (MFA)
+  Threats   : SQL injection, broken API authentication, privilege escalation
+
+<span class="b">Layer 3 — Service/Middleware Layer (Cloud)</span>
+  Function : Data storage, analytics, device management (AWS IoT, Azure IoT Hub)
+  Security  : Encryption at rest (AES-256), API security, identity &amp; access management (IAM)
+  Threats   : Misconfigured cloud storage, insecure API keys, mass data breach
+
+<span class="a">Layer 2 — Network/Transport Layer</span>
+  Protocols : MQTT+TLS, CoAP+DTLS, HTTP/HTTPS, LoRaWAN, Zigbee, Wi-Fi, 4G/5G
+  Security  : TLS/DTLS for transit encryption, VPN tunnels, network segmentation (IoT VLAN)
+  Threats   : Eavesdropping on unencrypted MQTT, MitM, replay attacks
+
+<span class="p">Layer 1 — Perception/Device Layer (Edge)</span>
+  Function : Sensors (temperature, GPS, camera), actuators, microcontrollers (ESP32, ARM Cortex-M)
+  Security  : Secure boot, hardware security module (HSM/TPM), device authentication, firmware signing
+  Threats   : Firmware extraction via JTAG, physical tampering, default credentials
+</pre></div></div>
+    <ul class="pts">
+      <li><b>RFC 7228 Device Classes:</b> Class 0 (&lt;10KB RAM) — no TLS, use OSCORE. Class 1 (~10KB RAM) — limited DTLS. Class 2 (~50KB RAM) — full TLS possible. Most edge IoT = Class 0-1 → lightweight security protocols required.</li>
+      <li><b>Security Significance:</b> MCU firmware vulnerabilities → remote code execution. Communication modules → eavesdropping. Gateways → single point of failure and pivot point for lateral movement. Cloud compromise → mass data breach across all connected devices.</li>
+    </ul>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q5b — Main Security Requirements of IoT in Healthcare Systems [4 Marks]</div>
+      <p>Healthcare IoT (pacemakers, infusion pumps, ECG monitors) is uniquely critical — security failures can result in direct patient harm. Mnemonic: <strong>DIAPER</strong></p>
+    </div></div>
+    <ul class="pts">
+      <li><b>D — Data Privacy (HIPAA/GDPR):</b> Patient data encrypted at rest (AES-256) and in transit (TLS 1.3/DTLS). Strict access control — minimum necessary access. Healthcare breach cost: $10.9M average (IBM 2023) — highest of any industry.</li>
+      <li><b>I — Data Integrity:</b> Tampered medical sensor readings can be lethal (e.g., false insulin dosage data). Cryptographic MACs on all readings. Physics-based anomaly detection: heart rate = 300 bpm → flag as impossible.</li>
+      <li><b>A — Device Authentication:</b> Mutual TLS — both device and server authenticate. Hardware-bound certificates (TPM/eSIM). Prevents rogue device injection into patient monitoring network.</li>
+      <li><b>P — Patient Safety (Availability):</b> Ventilators, infusion pumps, cardiac monitors cannot go offline. Fail-safe mode: continue last safe state if network lost. Redundant communication paths. Watchdog timers for self-recovery.</li>
+      <li><b>E — Audit Logging:</b> Every device command, data access, and configuration change immutably logged (blockchain-based audit trail). Required by HIPAA for forensic investigation and accountability.</li>
+      <li><b>R — Resilient OTA Updates:</b> Signed firmware (manufacturer's private key), encrypted in transit, atomic updates (complete or rollback — no partial bricking of cardiac monitors), thoroughly tested before deployment.</li>
+    </ul>
+
+    <div class="dv"></div>
+    <div class="blk"><div class="df"><div class="lbl">Q5c — IoT Attack Types + Cyber-Physical Protection Strategy [4 Marks]</div>
+      <p>Mnemonic: <strong>FREED</strong> — Firmware, Replication (botnet), Eavesdropping, Exhaustion (DoS), Data injection</p>
+    </div></div>
+    <table class="tb">
+      <tr><th>Attack Type</th><th>Mechanism</th><th>Real-World Example</th><th>Countermeasure</th></tr>
+      <tr><td>Firmware Attack</td><td>Dump firmware via JTAG/UART, reverse engineer, upload malicious firmware</td><td>Ring doorbell RCE vulnerability (2019)</td><td>Secure boot, code signing, hardened OS</td></tr>
+      <tr><td>Botnet (Mirai-style)</td><td>Scan for default credentials, auto-infect at scale, build DDoS botnet</td><td>Mirai (2016): 600K devices, 1.2 Tbps DDoS, took down Twitter/Netflix</td><td>Unique per-device passwords at manufacture, ISP C2 blocking</td></tr>
+      <tr><td>Eavesdropping</td><td>Capture unencrypted IoT traffic (HTTP, plain CoAP, Telnet)</td><td>Smart meter data revealed household activity patterns → burglary planning</td><td>DTLS for CoAP, TLS for MQTT, CoAPS</td></tr>
+      <tr><td>Resource Exhaustion (DoS)</td><td>Flood tiny device with requests → CPU 100% → actuator hangs</td><td>Smart lock jammed open during burglary; medical pump fails to deliver drug</td><td>Rate limiting at gateway, watchdog timers, redundant paths</td></tr>
+      <tr><td>False Data Injection</td><td>Inject fake sensor readings into control systems → wrong physical actions</td><td>Stuxnet: false PLC readings → centrifuges spin at wrong speed → physical damage</td><td>Sensor fusion, physics-based anomaly detection</td></tr>
+    </table>
+    <div class="g2">
+      <div class="gcrd"><div class="gcrd-t" style="color:var(--cy)">Data-Level Safeguards</div>
+        <ul class="pts">
+          <li><b>Encryption at rest:</b> AES-256 on device storage</li>
+          <li><b>Encryption in transit:</b> TLS 1.3 / DTLS 1.3</li>
+          <li><b>Data integrity:</b> HMAC-SHA256 on all sensor readings</li>
+          <li><b>Access control:</b> RBAC — only authorised apps read data</li>
+          <li><b>Data minimisation:</b> Collect only what is necessary</li>
+          <li><b>Secure erasure:</b> Wipe keys when decommissioned</li>
+        </ul>
+      </div>
+      <div class="gcrd"><div class="gcrd-t" style="color:var(--vi2)">Device-Level Safeguards</div>
+        <ul class="pts">
+          <li><b>Secure boot:</b> Verify firmware signature before executing</li>
+          <li><b>Hardware security:</b> TPM / eSE for key storage</li>
+          <li><b>Unique credentials:</b> No default passwords — unique per device</li>
+          <li><b>Tamper detection:</b> Zeroize keys if physical tamper detected</li>
+          <li><b>Network segmentation:</b> IoT on isolated VLAN</li>
+          <li><b>Signed OTA updates:</b> Authenticated, encrypted, atomic firmware updates</li>
+        </ul>
+      </div>
+    </div>
+    <div class="blk"><div class="nt"><div class="lbl">Exam Note — Attempt Strategy</div>
+      <p><b>Q1:</b> Best to attempt 1b (table = guaranteed marks) + 1c (5 jammer types + 4 defences = structured answer)<br>
+      <b>Q2:</b> 2a (5 mobility challenges + military example) + 2b (5 routing exploits with mitigations)<br>
+      <b>Q3:</b> 3a (LIFT threats + military scenario) + 3b (comparison table = easy 4 marks)<br>
+      <b>Q4:</b> 4c is compulsory-style (calculation = easy 2 marks + blockchain explanation = 2 marks) + 4b (Zero Trust 4 principles)<br>
+      <b>Q5:</b> 5a (4-layer architecture diagram/table) + 5c (FREED attacks table + data/device protection grid)</p>
+    </div></div>
+  </div>
+</div><!-- end solved paper -->
+
+</div><!-- end content -->
+</div><!-- end wrap -->
+
+<div class="ftr">
+  CPISC03 · Wireless Security · M.Tech IS / Ph.D. CSE · Semester II/IV · End-Sem 2025<br>
+  References: Stallings "Cryptography &amp; Network Security" · Murthy "Ad Hoc Wireless Networks" · Earle "Wireless Security Handbook" · NIST IR 8259 · IEEE 802.11i · Wi-Fi Alliance WPA3 Spec
+</div>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.sbtn,.mnav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('[onclick="go(\''+id+'\',this)"]').forEach(b=>b.classList.add('on'));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function loadYT(id, videoId){
+  const overlay = document.getElementById('ov-'+id);
+  const container = document.getElementById('th-'+id);
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube.com/embed/'+videoId+'?autoplay=1&rel=0';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none';
+  container.appendChild(iframe);
+  overlay.classList.add('hidden');
+}
+</script>
+</body>
+</html>
